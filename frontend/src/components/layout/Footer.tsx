@@ -12,9 +12,9 @@ export const Footer: React.FC = () => {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Logo AURA IA COLOR"
-                className="w-10 h-10 rounded-full object-cover border border-[#C6A15B]/60 shadow-[0_0_8px_rgba(198,161,91,0.2)] shrink-0"
+                className="w-10 h-10 rounded-full object-contain shrink-0"
               />
               <div className="flex flex-col justify-center">
                 <span className="font-serif text-lg tracking-[0.2em] text-[#FFFFFF] font-bold block leading-none">

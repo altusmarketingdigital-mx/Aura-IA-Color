@@ -82,9 +82,9 @@ export const Navbar: React.FC = () => {
           {/* Logo Central Oficial */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group">
             <img
-              src="/logo.jpg"
+              src="/logo.png"
               alt="AURA IA COLOR Logo"
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border border-[#C6A15B] shadow-[0_0_15px_rgba(198,161,91,0.3)] group-hover:scale-105 transition-transform duration-300 shrink-0"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-contain filter drop-shadow-[0_0_10px_rgba(198,161,91,0.4)] group-hover:scale-105 transition-transform duration-300 shrink-0"
             />
             <div className="text-left flex flex-col justify-center">
               <span className="font-serif text-lg sm:text-xl tracking-[0.25em] text-[#FFFFFF] font-bold block leading-none">
@@ -128,9 +128,9 @@ export const Navbar: React.FC = () => {
         <div className="p-6 border-b border-[#202020] flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
-              src="/logo.jpg"
+              src="/logo.png"
               alt="AURA IA COLOR Logo"
-              className="w-10 h-10 rounded-full object-cover border border-[#C6A15B]/70 shadow-[0_0_10px_rgba(198,161,91,0.3)] shrink-0"
+              className="w-10 h-10 rounded-full object-contain shrink-0"
             />
             <div className="flex flex-col justify-center">
               <span className="font-serif text-base tracking-[0.25em] text-[#FFFFFF] font-bold block leading-none">

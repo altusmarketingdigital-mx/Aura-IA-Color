@@ -54,11 +54,13 @@ export const Home: React.FC = () => {
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
           <div className="flex justify-center mb-6">
-            <img
-              src="/logo.jpg"
-              alt="AURA IA COLOR Logo Oficial"
-              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-[#C6A15B] shadow-[0_0_35px_rgba(198,161,91,0.5)] transform hover:scale-105 transition-transform duration-500"
-            />
+            <div className="relative p-1 rounded-full flex items-center justify-center">
+              <img
+                src="/logo.png"
+                alt="AURA IA COLOR Logo Oficial"
+                className="w-36 h-36 sm:w-44 sm:h-44 rounded-full object-contain filter drop-shadow-[0_0_35px_rgba(198,161,91,0.55)] transform hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
 
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/90 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(198,161,91,0.2)]">

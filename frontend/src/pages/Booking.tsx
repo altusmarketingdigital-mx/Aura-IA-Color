@@ -380,7 +380,7 @@ export const Booking: React.FC = () => {
           <div className="bg-[#171717] border border-[#262626] p-6 sm:p-8 rounded-sm">
             <h3 className="font-serif text-lg text-[#FFFFFF] mb-4 flex items-center gap-2">
               <User className="w-4 h-4 text-[#C6A15B]" />
-              <span>3. Datos de la Clienta</span>
+              <span>3. Tus Datos de Contacto</span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -447,7 +447,7 @@ export const Booking: React.FC = () => {
               <span>4. Fotografías de Diagnóstico (Opcional)</span>
             </h3>
             <p className="text-xs text-[#888888] mb-6">
-              Estas imágenes son estrictamente privadas, no se publican y solo las verán las master coloristas para preparar tu fórmula antes de tu llegada.
+              Estas imágenes son estrictamente privadas, no se publican y solo las verá el equipo de estilistas especialistas en colorimetría para preparar la máquina de formulación antes de tu llegada.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

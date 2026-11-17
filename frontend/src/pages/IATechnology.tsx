@@ -33,7 +33,7 @@ export const IATechnology: React.FC = () => {
             La formulación de tintes capilares ha dependido históricamente de la intuición del estilista. Sin embargo, cuando se trabaja con decoloraciones, fondos de aclaración (rojizos, cobrizos o amarillos) y porosidades desiguales, una variación de 2 gramos de un matizador puede alterar completamente el resultado final.
           </p>
           <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
-            En <strong>AURA IA COLOR</strong>, nuestras coloristas introducen los parámetros capilares evaluados en cabina (altura de tono base, porcentaje de canas, fondo de aclaración y tono objetivo) en nuestro sistema algorítmico. El modelo calcula las proporciones exactas de bases, reflejos y volúmenes de oxidante para neutralizar reflejos no deseados con precisión milimétrica.
+            En <strong>AURA IA COLOR</strong>, la asesoría humana es insustituible: la realiza un estilista profesional especializado en colorimetría capilar. El especialista evalúa física y técnicamente tu cabello y programa nuestra máquina formuladora asistida por Inteligencia Artificial. La máquina calcula y dosifica los pigmentos puros y oxidantes con exactitud matemática, asegurando la mezcla perfecta sin margen de error.
           </p>
         </div>
 
@@ -85,10 +85,10 @@ export const IATechnology: React.FC = () => {
             <ShieldAlert className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
             <div>
               <h4 className="text-sm font-semibold text-[#FFFFFF] mb-1">
-                Compromiso de Honestidad con Nuestras Clientas
+                La Fusión Perfecta: Talento Profesional y Tecnología
               </h4>
               <p className="text-xs text-[#888888] leading-relaxed">
-                La tecnología es una herramienta de asistencia técnica para nuestras coloristas profesionales. La plataforma web de AURA IA COLOR no realiza diagnósticos fotográficos automáticos ni sustituye la prueba de mechón y la inspección táctil en el salón.
+                La asesoría técnica es 100% personalizada y la realiza un estilista especialista en colorimetría capilar para mujeres, hombres y cualquier género. La máquina con Inteligencia Artificial es el instrumento tecnológico que formula y dosifica la mezcla exacta para garantizar resultados consistentes y cabello saludable.
               </p>
             </div>
           </div>

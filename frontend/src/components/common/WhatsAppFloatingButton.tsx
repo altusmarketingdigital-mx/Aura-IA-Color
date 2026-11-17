@@ -6,7 +6,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
   const [userMsg, setUserMsg] = useState('');
 
   const phone = '525537293887';
-  const defaultMessage = '¡Hola! Me gustaría recibir información personalizada sobre los servicios de coloración con Inteligencia Artificial en AURA IA COLOR.';
+  const defaultMessage = '¡Hola! Me gustaría recibir información sobre los servicios de colorimetría y formulación con máquina de IA en AURA IA COLOR.';
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,10 +51,10 @@ export const WhatsAppFloatingButton: React.FC = () => {
           <div className="p-4 bg-[#141414] space-y-3 text-xs">
             <div className="bg-[#1F1F1F] text-[#F5F1E9]/90 p-3 rounded-tr-lg rounded-br-lg rounded-bl-lg max-w-[90%] border border-[#2D2D2D]">
               <p className="leading-relaxed">
-                ¡Hola! ✨ Bienvenida a <strong>AURA IA COLOR</strong>, entre la Roma Sur y Del Valle Norte, CDMX.
+                ¡Hola! ✨ Te damos la bienvenida a <strong>AURA IA COLOR</strong>, entre la Roma Sur y Del Valle Norte, CDMX.
               </p>
               <p className="mt-2 text-[11px] text-[#888888]">
-                ¿Tienes dudas sobre tu tono ideal o deseas una cita de asesoría con Inteligencia Artificial?
+                ¿Tienes dudas sobre tu tono ideal o deseas una cita con nuestros estilistas especialistas en colorimetría y formulación con máquina de IA?
               </p>
             </div>
           </div>

@@ -76,7 +76,7 @@ export const Home: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-[#F5F1E9]/85 max-w-2xl mx-auto font-light leading-relaxed mb-10">
-            Descubre una nueva experiencia de coloración capilar con tecnología de inteligencia artificial y asesoría personalizada, en una ubicación privilegiada entre la Roma Sur y Del Valle Norte.
+            Servicio profesional de coloración capilar para mujeres, hombres y todo género. Asesoría directa por estilistas especializados en colorimetría, respaldados por la precisión de nuestra máquina de formulación con Inteligencia Artificial.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
@@ -107,10 +107,10 @@ export const Home: React.FC = () => {
                 Innovación Responsable
               </span>
               <h2 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-6 leading-snug">
-                Precisión Cromática con Inteligencia Artificial
+                Estilistas Especialistas con Apoyo de Máquina de Formulación con IA
               </h2>
               <p className="text-sm text-[#F5F1E9]/75 leading-relaxed mb-6 font-light">
-                En <strong>AURA IA COLOR</strong> hemos transformado el método tradicional de tintura integrando algoritmos de cálculo cromático. Nuestras master coloristas analizan tu subtono dérmico, porosidad y pigmento residual para formular la combinación exacta de tintes y oxidantes.
+                En <strong>AURA IA COLOR</strong> la asesoría la realiza un estilista profesional especializado en colorimetría capilar. Evaluamos tu tono base, tipo de cabello y expectativas de forma 100% personalizada para todo género, y nos apoyamos en una avanzada máquina de formulación con Inteligencia Artificial que dosifica y mezcla los pigmentos con precisión milimétrica.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -257,7 +257,7 @@ export const Home: React.FC = () => {
             Confianza y Excelencia
           </span>
           <h2 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-4">
-            La Experiencia de Nuestras Clientas
+            La Experiencia de Quienes Nos Visitan
           </h2>
         </div>
 

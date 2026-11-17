@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
               Servicios profesionales de coloración capilar combinados con tecnología de inteligencia artificial para alcanzar el matiz, brillo y salud perfectos en cada hebra.
             </p>
             <p className="text-[11px] text-[#C6A15B]/80 font-medium">
-              Dirección a cargo de Sara Beltrán Arias y Luz Adriana González Varela.
+              Atención profesional personalizada por Master Coloristas especializadas.
             </p>
           </div>
 

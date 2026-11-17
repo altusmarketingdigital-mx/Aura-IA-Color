@@ -41,7 +41,7 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Inicio', path: '/', subtitle: 'Experiencia principal y bienvenida' },
-    { name: 'Nosotros', path: '/nosotros', subtitle: 'Filosofía, Sara Beltrán & Luz Adriana' },
+    { name: 'Nosotros', path: '/nosotros', subtitle: 'Filosofía, experiencia y concepto de marca' },
     { name: 'Servicios', path: '/servicios', subtitle: 'Catálogo de coloración y técnicas' },
     { name: 'Tecnología IA', path: '/tecnologia-ia', subtitle: 'Formulación algorítmica de precisión' },
     { name: 'Galería', path: '/galeria', subtitle: 'Resultados y transformaciones reales' },

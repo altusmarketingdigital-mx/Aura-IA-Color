@@ -16,7 +16,7 @@ export const About: React.FC = () => {
             El Arte del Color Asistido por la Ciencia
           </h1>
           <p className="text-sm sm:text-base text-[#888888] font-light max-w-2xl mx-auto leading-relaxed">
-            Fundado por <strong>Sara Beltrán Arias</strong> y <strong>Luz Adriana González Varela</strong>, AURA IA COLOR nace para resolver la mayor frustración en los salones: la falta de predictibilidad y precisión en los resultados de coloración.
+            AURA IA COLOR nace de la pasión por la excelencia cromática y la necesidad de resolver la mayor frustración en los salones: la falta de predictibilidad y precisión en los resultados de coloración capilar.
           </p>
         </div>
 
@@ -41,10 +41,10 @@ export const About: React.FC = () => {
             </p>
             <div className="pt-4 border-t border-[#262626]">
               <p className="font-serif text-lg text-[#C6A15B] italic">
-                "Nuestra misión es que cada clienta salga con el tono exacto que soñó, manteniendo su cabello sano y fuerte."
+                "Nuestra misión es que cada clienta experimente el tono exacto que soñó, manteniendo su cabello radiante, sano y con máxima fortaleza."
               </p>
-              <p className="text-xs text-[#888888] mt-2 font-medium">
-                — Sara Beltrán Arias y Luz Adriana González Varela
+              <p className="text-xs text-[#888888] mt-2 font-medium uppercase tracking-wider">
+                — Equipo Master Colorista AURA IA COLOR
               </p>
             </div>
           </div>

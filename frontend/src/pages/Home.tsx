@@ -269,7 +269,7 @@ export const Home: React.FC = () => {
               ))}
             </div>
             <p className="text-xs text-[#F5F1E9]/80 leading-relaxed italic mb-6 font-light">
-              "Llevaba años buscando un rubio beige que no se oxidara a naranja a las dos semanas. La formulación con IA dio en el clavo con mi tono de piel. La atención de Sara y Adriana es impecable."
+              "Llevaba años buscando un rubio beige que no se oxidara a naranja a las dos semanas. La formulación con IA dio en el clavo con mi tono de piel. La atención del equipo de coloristas es impecable."
             </p>
             <p className="text-xs font-semibold text-[#FFFFFF] uppercase tracking-wider">Mariana R.</p>
             <p className="text-[10px] text-[#888888]">Balayage & Colorimetría IA</p>

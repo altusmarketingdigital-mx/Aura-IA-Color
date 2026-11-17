@@ -392,7 +392,7 @@ export const Booking: React.FC = () => {
                   type="text"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  placeholder="Ej. Sara Beltrán"
+                  placeholder="Ej. María Fernanda Morales"
                   className="w-full bg-[#111111] border border-[#333333] text-[#FFFFFF] px-4 py-2.5 rounded-sm text-xs focus:outline-none focus:border-[#C6A15B]"
                   required
                 />

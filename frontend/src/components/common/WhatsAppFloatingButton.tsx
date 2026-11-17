@@ -51,7 +51,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
           <div className="p-4 bg-[#141414] space-y-3 text-xs">
             <div className="bg-[#1F1F1F] text-[#F5F1E9]/90 p-3 rounded-tr-lg rounded-br-lg rounded-bl-lg max-w-[90%] border border-[#2D2D2D]">
               <p className="leading-relaxed">
-                ¡Hola! ✨ Bienvenida a <strong>AURA IA COLOR</strong> en Del Valle Norte, CDMX.
+                ¡Hola! ✨ Bienvenida a <strong>AURA IA COLOR</strong>, entre la Roma Sur y Del Valle Norte, CDMX.
               </p>
               <p className="mt-2 text-[11px] text-[#888888]">
                 ¿Tienes dudas sobre tu tono ideal o deseas una cita de asesoría con Inteligencia Artificial?

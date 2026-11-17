@@ -16,7 +16,7 @@ export const Contact: React.FC = () => {
             Contacto y Citas
           </h1>
           <p className="text-sm text-[#888888] font-light leading-relaxed">
-            Visítanos en Del Valle Norte o contáctanos directamente a través de nuestros canales oficiales.
+            Visítanos en una ubicación estratégica entre la Roma Sur y Del Valle Norte, o contáctanos directamente a través de nuestros canales oficiales.
           </p>
         </div>
 

@@ -76,7 +76,7 @@ export const Home: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-[#F5F1E9]/85 max-w-2xl mx-auto font-light leading-relaxed mb-10">
-            Descubre una nueva experiencia de coloración capilar con tecnología de inteligencia artificial y asesoría personalizada en el corazón de la Colonia Del Valle.
+            Descubre una nueva experiencia de coloración capilar con tecnología de inteligencia artificial y asesoría personalizada, en una ubicación privilegiada entre la Roma Sur y Del Valle Norte.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
@@ -315,7 +315,7 @@ export const Home: React.FC = () => {
                 Ubicación Privilegiada
               </h2>
               <p className="text-xs sm:text-sm text-[#888888] leading-relaxed mb-6 font-light">
-                Nuestro estudio se encuentra en Obrero Mundial 122, Local 2, Colonia Del Valle Norte, Benito Juárez, Ciudad de México. Diseñado con privacidad, confort y la más alta tecnología para tu atención.
+                Nuestro estudio se encuentra en Obrero Mundial 122, Local 2, entre la Roma Sur y Del Valle Norte, Benito Juárez, Ciudad de México. Diseñado con privacidad, confort y la más alta tecnología para tu atención.
               </p>
               <div className="p-4 bg-[#1B1B1B] rounded border border-[#2D2D2D] mb-6">
                 <p className="text-xs text-[#C6A15B] font-semibold mb-1">Horario Comercial:</p>

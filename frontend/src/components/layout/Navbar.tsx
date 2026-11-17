@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
     { name: 'Tecnología IA', path: '/tecnologia-ia', subtitle: 'Formulación algorítmica de precisión' },
     { name: 'Galería', path: '/galeria', subtitle: 'Resultados y transformaciones reales' },
     { name: 'Promociones', path: '/promociones', subtitle: '50% de descuento en tu 5ta visita' },
-    { name: 'Contacto', path: '/contacto', subtitle: 'Del Valle Norte, CDMX y WhatsApp' },
+    { name: 'Contacto', path: '/contacto', subtitle: 'Entre Roma Sur y Del Valle Norte, CDMX' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -198,7 +198,7 @@ export const Navbar: React.FC = () => {
           <div className="space-y-2 text-xs text-[#888888]">
             <p className="flex items-center gap-2">
               <MapPin className="w-3.5 h-3.5 text-[#C6A15B] shrink-0" />
-              <span>Del Valle Norte, Benito Juárez, CDMX</span>
+              <span>Entre Roma Sur y Del Valle Norte, CDMX</span>
             </p>
             <p className="flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-[#C6A15B] shrink-0" />

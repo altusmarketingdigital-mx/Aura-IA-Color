@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sparkles, Calendar, ShieldCheck } from 'lucide-react';
+import { Menu, X, Calendar, ShieldCheck, ChevronRight, Sparkles } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { name: 'Inicio', path: '/' },
@@ -16,109 +29,132 @@ export const Navbar: React.FC = () => {
     { name: 'Contacto', path: '/contacto' },
   ];
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#111111]/90 backdrop-blur-md border-b border-[#333333]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+    <header className="sticky top-0 z-50 px-4 sm:px-6 lg:px-8 py-3 transition-all duration-300">
+      <div
+        className={`max-w-7xl mx-auto rounded-full border transition-all duration-500 ${
+          isScrolled
+            ? 'bg-[#111111]/90 backdrop-blur-xl border-[#C6A15B]/30 shadow-[0_10px_35px_rgba(0,0,0,0.8)] py-2.5 px-6'
+            : 'bg-[#141414]/70 backdrop-blur-md border-[#2B2B2B] py-3 px-6 shadow-lg'
+        }`}
+      >
+        <div className="flex items-center justify-between">
           
-          {/* Logo Oficial */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <img
-              src="/logo.jpg"
-              alt="Logo AURA IA COLOR"
-              className="w-12 h-12 rounded-full object-cover border border-[#C6A15B]/60 shadow-[0_0_12px_rgba(198,161,91,0.25)] group-hover:scale-105 transition-all"
-            />
+          {/* Logo Oficial con Efecto de Luz */}
+          <Link to="/" className="flex items-center gap-3.5 group">
+            <div className="relative">
+              <img
+                src="/logo.jpg"
+                alt="AURA IA COLOR Logo"
+                className="w-11 h-11 rounded-full object-cover border border-[#C6A15B] shadow-[0_0_15px_rgba(198,161,91,0.35)] group-hover:scale-105 transition-transform duration-300"
+              />
+              <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C6A15B] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#C6A15B]"></span>
+              </span>
+            </div>
             <div>
-              <span className="font-serif text-xl tracking-[0.2em] text-[#FFFFFF] font-bold block">
+              <span className="font-serif text-lg tracking-[0.25em] text-[#FFFFFF] font-bold block leading-none">
                 AURA <span className="text-[#C6A15B] font-light">IA COLOR</span>
               </span>
-              <span className="text-[10px] tracking-[0.25em] text-[#C6A15B] uppercase block">
-                Coloración Capilar con IA
+              <span className="text-[9px] tracking-[0.3em] text-[#888888] group-hover:text-[#C6A15B] uppercase block mt-1 transition-colors">
+                Coloración de Alta Gama
               </span>
             </div>
           </Link>
 
-          {/* Menú Escritorio */}
-          <nav className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-xs uppercase tracking-widest transition-colors font-medium ${
-                  isActive(link.path)
-                    ? 'text-[#C6A15B] border-b-2 border-[#C6A15B] pb-1'
-                    : 'text-[#F5F1E9]/75 hover:text-[#C6A15B]'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+          {/* Menú de Navegación Estilo Flotante / Cápsula */}
+          <nav className="hidden lg:flex items-center gap-1 bg-[#1A1A1A]/80 border border-[#2D2D2D] rounded-full px-3 py-1.5 shadow-inner">
+            {navLinks.map((link) => {
+              const active = isActive(link.path);
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`relative px-4 py-2 rounded-full text-xs uppercase tracking-widest font-medium transition-all duration-300 ${
+                    active
+                      ? 'bg-gradient-to-r from-[#DFBF7E] via-[#C6A15B] to-[#9E7B3B] text-[#111111] font-bold shadow-[0_0_15px_rgba(198,161,91,0.4)]'
+                      : 'text-[#F5F1E9]/75 hover:text-[#FFFFFF] hover:bg-[#262626]/60'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Botón CTA y Acceso Admin */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* CTA Principal y Enlace a Panel */}
+          <div className="hidden lg:flex items-center gap-3">
             <Link
               to="/admin/login"
-              className="text-[#888888] hover:text-[#C6A15B] p-2 transition-colors title='Panel Privado'"
+              className="text-[#666666] hover:text-[#C6A15B] p-2 transition-colors rounded-full hover:bg-[#202020]"
               title="Panel Administrativo"
             >
               <ShieldCheck className="w-5 h-5" />
             </Link>
+
             <Link
               to="/reservar"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#C6A15B] text-[#111111] hover:bg-[#DFBF7E] font-semibold text-xs uppercase tracking-widest rounded-sm transition-all shadow-md shadow-[#C6A15B]/10 hover:shadow-[#C6A15B]/20"
+              className="relative group overflow-hidden px-6 py-2.5 rounded-full bg-gradient-to-r from-[#C6A15B] via-[#DFBF7E] to-[#C6A15B] text-[#111111] font-bold text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(198,161,91,0.3)] hover:shadow-[0_0_30px_rgba(198,161,91,0.6)] transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
             >
-              <Calendar className="w-4 h-4" />
+              <span className="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+              <Calendar className="w-3.5 h-3.5" />
               <span>Agenda tu Cita</span>
             </Link>
           </div>
 
-          {/* Botón Móvil */}
-          <div className="lg:hidden flex items-center gap-3">
+          {/* Disparador Móvil */}
+          <div className="lg:hidden flex items-center gap-2.5">
             <Link
               to="/reservar"
-              className="px-3 py-1.5 bg-[#C6A15B] text-[#111111] font-semibold text-xs uppercase tracking-widest rounded-sm"
+              className="px-4 py-1.5 rounded-full bg-[#C6A15B] text-[#111111] font-bold text-xs uppercase tracking-wider"
             >
               Agendar
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-[#F5F1E9] p-2 focus:outline-none"
-              aria-label="Abrir menú"
+              className="p-2 text-[#FFFFFF] hover:text-[#C6A15B] focus:outline-none rounded-full bg-[#1F1F1F] border border-[#333333]"
+              aria-label="Abrir Menú"
             >
-              {isOpen ? <X className="w-6 h-6 text-[#C6A15B]" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? <X className="w-5 h-5 text-[#C6A15B]" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
+
         </div>
       </div>
 
-      {/* Menú Móvil Desplegable */}
+      {/* Menú Desplegable Móvil Renovado */}
       {isOpen && (
-        <div className="lg:hidden bg-[#1A1A1A] border-b border-[#333333] px-4 pt-3 pb-6 space-y-3">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setIsOpen(false)}
-              className={`block py-2 text-sm uppercase tracking-wider ${
-                isActive(link.path) ? 'text-[#C6A15B] font-semibold' : 'text-[#F5F1E9]/80'
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <div className="pt-3 border-t border-[#333333] flex justify-between items-center">
+        <div className="lg:hidden max-w-7xl mx-auto mt-2 bg-[#161616]/95 backdrop-blur-2xl border border-[#C6A15B]/40 rounded-2xl p-5 shadow-2xl animate-fadeIn space-y-2">
+          {navLinks.map((link) => {
+            const active = isActive(link.path);
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center justify-between px-4 py-3 rounded-xl text-xs uppercase tracking-widest font-semibold transition-all ${
+                  active
+                    ? 'bg-gradient-to-r from-[#C6A15B] to-[#9E7B3B] text-[#111111] shadow-md'
+                    : 'text-[#F5F1E9]/80 hover:text-[#C6A15B] hover:bg-[#202020]'
+                }`}
+              >
+                <span>{link.name}</span>
+                <ChevronRight className={`w-4 h-4 ${active ? 'text-[#111111]' : 'text-[#666666]'}`} />
+              </Link>
+            );
+          })}
+
+          <div className="pt-3 border-t border-[#262626] flex items-center justify-between px-2">
             <Link
               to="/admin/login"
               onClick={() => setIsOpen(false)}
-              className="text-xs text-[#888888] flex items-center gap-1.5"
+              className="text-xs text-[#888888] hover:text-[#C6A15B] flex items-center gap-2 py-1"
             >
-              <ShieldCheck className="w-4 h-4" />
-              <span>Panel Administrativo</span>
+              <ShieldCheck className="w-4 h-4 text-[#C6A15B]" />
+              <span>Acceso Administrativo</span>
             </Link>
           </div>
         </div>

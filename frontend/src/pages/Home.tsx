@@ -57,21 +57,21 @@ export const Home: React.FC = () => {
             <img
               src="/logo.jpg"
               alt="AURA IA COLOR Logo Oficial"
-              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-[#C6A15B] shadow-[0_0_35px_rgba(198,161,91,0.5)] transform hover:scale-105 transition-transform duration-500 animate-floatSlow"
+              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-[#C6A15B] shadow-[0_0_35px_rgba(198,161,91,0.5)] transform hover:scale-105 transition-transform duration-500"
             />
           </div>
 
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/90 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(198,161,91,0.2)]">
-            <Sparkles className="w-4 h-4 text-[#C6A15B] animate-spin duration-3000" />
-            <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium">
-              Tecnología & Coloración Capilar de Alta Gama
+            <Sparkles className="w-4 h-4 text-[#C6A15B]" />
+            <span className="text-xs uppercase tracking-[0.2em] text-[#C6A15B] font-medium text-center">
+              COLORACIÓN CAPILAR DE ALTA GAMA CON INTELIGENCIA ARTIFICIAL IA
             </span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-[#FFFFFF] tracking-tight mb-6 leading-tight">
-            TU COLOR. TU ESENCIA. <br />
+            TU COLOR. TU DISEÑO. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFBF7E] via-[#C6A15B] to-[#9E7B3B] gold-text-glow">
-              TU TECNOLOGÍA.
+              TU ESTILO.
             </span>
           </h1>
 

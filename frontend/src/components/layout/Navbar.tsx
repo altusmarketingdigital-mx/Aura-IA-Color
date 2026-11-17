@@ -90,8 +90,8 @@ export const Navbar: React.FC = () => {
               <span className="font-serif text-lg sm:text-xl tracking-[0.2em] text-[#FFFFFF] font-bold block leading-tight">
                 AURA <span className="text-[#C6A15B] font-light">IA COLOR</span>
               </span>
-              <span className="text-[8px] sm:text-[9px] tracking-[0.25em] text-[#C6A15B] uppercase block">
-                Coloración Capilar con IA
+              <span className="text-[8px] sm:text-[9px] tracking-[0.2em] text-[#C6A15B] uppercase block">
+                Colorimetría con Inteligencia Artificial
               </span>
             </div>
           </Link>

@@ -20,28 +20,39 @@ export const About: React.FC = () => {
           </p>
         </div>
 
-        {/* Sección de Concepto */}
+        {/* Sección de Concepto con Render Oficial de Estudio */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
-          <div className="aspect-[4/5] rounded-sm overflow-hidden border border-[#333333]">
-            <img
-              src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1000&q=80"
-              alt="Estudio AURA IA COLOR"
-              className="w-full h-full object-cover filter brightness-95"
-            />
+          <div className="relative group">
+            <div className="aspect-[16/10] sm:aspect-[4/3] rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-2xl relative">
+              <img
+                src="/salon-render.jpg"
+                alt="Render Arquitectónico Oficial de AURA IA COLOR"
+                className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent opacity-60" />
+            </div>
+            <div className="absolute -bottom-4 -right-4 bg-[#1A1A1A]/95 border border-[#C6A15B]/50 px-4 py-2 rounded-sm shadow-xl backdrop-blur-md">
+              <span className="text-[10px] text-[#C6A15B] uppercase tracking-widest font-mono font-semibold">
+                Concepto Arquitectónico • Próxima Inauguración
+              </span>
+            </div>
           </div>
           <div className="space-y-6">
+            <span className="text-[11px] uppercase tracking-widest text-[#C6A15B] font-semibold block">
+              Instalaciones de Vanguardia
+            </span>
             <h2 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF]">
-              Una Visión Transformadora
+              Una Visión Transformadora del Espacio y el Color
             </h2>
             <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
-              La coloración capilar no es un proceso estandarizado. Cada cabello posee una historia química previa, porosidad, grosor y un subtono natural único.
+              Nuestro espacio físico ha sido concebido para combinar el lujo contemporáneo, la calidez botánica y la más alta ingeniería en colorimetría capilar. Con estaciones de atención privada, iluminación diseñada para evaluar reflejos cromáticos reales y nuestra estación central de formulación con Inteligencia Artificial.
             </p>
             <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
-              En AURA IA COLOR eliminamos las suposiciones integrando herramientas de cálculo algorítmico que determinan los gramos exactos de pigmentos primarios y secundarios necesarios para alcanzar la altura de tono deseada sin comprometer la estructura capilar.
+              En AURA IA COLOR eliminamos las suposiciones integrando herramientas de cálculo algorítmico y dispensación robótica directa que determinan los gramos exactos de pigmentos primarios y secundarios necesarios para alcanzar la altura de tono deseada sin comprometer la estructura capilar.
             </p>
             <div className="pt-4 border-t border-[#262626]">
               <p className="font-serif text-lg text-[#C6A15B] italic">
-                "Nuestra misión es que cada clienta experimente el tono exacto que soñó, manteniendo su cabello radiante, sano y con máxima fortaleza."
+                "Nuestra misión es que cada persona experimente el tono exacto que soñó, manteniendo su cabello radiante, sano y con máxima fortaleza."
               </p>
               <p className="text-xs text-[#888888] mt-2 font-medium uppercase tracking-wider">
                 — Equipo Master Colorista AURA IA COLOR

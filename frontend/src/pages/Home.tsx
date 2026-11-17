@@ -255,12 +255,19 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. BANNER DE PROMOCIÓN OFICIAL */}
+      {/* 4. BANNER DE PROMOCIÓN OFICIAL CON FONDO ATMOSFÉRICO DEL ESTUDIO */}
       {promotions.length > 0 && (
-        <section className="py-16 bg-[#161616] border-y border-[#262626]">
-          <div className="max-w-5xl mx-auto px-4 text-center">
+        <section className="py-20 relative overflow-hidden border-y border-[#262626]">
+          {/* Fondo con el Render del Salón en marca de agua translúcida */}
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-15 filter brightness-75 scale-105"
+            style={{ backgroundImage: `url('/salon-render.jpg')` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/90 to-[#111111]" />
+
+          <div className="max-w-5xl mx-auto px-4 text-center relative z-10">
             <span className="text-[10px] uppercase tracking-[0.3em] text-[#C6A15B] font-semibold block mb-2">
-              Programa de Lealtad AURA
+              Programa de Lealtad AURA • Próxima Apertura
             </span>
             <h2 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF] mb-3">
               {promotions[0].title}: <span className="text-[#C6A15B]">{promotions[0].discountText}</span>
@@ -270,7 +277,7 @@ export const Home: React.FC = () => {
             </p>
             <Link
               to="/promociones"
-              className="inline-block px-6 py-2.5 border border-[#C6A15B] text-[#C6A15B] hover:bg-[#C6A15B] hover:text-[#111111] text-xs uppercase tracking-widest font-semibold rounded-sm transition-all"
+              className="inline-block px-7 py-3 border border-[#C6A15B] text-[#C6A15B] hover:bg-[#C6A15B] hover:text-[#111111] text-xs uppercase tracking-widest font-semibold rounded-sm transition-all shadow-[0_4px_20px_rgba(198,161,91,0.2)]"
             >
               Consultar Condiciones
             </Link>

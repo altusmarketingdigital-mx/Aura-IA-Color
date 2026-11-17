@@ -41,16 +41,18 @@ export const Home: React.FC = () => {
       <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-[#222222]">
         {/* Imagen de fondo con zoom sutil */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-30 filter brightness-75 scale-105 animate-pulse duration-[8000ms]"
+          className="absolute inset-0 bg-cover bg-center opacity-25 filter brightness-75 scale-105 animate-pulse duration-[8000ms]"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1920&q=85')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent" />
         
-        {/* Luces difusas decorativas de fondo */}
-        <div className="absolute -top-32 left-1/4 w-96 h-96 bg-[#C6A15B]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 right-1/4 w-96 h-96 bg-[#C6A15B]/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Splashes de Tintas Orgánicas sobre fondo negro y dorado */}
+        <div className="absolute top-10 -left-20 w-[420px] h-[420px] ink-splash-magenta rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 -right-28 w-[480px] h-[480px] ink-splash-cyan rounded-full pointer-events-none" />
+        <div className="absolute -bottom-24 left-1/3 w-[500px] h-[500px] ink-splash-amber rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[360px] h-[360px] ink-splash-rose rounded-full pointer-events-none" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
           <div className="flex justify-center mb-6">
@@ -70,16 +72,25 @@ export const Home: React.FC = () => {
             </span>
           </div>
 
+          {/* Slogan con texto en movimiento dinámico de colores sobre base dorada */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-[#FFFFFF] tracking-tight mb-6 leading-tight">
             TU COLOR. TU DISEÑO. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFBF7E] via-[#C6A15B] to-[#9E7B3B] gold-text-glow">
+            <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
               TU ESTILO.
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-[#F5F1E9]/85 max-w-2xl mx-auto font-light leading-relaxed mb-10">
-            Servicio profesional de coloración capilar para mujeres, hombres y todo género. Asesoría directa por estilistas especializados en colorimetría, respaldados por la precisión de nuestra máquina de formulación con Inteligencia Artificial.
+          <p className="text-base sm:text-lg md:text-xl text-[#F5F1E9]/85 max-w-2xl mx-auto font-light leading-relaxed mb-6">
+            Servicio profesional de coloración capilar para mujeres, hombres y todo género. Asesoría directa por estilistas especializados en colorimetría, respaldados por la precisión de nuestra máquina dispensadora con Inteligencia Artificial.
           </p>
+
+          {/* Badge sutil de tecnología aliada */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#161616]/80 border border-[#333333] mb-10 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#06b6d4] animate-ping" />
+            <span className="text-[11px] text-[#A3A3A3] font-light">
+              Impulsado por tecnología certificada de dispensación cromática con IA • <strong className="text-[#DFBF7E] font-medium">Digital Color AI Architecture</strong>
+            </span>
+          </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
             <Link
@@ -100,51 +111,66 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. DIFERENCIADOR DE INTELIGENCIA ARTIFICIAL */}
-      <section className="py-24 bg-[#141414] border-b border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. DIFERENCIADOR DE INTELIGENCIA ARTIFICIAL & ALIANZA TECNOLÓGICA */}
+      <section className="py-24 bg-[#141414] border-b border-[#222222] relative overflow-hidden">
+        {/* Splash de fondo sutil en sección técnica */}
+        <div className="absolute top-1/2 -right-36 w-96 h-96 ink-splash-magenta rounded-full pointer-events-none opacity-20" />
+        <div className="absolute bottom-0 -left-20 w-80 h-80 ink-splash-cyan rounded-full pointer-events-none opacity-20" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
-                Innovación Responsable
+                Innovación Responsable • Tecnología Digital Color AI
               </span>
               <h2 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-6 leading-snug">
-                Estilistas Especialistas con Apoyo de Máquina de Formulación con IA
+                Estilistas Especialistas con Apoyo de Dispensación Inteligente con IA
               </h2>
               <p className="text-sm text-[#F5F1E9]/75 leading-relaxed mb-6 font-light">
-                En <strong>AURA IA COLOR</strong> la asesoría la realiza un estilista profesional especializado en colorimetría capilar. Evaluamos tu tono base, tipo de cabello y expectativas de forma 100% personalizada para todo género, y nos apoyamos en una avanzada máquina de formulación con Inteligencia Artificial que dosifica y mezcla los pigmentos con precisión milimétrica.
+                En <strong>AURA IA COLOR</strong> la asesoría la realiza un estilista profesional especializado en colorimetría capilar. Evaluamos tu tono base, tipo de cabello y expectativas de forma 100% personalizada para todo género, y nos apoyamos en la arquitectura tecnológica de <strong>Digital Color AI</strong>: una máquina inteligente que formula y dispensa el tinte listo para aplicar con más de <strong>1,200 tonos posibles</strong> y cero margen de error.
               </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className="bg-[#191919] p-4 rounded-sm border border-[#262626]">
+                  <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">1,200+</span>
+                  <p className="text-xs text-[#FFFFFF] font-medium">Tonos de Alta Precisión</p>
+                  <p className="text-[11px] text-[#888888] mt-1 font-light">Formulados matemáticamente con 12 latas de pigmentos orgánicos concentrados.</p>
+                </div>
+                <div className="bg-[#191919] p-4 rounded-sm border border-[#262626]">
+                  <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">0%</span>
+                  <p className="text-xs text-[#FFFFFF] font-medium">Improvisación & Desperdicio</p>
+                  <p className="text-[11px] text-[#888888] mt-1 font-light">Dosificación exacta al miligramo. Menor residuo químico y máxima ecología capilar.</p>
+                </div>
+              </div>
+
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="text-sm font-semibold text-[#FFFFFF]">Cero Improvisación</h3>
-                    <p className="text-xs text-[#888888]">Formulaciones exactas basadas en leyes de colorimetría y datos capilares medidos.</p>
+                    <h3 className="text-sm font-semibold text-[#FFFFFF]">Cuidado Botánico Activo</h3>
+                    <p className="text-xs text-[#888888]">Pigmentos enriquecidos con Aceite de Argán, Aloe Vera, Pantenol y Vitamina E para efecto espejo y fibra capilar sana.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="text-sm font-semibold text-[#FFFFFF]">Salud de la Fibra Capilar</h3>
-                    <p className="text-xs text-[#888888]">Optimización de volúmenes de peróxido para minimizar el estrés estructural del cabello.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="text-sm font-semibold text-[#FFFFFF]">Historial de Colorimetría</h3>
-                    <p className="text-xs text-[#888888]">Registro exacto de mezclas en cada una de tus visitas para resultados consistentes.</p>
+                    <h3 className="text-sm font-semibold text-[#FFFFFF]">Historial de Colorimetría Inmutable</h3>
+                    <p className="text-xs text-[#888888]">Tu fórmula exacta queda registrada digitalmente en cada cita para que tu tono siempre conserve la misma perfección.</p>
                   </div>
                 </div>
               </div>
-              <div className="mt-8">
+
+              <div className="mt-8 flex items-center gap-6">
                 <Link
                   to="/tecnologia-ia"
                   className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#C6A15B] hover:text-[#DFBF7E] font-semibold border-b border-[#C6A15B] pb-1 transition-colors"
                 >
-                  <span>Descubre cómo funciona la tecnología</span>
+                  <span>Conoce los 4 pasos del proceso</span>
                   <ChevronRight className="w-4 h-4" />
                 </Link>
+                <span className="text-[10px] text-[#666666] uppercase tracking-wider">
+                  Partner Tech Certificado
+                </span>
               </div>
             </div>
 
@@ -161,6 +187,9 @@ export const Home: React.FC = () => {
                 <p className="font-serif text-2xl text-[#C6A15B] font-bold">100%</p>
                 <p className="text-xs text-[#F5F1E9]/80 mt-1 uppercase tracking-wider">
                   Personalización matemática del matiz
+                </p>
+                <p className="text-[10px] text-[#A3A3A3] mt-2 font-light">
+                  Tecnología de formulación asistida por Digital Color AI
                 </p>
               </div>
             </div>

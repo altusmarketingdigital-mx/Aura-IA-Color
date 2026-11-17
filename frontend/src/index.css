@@ -49,6 +49,91 @@
   }
 }
 
+/* Animación de Texto Multicolor Dinámico para Slogan */
+@keyframes dynamicColorFlow {
+  0% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 16px rgba(198, 161, 91, 0.4));
+  }
+  25% {
+    background-position: 50% 100%;
+    filter: drop-shadow(0 0 20px rgba(188, 19, 254, 0.45));
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 22px rgba(6, 182, 212, 0.5));
+  }
+  75% {
+    background-position: 50% 0%;
+    filter: drop-shadow(0 0 20px rgba(255, 45, 155, 0.45));
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 16px rgba(198, 161, 91, 0.4));
+  }
+}
+
+.slogan-multicolor-flow {
+  background: linear-gradient(
+    135deg,
+    #DFBF7E 0%,
+    #C6A15B 18%,
+    #bc13fe 38%,
+    #06b6d4 58%,
+    #ff2d9b 78%,
+    #DFBF7E 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: dynamicColorFlow 8s ease-in-out infinite;
+}
+
+/* Splash de Tintas en Fondo (Efecto Orgánico de Color) */
+@keyframes inkDriftSlow {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+    opacity: 0.22;
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.15) rotate(12deg);
+    opacity: 0.38;
+  }
+  66% {
+    transform: translate(-25px, 25px) scale(0.92) rotate(-10deg);
+    opacity: 0.28;
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+    opacity: 0.22;
+  }
+}
+
+.ink-splash-magenta {
+  background: radial-gradient(circle at 40% 40%, rgba(188, 19, 254, 0.45) 0%, rgba(124, 58, 237, 0.2) 45%, transparent 70%);
+  filter: blur(55px);
+  animation: inkDriftSlow 14s ease-in-out infinite alternate;
+}
+
+.ink-splash-cyan {
+  background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.4) 0%, rgba(59, 130, 246, 0.18) 50%, transparent 72%);
+  filter: blur(60px);
+  animation: inkDriftSlow 18s ease-in-out infinite alternate-reverse;
+}
+
+.ink-splash-amber {
+  background: radial-gradient(circle at 45% 45%, rgba(198, 161, 91, 0.5) 0%, rgba(255, 85, 0, 0.2) 45%, transparent 70%);
+  filter: blur(50px);
+  animation: inkDriftSlow 12s ease-in-out infinite alternate;
+}
+
+.ink-splash-rose {
+  background: radial-gradient(circle at 55% 45%, rgba(255, 45, 155, 0.38) 0%, rgba(188, 19, 254, 0.15) 50%, transparent 70%);
+  filter: blur(55px);
+  animation: inkDriftSlow 16s ease-in-out infinite alternate-reverse;
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

@@ -42,9 +42,11 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children 
         {/* Cabecera */}
         <div className="p-6 border-b border-[#262626]">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full border border-[#C6A15B] flex items-center justify-center bg-[#1A1A1A]">
-              <Sparkles className="w-4 h-4 text-[#C6A15B]" />
-            </div>
+            <img
+              src="/logo.jpg"
+              alt="Logo AURA IA COLOR"
+              className="w-9 h-9 rounded-full object-cover border border-[#C6A15B]/60"
+            />
             <div>
               <span className="font-serif text-base tracking-wider text-[#FFFFFF] font-bold block">
                 AURA <span className="text-[#C6A15B]">ADMIN</span>

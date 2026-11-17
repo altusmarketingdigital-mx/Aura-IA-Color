@@ -37,9 +37,11 @@ export const AdminLogin: React.FC = () => {
       <div className="max-w-md w-full bg-[#161616] border border-[#2B2B2B] p-8 sm:p-10 rounded-sm shadow-2xl">
         
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-full border border-[#C6A15B] flex items-center justify-center bg-[#1A1A1A] mx-auto mb-4">
-            <Sparkles className="w-6 h-6 text-[#C6A15B]" />
-          </div>
+          <img
+            src="/logo.jpg"
+            alt="Logo AURA IA COLOR"
+            className="w-20 h-20 rounded-full object-cover border border-[#C6A15B]/70 shadow-[0_0_20px_rgba(198,161,91,0.3)] mx-auto mb-4"
+          />
           <h1 className="font-serif text-2xl text-[#FFFFFF] font-bold">
             AURA <span className="text-[#C6A15B] font-light">ADMIN</span>
           </h1>

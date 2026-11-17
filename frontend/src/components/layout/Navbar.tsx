@@ -27,9 +27,11 @@ export const Navbar: React.FC = () => {
           
           {/* Logo Oficial */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full border border-[#C6A15B] flex items-center justify-center bg-[#1A1A1A] group-hover:border-[#DFBF7E] transition-colors">
-              <Sparkles className="w-5 h-5 text-[#C6A15B]" />
-            </div>
+            <img
+              src="/logo.jpg"
+              alt="Logo AURA IA COLOR"
+              className="w-12 h-12 rounded-full object-cover border border-[#C6A15B]/60 shadow-[0_0_12px_rgba(198,161,91,0.25)] group-hover:scale-105 transition-all"
+            />
             <div>
               <span className="font-serif text-xl tracking-[0.2em] text-[#FFFFFF] font-bold block">
                 AURA <span className="text-[#C6A15B] font-light">IA COLOR</span>

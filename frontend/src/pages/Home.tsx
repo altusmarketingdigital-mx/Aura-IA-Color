@@ -49,6 +49,14 @@ export const Home: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/70 to-transparent" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
+          <div className="flex justify-center mb-6">
+            <img
+              src="/logo.jpg"
+              alt="AURA IA COLOR Logo Oficial"
+              className="w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-[#C6A15B] shadow-[0_0_30px_rgba(198,161,91,0.4)] animate-pulse"
+            />
+          </div>
+
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/80 backdrop-blur-sm mb-6">
             <Sparkles className="w-4 h-4 text-[#C6A15B]" />
             <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium">

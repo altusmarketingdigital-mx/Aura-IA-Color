@@ -11,9 +11,11 @@ export const Footer: React.FC = () => {
           {/* Columna 1: Marca y Concepto */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-full border border-[#C6A15B] flex items-center justify-center bg-[#1A1A1A]">
-                <Sparkles className="w-4 h-4 text-[#C6A15B]" />
-              </div>
+              <img
+                src="/logo.jpg"
+                alt="Logo AURA IA COLOR"
+                className="w-10 h-10 rounded-full object-cover border border-[#C6A15B]/60 shadow-[0_0_8px_rgba(198,161,91,0.2)]"
+              />
               <span className="font-serif text-lg tracking-[0.2em] text-[#FFFFFF] font-bold">
                 AURA <span className="text-[#C6A15B] font-light">IA COLOR</span>
               </span>

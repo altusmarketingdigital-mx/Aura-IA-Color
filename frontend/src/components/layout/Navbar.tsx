@@ -80,18 +80,18 @@ export const Navbar: React.FC = () => {
           </button>
 
           {/* Logo Central Oficial */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group">
             <img
               src="/logo.jpg"
               alt="AURA IA COLOR Logo"
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border border-[#C6A15B] shadow-[0_0_15px_rgba(198,161,91,0.3)] group-hover:scale-105 transition-transform duration-300"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border border-[#C6A15B] shadow-[0_0_15px_rgba(198,161,91,0.3)] group-hover:scale-105 transition-transform duration-300 shrink-0"
             />
-            <div className="text-left">
-              <span className="font-serif text-lg sm:text-xl tracking-[0.2em] text-[#FFFFFF] font-bold block leading-tight">
-                AURA <span className="text-[#C6A15B] font-light">IA COLOR</span>
+            <div className="text-left flex flex-col justify-center">
+              <span className="font-serif text-lg sm:text-xl tracking-[0.25em] text-[#FFFFFF] font-bold block leading-none">
+                AURA
               </span>
-              <span className="text-[8px] sm:text-[9px] tracking-[0.2em] text-[#C6A15B] uppercase block">
-                Colorimetría con Inteligencia Artificial
+              <span className="text-[10px] sm:text-xs tracking-[0.3em] text-[#C6A15B] font-light uppercase block mt-1 leading-none">
+                IA COLOR
               </span>
             </div>
           </Link>
@@ -130,14 +130,14 @@ export const Navbar: React.FC = () => {
             <img
               src="/logo.jpg"
               alt="AURA IA COLOR Logo"
-              className="w-10 h-10 rounded-full object-cover border border-[#C6A15B]/70 shadow-[0_0_10px_rgba(198,161,91,0.3)]"
+              className="w-10 h-10 rounded-full object-cover border border-[#C6A15B]/70 shadow-[0_0_10px_rgba(198,161,91,0.3)] shrink-0"
             />
-            <div>
-              <span className="font-serif text-base tracking-widest text-[#FFFFFF] font-bold block">
-                AURA <span className="text-[#C6A15B]">IA COLOR</span>
+            <div className="flex flex-col justify-center">
+              <span className="font-serif text-base tracking-[0.25em] text-[#FFFFFF] font-bold block leading-none">
+                AURA
               </span>
-              <span className="text-[9px] uppercase tracking-wider text-[#888888]">
-                Navegación Exclusiva
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#C6A15B] font-light mt-1 leading-none">
+                IA COLOR
               </span>
             </div>
           </div>

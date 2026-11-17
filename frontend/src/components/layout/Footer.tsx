@@ -14,11 +14,16 @@ export const Footer: React.FC = () => {
               <img
                 src="/logo.jpg"
                 alt="Logo AURA IA COLOR"
-                className="w-10 h-10 rounded-full object-cover border border-[#C6A15B]/60 shadow-[0_0_8px_rgba(198,161,91,0.2)]"
+                className="w-10 h-10 rounded-full object-cover border border-[#C6A15B]/60 shadow-[0_0_8px_rgba(198,161,91,0.2)] shrink-0"
               />
-              <span className="font-serif text-lg tracking-[0.2em] text-[#FFFFFF] font-bold">
-                AURA <span className="text-[#C6A15B] font-light">IA COLOR</span>
-              </span>
+              <div className="flex flex-col justify-center">
+                <span className="font-serif text-lg tracking-[0.2em] text-[#FFFFFF] font-bold block leading-none">
+                  AURA
+                </span>
+                <span className="text-[10px] tracking-[0.25em] text-[#C6A15B] font-light uppercase mt-1 leading-none">
+                  IA COLOR
+                </span>
+              </div>
             </div>
             <p className="text-xs text-[#888888] leading-relaxed mb-4">
               Servicios profesionales de coloración capilar combinados con tecnología de inteligencia artificial para alcanzar el matiz, brillo y salud perfectos en cada hebra.

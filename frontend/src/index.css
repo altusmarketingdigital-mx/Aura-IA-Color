@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-aura-black text-aura-ivory font-sans antialiased selection:bg-aura-gold selection:text-aura-black;
   }
@@ -10,6 +13,48 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif tracking-wide;
   }
+}
+
+/* Efectos de Brillo Dorado y Halo */
+.gold-glow {
+  box-shadow: 0 0 25px rgba(198, 161, 91, 0.25);
+}
+
+.gold-glow-hover:hover {
+  box-shadow: 0 0 35px rgba(198, 161, 91, 0.45);
+}
+
+.gold-text-glow {
+  text-shadow: 0 0 15px rgba(198, 161, 91, 0.35);
+}
+
+/* Animaciones de Entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-floatSlow {
+  animation: floatSlow 6s ease-in-out infinite;
 }
 
 /* Scrollbar personalizado de lujo */

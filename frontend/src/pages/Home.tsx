@@ -38,27 +38,31 @@ export const Home: React.FC = () => {
     <div className="bg-[#111111]">
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-[#222222]">
-        {/* Imagen de fondo oscurecida */}
+      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-[#222222]">
+        {/* Imagen de fondo con zoom sutil */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-25 filter brightness-75 scale-105 transform duration-1000"
+          className="absolute inset-0 bg-cover bg-center opacity-30 filter brightness-75 scale-105 animate-pulse duration-[8000ms]"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1920&q=85')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/75 to-transparent" />
+        
+        {/* Luces difusas decorativas de fondo */}
+        <div className="absolute -top-32 left-1/4 w-96 h-96 bg-[#C6A15B]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 right-1/4 w-96 h-96 bg-[#C6A15B]/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
           <div className="flex justify-center mb-6">
             <img
               src="/logo.jpg"
               alt="AURA IA COLOR Logo Oficial"
-              className="w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-[#C6A15B] shadow-[0_0_30px_rgba(198,161,91,0.4)] animate-pulse"
+              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-[#C6A15B] shadow-[0_0_35px_rgba(198,161,91,0.5)] transform hover:scale-105 transition-transform duration-500 animate-floatSlow"
             />
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/80 backdrop-blur-sm mb-6">
-            <Sparkles className="w-4 h-4 text-[#C6A15B]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/90 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(198,161,91,0.2)]">
+            <Sparkles className="w-4 h-4 text-[#C6A15B] animate-spin duration-3000" />
             <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium">
               Tecnología & Coloración Capilar de Alta Gama
             </span>
@@ -66,26 +70,26 @@ export const Home: React.FC = () => {
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-[#FFFFFF] tracking-tight mb-6 leading-tight">
             TU COLOR. TU ESENCIA. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFBF7E] via-[#C6A15B] to-[#9E7B3B]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFBF7E] via-[#C6A15B] to-[#9E7B3B] gold-text-glow">
               TU TECNOLOGÍA.
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-[#F5F1E9]/80 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+          <p className="text-base sm:text-lg md:text-xl text-[#F5F1E9]/85 max-w-2xl mx-auto font-light leading-relaxed mb-10">
             Descubre una nueva experiencia de coloración capilar con tecnología de inteligencia artificial y asesoría personalizada en el corazón de la Colonia Del Valle.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
             <Link
               to="/reservar"
-              className="w-full sm:w-auto px-8 py-4 bg-[#C6A15B] hover:bg-[#DFBF7E] text-[#111111] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all shadow-lg shadow-[#C6A15B]/20 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-9 py-4 bg-[#C6A15B] hover:bg-[#DFBF7E] text-[#111111] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all transform hover:-translate-y-1 shadow-[0_4px_25px_rgba(198,161,91,0.3)] hover:shadow-[0_4px_35px_rgba(198,161,91,0.5)] flex items-center justify-center gap-2"
             >
               <Calendar className="w-4 h-4" />
               <span>Agenda tu Cita</span>
             </Link>
             <Link
               to="/servicios"
-              className="w-full sm:w-auto px-8 py-4 border border-[#C6A15B]/70 text-[#C6A15B] hover:bg-[#C6A15B]/10 font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-9 py-4 border border-[#C6A15B]/80 text-[#C6A15B] hover:bg-[#C6A15B]/15 hover:border-[#DFBF7E] font-semibold text-xs uppercase tracking-[0.2em] rounded-sm transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2"
             >
               <span>Conoce Nuestros Servicios</span>
               <ArrowRight className="w-4 h-4" />
@@ -180,10 +184,10 @@ export const Home: React.FC = () => {
           {services.map((service) => (
             <div
               key={service.id}
-              className="bg-[#171717] border border-[#292929] hover:border-[#C6A15B]/60 rounded-sm p-6 flex flex-col justify-between transition-all group"
+              className="bg-[#171717] border border-[#292929] hover:border-[#C6A15B] rounded-sm p-6 flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(198,161,91,0.15)] group"
             >
               <div>
-                <span className="text-[10px] uppercase tracking-widest text-[#C6A15B] block mb-2">
+                <span className="text-[10px] uppercase tracking-widest text-[#C6A15B] block mb-2 font-mono">
                   {service.categoryName}
                 </span>
                 <h3 className="font-serif text-lg text-[#FFFFFF] group-hover:text-[#C6A15B] transition-colors mb-2">
@@ -202,7 +206,7 @@ export const Home: React.FC = () => {
                 </div>
                 <Link
                   to={`/reservar?serviceId=${service.id}`}
-                  className="p-2.5 bg-[#222222] group-hover:bg-[#C6A15B] text-[#C6A15B] group-hover:text-[#111111] rounded-sm transition-colors"
+                  className="p-3 bg-[#222222] group-hover:bg-[#C6A15B] text-[#C6A15B] group-hover:text-[#111111] rounded-sm transition-all transform group-hover:rotate-6"
                   title="Reservar este servicio"
                 >
                   <Calendar className="w-4 h-4" />

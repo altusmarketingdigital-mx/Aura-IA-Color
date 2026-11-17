@@ -1,0 +1,24 @@
+# Dependencias
+node_modules/
+dist/
+build/
+
+# Entornos y secretos
+.env
+.env.local
+.env.*.local
+*.log
+
+# Base de datos local
+*.db
+*.db-journal
+
+# Almacenamiento privado de fotos de diagnóstico de clientas
+backend/uploads/private/
+uploads/private/
+
+# IDE y Sistema
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,203 @@
+// Prisma Schema para AURA IA COLOR
+// Versión 1.0 - Desarrollado por ALTUS MKT DIGITAL
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. Usuarios del Sistema y Roles Administrativos
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String
+  name         String
+  role         String        @default("ADMIN_OPERATIVO") // ADMIN_PRINCIPAL | ADMIN_OPERATIVO
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  activityLogs ActivityLog[]
+  blockedSlots BlockedSlot[]
+
+  @@map("users")
+}
+
+// 2. Cartera de Clientes
+model Customer {
+  id           String        @id @default(uuid())
+  name         String
+  phone        String
+  email        String?
+  notes        String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments Appointment[]
+
+  @@index([phone])
+  @@map("customers")
+}
+
+// 3. Categorías de Servicios
+model ServiceCategory {
+  id           String    @id @default(uuid())
+  name         String
+  slug         String    @unique
+  description  String?
+  displayOrder Int       @default(0)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  services     Service[]
+
+  @@map("service_categories")
+}
+
+// 4. Catálogo de Servicios
+model Service {
+  id              String          @id @default(uuid())
+  categoryId      String
+  category        ServiceCategory @relation(fields: [categoryId], references: [id])
+  name            String
+  description     String
+  durationMinutes Int // Duración en minutos
+  price           Float // Precio oficial configurado en admin
+  bufferMinutes   Int             @default(15) // Tiempo de preparación entre citas
+  image           String?
+  isActive        Boolean         @default(true)
+  isFeatured      Boolean         @default(false)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  appointments    Appointment[]
+
+  @@index([categoryId])
+  @@map("services")
+}
+
+// 5. Citas y Reservaciones
+model Appointment {
+  id              String             @id @default(uuid())
+  folio           String             @unique // Ejemplo: AURA-2026-00001
+  customerId      String
+  customer        Customer           @relation(fields: [customerId], references: [id])
+  serviceId       String
+  service         Service            @relation(fields: [serviceId], references: [id])
+  appointmentDate DateTime // Fecha y hora de la cita
+  durationMinutes Int // Duración pactada
+  status          String             @default("PENDING") // PENDING | CONFIRMED | REJECTED | CANCELLED | COMPLETED
+  clientNotes     String?
+  adminNotes      String?
+  rejectionReason String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  photos          AppointmentPhoto[]
+
+  @@index([appointmentDate, status])
+  @@index([customerId])
+  @@map("appointments")
+}
+
+// 6. Fotografías de Diagnóstico de Citas (Almacenamiento Privado)
+model AppointmentPhoto {
+  id            String      @id @default(uuid())
+  appointmentId String
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  photoType     String // CURRENT (foto actual) | REFERENCE (foto de referencia deseada)
+  filePath      String // Ruta protegida en uploads/private
+  originalName  String
+  mimeType      String
+  fileSize      Int
+  createdAt     DateTime    @default(now())
+
+  @@index([appointmentId])
+  @@map("appointment_photos")
+}
+
+// 7. Horarios Oficiales de Atención
+model BusinessHours {
+  id        String  @id @default(uuid())
+  dayOfWeek Int     @unique // 0=Domingo, 1=Lunes, ..., 6=Sábado
+  openTime  String  @default("09:00") // Formato HH:mm
+  closeTime String  @default("19:00") // Formato HH:mm
+  isOpen    Boolean @default(true)
+
+  @@map("business_hours")
+}
+
+// 8. Bloqueos de Horario Especiales (Mantenimiento, festivos, capacitaciones)
+model BlockedSlot {
+  id        String   @id @default(uuid())
+  date      String // Formato YYYY-MM-DD
+  startTime String // Formato HH:mm
+  endTime   String // Formato HH:mm
+  reason    String
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([date])
+  @@map("blocked_slots")
+}
+
+// 9. Promociones
+model Promotion {
+  id           String    @id @default(uuid())
+  title        String
+  description  String
+  discountText String?
+  image        String?
+  validFrom    DateTime?
+  validTo      DateTime?
+  conditions   String?
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("promotions")
+}
+
+// 10. Galería de Trabajos (Público con autorización)
+model Gallery {
+  id           String   @id @default(uuid())
+  title        String
+  category     String // BALAYAGE | BABYLIGHTS | COLORACION | TRANSFORMACIONES
+  imageUrl     String
+  beforeImage  String?
+  isPublished  Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category, isPublished])
+  @@map("gallery")
+}
+
+// 11. Contenido Web Administrable
+model WebsiteContent {
+  id          String   @id @default(uuid())
+  sectionKey  String   @unique // 'hero', 'about', 'ia_technology', 'contact'
+  contentJson String
+  updatedAt   DateTime @updatedAt
+
+  @@map("website_content")
+}
+
+// 12. Auditoría y Registro de Actividad
+model ActivityLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String?
+  details   String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("activity_logs")
+}

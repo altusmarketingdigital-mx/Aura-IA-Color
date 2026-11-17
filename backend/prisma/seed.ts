@@ -46,15 +46,15 @@ async function main() {
 
   console.log(`[Seed] Usuarios creados: ${adminPrincipal.email} y ${adminOperativo.email}`);
 
-  // 3. Horarios Oficiales de Atención (Lunes a Sábado de 09:00 a 19:00, Domingos cerrado)
+  // 3. Horarios Oficiales de Atención (Lunes a Sábado de 10:00 a 20:00, Domingos Previa Cita Especial)
   const daysOfWeek = [
-    { dayOfWeek: 0, openTime: '09:00', closeTime: '19:00', isOpen: false }, // Domingo
-    { dayOfWeek: 1, openTime: '09:00', closeTime: '19:00', isOpen: true },  // Lunes
-    { dayOfWeek: 2, openTime: '09:00', closeTime: '19:00', isOpen: true },  // Martes
-    { dayOfWeek: 3, openTime: '09:00', closeTime: '19:00', isOpen: true },  // Miércoles
-    { dayOfWeek: 4, openTime: '09:00', closeTime: '19:00', isOpen: true },  // Jueves
-    { dayOfWeek: 5, openTime: '09:00', closeTime: '19:00', isOpen: true },  // Viernes
-    { dayOfWeek: 6, openTime: '09:00', closeTime: '19:00', isOpen: true },  // Sábado
+    { dayOfWeek: 0, openTime: '10:00', closeTime: '20:00', isOpen: false }, // Domingo (Cita Especial)
+    { dayOfWeek: 1, openTime: '10:00', closeTime: '20:00', isOpen: true },  // Lunes
+    { dayOfWeek: 2, openTime: '10:00', closeTime: '20:00', isOpen: true },  // Martes
+    { dayOfWeek: 3, openTime: '10:00', closeTime: '20:00', isOpen: true },  // Miércoles
+    { dayOfWeek: 4, openTime: '10:00', closeTime: '20:00', isOpen: true },  // Jueves
+    { dayOfWeek: 5, openTime: '10:00', closeTime: '20:00', isOpen: true },  // Viernes
+    { dayOfWeek: 6, openTime: '10:00', closeTime: '20:00', isOpen: true },  // Sábado
   ];
 
   for (const day of daysOfWeek) {

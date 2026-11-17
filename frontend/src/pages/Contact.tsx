@@ -86,8 +86,8 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-xs uppercase tracking-wider text-[#888888] mb-1">Horario Oficial de Operación</h4>
-                  <p className="text-sm text-[#FFFFFF]">Lunes a Sábado: 09:00 a 19:00 hrs</p>
-                  <p className="text-xs text-[#C6A15B] font-medium mt-0.5">Domingos: Cerrado</p>
+                  <p className="text-sm text-[#FFFFFF]">Lunes a Sábado: 10:00 a 20:00 hrs</p>
+                  <p className="text-xs text-[#C6A15B] font-medium mt-0.5">Domingos: Previa Cita Especial</p>
                 </div>
               </div>
 

@@ -76,11 +76,11 @@ export const Footer: React.FC = () => {
             <div className="space-y-2 text-xs text-[#888888]">
               <div className="flex justify-between border-b border-[#222222] pb-1">
                 <span>Lunes a Sábado:</span>
-                <span className="text-[#F5F1E9]">09:00 - 19:00 hrs</span>
+                <span className="text-[#F5F1E9]">10:00 - 20:00 hrs</span>
               </div>
               <div className="flex justify-between border-b border-[#222222] pb-1">
                 <span>Domingos:</span>
-                <span className="text-[#C6A15B]">Cerrado</span>
+                <span className="text-[#C6A15B]">Previa Cita Especial</span>
               </div>
               <p className="text-[11px] text-[#888888] pt-2 italic">
                 * Atención personalizada previa reservación en línea o por WhatsApp.

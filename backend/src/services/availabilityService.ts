@@ -72,7 +72,7 @@ export async function calculateAvailability(dateStr: string, serviceId: string):
     return {
       isOpen: false,
       slots: [],
-      dayInfo: dayOfWeek === 0 ? 'Domingos cerrado' : 'Cerrado en este día',
+      dayInfo: dayOfWeek === 0 ? 'Domingos atención únicamente bajo Cita Especial (solicitar por WhatsApp)' : 'Cerrado en este día',
     };
   }
 

@@ -57,19 +57,38 @@ export const IATechnology: React.FC = () => {
 
         {/* Explicación de la Alianza y Rol del Estilista */}
         <div className="bg-[#171717] border border-[#292929] p-8 md:p-10 rounded-sm mb-16 shadow-xl">
-          <div className="flex items-center gap-2 mb-3">
-            <Sparkles className="w-5 h-5 text-[#C6A15B]" />
-            <span className="text-xs uppercase tracking-widest text-[#C6A15B] font-medium">Tecnología de Punta en Cabina</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-6">
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-2 mb-3">
+                <Sparkles className="w-5 h-5 text-[#C6A15B]" />
+                <span className="text-xs uppercase tracking-widest text-[#C6A15B] font-medium">Tecnología de Punta en Cabina</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF] mb-4">
+                ¿Cómo funciona nuestra tecnología de formulación?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light mb-4">
+                En la peluquería convencional, mezclar tonos dependía enteramente de la intuición y el 'ojo' del momento. Factores como el fondo de aclaración (tonos cobrizos o amarillos residuales) y la porosidad capilar provocaban que un tinte quedara desigual o cambiara de tono a las dos semanas.
+              </p>
+              <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
+                En <strong>AURA IA COLOR</strong> operamos con la tecnología y derechos de formulación inteligente desarrollada en alianza con el ecosistema de <strong>Digital Color AI</strong>. El corazón del servicio sigue siendo el estilista humano especializado en colorimetría, quien evalúa tu fibra capilar, selecciona la altura de tono requerida y envía la instrucción a la máquina dosificadora con IA. El sistema computa los coeficientes cromáticos exactos y dispensa la fórmula pura lista para su aplicación.
+              </p>
+            </div>
+            
+            <div className="lg:col-span-5">
+              <div className="rounded-sm overflow-hidden border border-[#C6A15B]/30 shadow-2xl relative group">
+                <img
+                  src="/digital-color-machine-splash.jpg"
+                  alt="Máquina Digital Color y Explosión de Pigmentos"
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="p-3 bg-[#141414] border-t border-[#222222] text-center">
+                  <span className="text-[11px] text-[#C6A15B] font-mono tracking-wider">
+                    Smart Color Master • AI Engine System
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF] mb-4">
-            ¿Cómo funciona nuestra tecnología de formulación?
-          </h2>
-          <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light mb-4">
-            En la peluquería convencional, mezclar tonos dependía enteramente de la intuición y el 'ojo' del momento. Factores como el fondo de aclaración (tonos cobrizos o amarillos residuales) y la porosidad capilar provocaban que un tinte quedara desigual o cambiara de tono a las dos semanas.
-          </p>
-          <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light mb-6">
-            En <strong>AURA IA COLOR</strong> operamos con la tecnología y derechos de formulación inteligente desarrollada en alianza con el ecosistema de <strong>Digital Color AI</strong>. El corazón del servicio sigue siendo el estilista humano especializado en colorimetría, quien evalúa tu fibra capilar, selecciona la altura de tono requerida y envía la instrucción a la máquina dosificadora con IA. El sistema computa los coeficientes cromáticos exactos y dispensa la fórmula pura lista para su aplicación.
-          </p>
 
           <div className="p-4 rounded-sm bg-[#121212] border border-[#2b2b2b] flex items-center justify-between flex-wrap gap-4">
             <div className="text-xs text-[#888888]">

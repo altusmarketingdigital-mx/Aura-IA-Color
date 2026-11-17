@@ -38,21 +38,17 @@ export const Home: React.FC = () => {
     <div className="bg-[#111111]">
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-[#222222]">
-        {/* Imagen de fondo con zoom sutil */}
+      <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden border-b border-[#222222]">
+        {/* Splash Real de Pigmentos en Explosión (Digital Color AI) de fondo */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-25 filter brightness-75 scale-105 animate-pulse duration-[8000ms]"
+          className="absolute inset-0 bg-cover bg-center opacity-40 filter brightness-90 contrast-125 scale-105 transition-transform duration-1000"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1920&q=85')`,
+            backgroundImage: `url('/hero-color-splash-bg.jpg')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent" />
-        
-        {/* Splashes de Tintas Orgánicas sobre fondo negro y dorado */}
-        <div className="absolute top-10 -left-20 w-[420px] h-[420px] ink-splash-magenta rounded-full pointer-events-none" />
-        <div className="absolute top-1/3 -right-28 w-[480px] h-[480px] ink-splash-cyan rounded-full pointer-events-none" />
-        <div className="absolute -bottom-24 left-1/3 w-[500px] h-[500px] ink-splash-amber rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[360px] h-[360px] ink-splash-rose rounded-full pointer-events-none" />
+        {/* Capa de atmósfera oscura elegante para legibilidad óptima */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/85 to-[#111111]/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#111111_75%)]" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
           <div className="flex justify-center mb-6">
@@ -60,12 +56,12 @@ export const Home: React.FC = () => {
               <img
                 src="/logo.png"
                 alt="AURA IA COLOR Logo Oficial"
-                className="w-36 h-36 sm:w-44 sm:h-44 rounded-full object-contain filter drop-shadow-[0_0_35px_rgba(198,161,91,0.55)] transform hover:scale-105 transition-transform duration-500"
+                className="w-36 h-36 sm:w-44 sm:h-44 rounded-full object-contain filter drop-shadow-[0_0_40px_rgba(198,161,91,0.65)] transform hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/90 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(198,161,91,0.2)]">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/90 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(198,161,91,0.25)]">
             <Sparkles className="w-4 h-4 text-[#C6A15B]" />
             <span className="text-xs uppercase tracking-[0.2em] text-[#C6A15B] font-medium text-center">
               COLORACIÓN CAPILAR DE ALTA GAMA CON INTELIGENCIA ARTIFICIAL IA
@@ -80,14 +76,14 @@ export const Home: React.FC = () => {
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-[#F5F1E9]/85 max-w-2xl mx-auto font-light leading-relaxed mb-6">
+          <p className="text-base sm:text-lg md:text-xl text-[#F5F1E9]/90 max-w-2xl mx-auto font-light leading-relaxed mb-6">
             Servicio profesional de coloración capilar para mujeres, hombres y todo género. Asesoría directa por estilistas especializados en colorimetría, respaldados por la precisión de nuestra máquina dispensadora con Inteligencia Artificial.
           </p>
 
           {/* Badge sutil de tecnología aliada */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#161616]/80 border border-[#333333] mb-10 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#161616]/85 border border-[#C6A15B]/30 mb-10 backdrop-blur-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]">
             <span className="w-2 h-2 rounded-full bg-[#06b6d4] animate-ping" />
-            <span className="text-[11px] text-[#A3A3A3] font-light">
+            <span className="text-[11px] text-[#C5C5C5] font-light">
               Impulsado por tecnología certificada de dispensación cromática con IA • <strong className="text-[#DFBF7E] font-medium">Digital Color AI Architecture</strong>
             </span>
           </div>
@@ -174,22 +170,23 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Fotografía de lujo */}
+            {/* Fotografía de la Máquina y Explosión de Color Real */}
             <div className="relative">
-              <div className="aspect-[4/5] rounded-sm overflow-hidden border border-[#333333] shadow-2xl">
+              <div className="aspect-[4/3] rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-[0_10px_40px_rgba(0,0,0,0.8)] relative group">
                 <img
-                  src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80"
-                  alt="Coloración Capilar de Precisión"
-                  className="w-full h-full object-cover filter brightness-90 hover:scale-105 transition-transform duration-700"
+                  src="/digital-color-machine-splash.jpg"
+                  alt="Máquina Digital Color y Explosión de Pigmentos con Inteligencia Artificial"
+                  className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60" />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-[#1A1A1A] border border-[#C6A15B]/50 p-6 rounded-sm shadow-xl max-w-xs hidden sm:block">
-                <p className="font-serif text-2xl text-[#C6A15B] font-bold">100%</p>
-                <p className="text-xs text-[#F5F1E9]/80 mt-1 uppercase tracking-wider">
-                  Personalización matemática del matiz
+              <div className="absolute -bottom-6 -left-6 bg-[#1A1A1A]/95 border border-[#C6A15B]/50 p-6 rounded-sm shadow-2xl max-w-xs hidden sm:block backdrop-blur-md">
+                <p className="font-serif text-2xl text-[#C6A15B] font-bold">1,200+ Tonos</p>
+                <p className="text-xs text-[#F5F1E9]/90 mt-1 uppercase tracking-wider font-medium">
+                  Dispensación Robótica en Tiempo Real
                 </p>
                 <p className="text-[10px] text-[#A3A3A3] mt-2 font-light">
-                  Tecnología de formulación asistida por Digital Color AI
+                  Formulación asistida por Digital Color AI Engine System
                 </p>
               </div>
             </div>

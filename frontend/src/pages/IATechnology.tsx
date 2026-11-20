@@ -77,13 +77,13 @@ export const IATechnology: React.FC = () => {
             <div className="lg:col-span-5">
               <div className="rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-2xl relative group bg-[#161616]">
                 <img
-                  src="/white-machine-clean.jpg"
-                  alt="Máquina Blanca Oficial Dispensadora de Color AURA IA COLOR"
+                  src="/tecnologia-cabina-white-machine.jpg"
+                  alt="Estación Oficial de Formulación y Dispensación con IA - AURA IA COLOR"
                   className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="p-3 bg-[#141414] border-t border-[#222222] text-center">
                   <span className="text-[11px] text-[#C6A15B] font-mono tracking-wider">
-                    Smart Color Master • AI Engine System
+                    Smart Color Master • Dispensación Robótica Inteligente
                   </span>
                 </div>
               </div>

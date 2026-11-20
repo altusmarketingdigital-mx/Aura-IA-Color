@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Instagram, Clock, MessageSquare, Calendar } from 'lucide-react';
+import { MapPin, Phone, Instagram, Clock, MessageSquare, Calendar, Facebook } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Contact: React.FC = () => {
@@ -7,13 +7,19 @@ export const Contact: React.FC = () => {
     <div className="bg-[#111111] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Encabezado */}
+        {/* Encabezado con efecto de brillo y estilo premium */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
             Estamos para Servirte
           </span>
-          <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-6">
-            Contacto y Citas
+          <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-6 tracking-tight">
+            <span className="relative inline-block">
+              <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
+                Contacto y Citas
+              </span>
+              {/* Aro dorado decorativo suave en el título */}
+              <span className="absolute -bottom-2 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#C6A15B] to-transparent shadow-[0_0_8px_#C6A15B]" />
+            </span>
           </h1>
           <p className="text-sm text-[#888888] font-light leading-relaxed">
             Visítanos en una ubicación estratégica entre la Roma Sur y Del Valle Norte, o contáctanos directamente a través de nuestros canales oficiales.
@@ -23,7 +29,7 @@ export const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
           
           {/* Tarjeta de Información de Contacto */}
-          <div className="bg-[#171717] border border-[#262626] p-8 sm:p-10 rounded-sm space-y-8">
+          <div className="bg-[#171717] border border-[#262626] p-8 sm:p-10 rounded-sm space-y-8 shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
             <div>
               <h2 className="font-serif text-2xl text-[#FFFFFF] mb-2">AURA IA COLOR</h2>
               <p className="text-xs text-[#C6A15B] uppercase tracking-wider font-semibold">
@@ -57,7 +63,7 @@ export const Contact: React.FC = () => {
                     rel="noopener noreferrer"
                     className="text-sm text-[#C6A15B] hover:underline font-semibold"
                   >
-                    55 3729 3887 (525537293887)
+                    55 3729 3887
                   </a>
                   <p className="text-[11px] text-[#888888] mt-0.5">Atención personalizada y dudas sobre citas</p>
                 </div>
@@ -82,12 +88,29 @@ export const Contact: React.FC = () => {
 
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-sm bg-[#1A1A1A] border border-[#333333] flex items-center justify-center shrink-0">
+                  <Facebook className="w-5 h-5 text-[#C6A15B]" />
+                </div>
+                <div>
+                  <h4 className="text-xs uppercase tracking-wider text-[#888888] mb-1">Facebook Oficial</h4>
+                  <a
+                    href="https://facebook.com/aura.iacolor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[#FFFFFF] hover:text-[#C6A15B] transition-colors"
+                  >
+                    AURA IA COLOR
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-sm bg-[#1A1A1A] border border-[#333333] flex items-center justify-center shrink-0">
                   <Clock className="w-5 h-5 text-[#C6A15B]" />
                 </div>
                 <div>
                   <h4 className="text-xs uppercase tracking-wider text-[#888888] mb-1">Horario Oficial de Operación</h4>
                   <p className="text-sm text-[#FFFFFF]">Martes a Sábado: 10:00 a 20:00 hrs</p>
-                  <p className="text-xs text-[#C6A15B] font-medium mt-0.5">Domingos: 10:00 a 16:00 hrs</p>
+                  <p className="text-xs text-[#C6A15B] font-medium mt-0.5">Domingos: 10:00 a 16:00 hrs (Bajo confirmación)</p>
                   <p className="text-xs text-[#777777] mt-0.5">Lunes: Cerrado</p>
                 </div>
               </div>

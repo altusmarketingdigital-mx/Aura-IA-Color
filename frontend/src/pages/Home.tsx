@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Calendar, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Star } from 'lucide-react';
 import api from '../services/api';
+import { BeforeAfterSlider } from '../components/common/BeforeAfterSlider';
 
 export const Home: React.FC = () => {
   const [services, setServices] = useState<any[]>([]);
@@ -80,11 +81,11 @@ export const Home: React.FC = () => {
             Servicio profesional de coloración capilar para mujeres, hombres y todo género. Asesoría directa por estilistas especializados en colorimetría, respaldados por la precisión de nuestra máquina dispensadora con Inteligencia Artificial.
           </p>
 
-          {/* Badge sutil de tecnología aliada */}
+          {/* Badge sutil de tecnología de formulación */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#161616]/85 border border-[#C6A15B]/30 mb-10 backdrop-blur-sm shadow-[0_0_15px_rgba(0,0,0,0.5)]">
             <span className="w-2 h-2 rounded-full bg-[#06b6d4] animate-ping" />
             <span className="text-[11px] text-[#C5C5C5] font-light">
-              Impulsado por tecnología certificada de dispensación cromática con IA • <strong className="text-[#DFBF7E] font-medium">Digital Color AI Architecture</strong>
+              Tecnología de dispensación robótica inteligente • <strong className="text-[#DFBF7E] font-medium">Smart Color Master con IA</strong>
             </span>
           </div>
 
@@ -107,7 +108,7 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. DIFERENCIADOR DE INTELIGENCIA ARTIFICIAL & ALIANZA TECNOLÓGICA */}
+      {/* 2. DIFERENCIADOR DE INTELIGENCIA ARTIFICIAL & TECNOLOGÍA PROPIA */}
       <section className="py-24 bg-[#141414] border-b border-[#222222] relative overflow-hidden">
         {/* Splash de fondo sutil en sección técnica */}
         <div className="absolute top-1/2 -right-36 w-96 h-96 ink-splash-magenta rounded-full pointer-events-none opacity-20" />
@@ -117,13 +118,13 @@ export const Home: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
-                Innovación Responsable • Tecnología Digital Color AI
+                Innovación Responsable • Precisión Robótica
               </span>
               <h2 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-6 leading-snug">
                 Estilistas Especialistas con Apoyo de Dispensación Inteligente con IA
               </h2>
               <p className="text-sm text-[#F5F1E9]/75 leading-relaxed mb-6 font-light">
-                En <strong>AURA IA COLOR</strong> la asesoría la realiza un estilista profesional especializado en colorimetría capilar. Evaluamos tu tono base, tipo de cabello y expectativas de forma 100% personalizada para todo género, y nos apoyamos en la arquitectura tecnológica de <strong>Digital Color AI</strong>: una máquina inteligente que formula y dispensa el tinte listo para aplicar con más de <strong>1,200 tonos posibles</strong> y cero margen de error.
+                En <strong>AURA IA COLOR</strong> la asesoría la realiza un estilista profesional especializado en colorimetría capilar. Evaluamos tu tono base, tipo de cabello y expectativas de forma 100% personalizada para todo género, y nos apoyamos en una avanzada máquina inteligente que formula y dispensa el tinte listo para aplicar con más de <strong>1,200 tonos posibles</strong> y cero margen de error.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -164,19 +165,19 @@ export const Home: React.FC = () => {
                   <span>Conoce los 4 pasos del proceso</span>
                   <ChevronRight className="w-4 h-4" />
                 </Link>
-                <span className="text-[10px] text-[#666666] uppercase tracking-wider">
-                  Partner Tech Certificado
+                <span className="text-[10px] text-[#C6A15B] uppercase tracking-wider font-mono">
+                  Tecnología de Formulación Robótica
                 </span>
               </div>
             </div>
 
-            {/* Fotografía de la Máquina y Explosión de Color Real */}
+            {/* Fotografía de la Máquina Blanca Oficial (con marca difuminada) */}
             <div className="relative">
-              <div className="aspect-[4/3] rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-[0_10px_40px_rgba(0,0,0,0.8)] relative group">
+              <div className="aspect-[3/4] sm:aspect-[4/5] rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-[0_15px_50px_rgba(0,0,0,0.85)] relative group bg-[#161616]">
                 <img
-                  src="/digital-color-machine-splash.jpg"
-                  alt="Máquina Digital Color y Explosión de Pigmentos con Inteligencia Artificial"
-                  className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700"
+                  src="/white-machine-clean.jpg"
+                  alt="Máquina Inteligente Blanca Dispensadora de Color AURA IA COLOR"
+                  className="w-full h-full object-cover object-center filter brightness-95 group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60" />
               </div>
@@ -186,7 +187,7 @@ export const Home: React.FC = () => {
                   Dispensación Robótica en Tiempo Real
                 </p>
                 <p className="text-[10px] text-[#A3A3A3] mt-2 font-light">
-                  Formulación asistida por Digital Color AI Engine System
+                  Estación de formulación inteligente AURA IA COLOR
                 </p>
               </div>
             </div>
@@ -252,6 +253,47 @@ export const Home: React.FC = () => {
             <span>Ver todas las categorías y técnicas</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
+        </div>
+      </section>
+
+      {/* 3.5 SECCIÓN INTERACTIVA: TRANSFORMACIÓN ANTES Y DESPUÉS (SLIDER INTERACTIVO AURA) */}
+      <section className="py-24 bg-[#141414] border-b border-[#222222] relative overflow-hidden">
+        {/* Splashes decorativos en sección de transformación */}
+        <div className="absolute top-1/4 -left-20 w-80 h-80 ink-splash-amber rounded-full pointer-events-none opacity-20" />
+        <div className="absolute bottom-1/4 -right-20 w-80 h-80 ink-splash-magenta rounded-full pointer-events-none opacity-20" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
+              Hair Color with AI • Resultados Reales
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-4">
+              Una Transformación AURA
+            </h2>
+            <p className="text-xs sm:text-sm text-[#888888] font-light">
+              Desliza el control interactivo para apreciar la corrección, brillo, hidratación y matiz exacto obtenido con formulación inteligente.
+            </p>
+          </div>
+
+          <div className="bg-[#181818] border border-[#2D2D2D] p-6 sm:p-10 rounded-sm shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+            <BeforeAfterSlider
+              beforeImage="/transform-aura-blonde-before.jpg"
+              afterImage="/transform-aura-blonde-after.jpg"
+              beforeLabel="Antes"
+              afterLabel="Después"
+              aspectRatio="aspect-[4/5] sm:aspect-[4/5]"
+            />
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link
+              to="/galeria"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#C6A15B] hover:text-[#DFBF7E] font-semibold border-b border-[#C6A15B] pb-1 transition-colors"
+            >
+              <span>Explora más transformaciones en nuestra Galería Oficial</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 

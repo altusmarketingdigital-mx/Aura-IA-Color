@@ -17,7 +17,7 @@ export const IATechnology: React.FC = () => {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/90 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(198,161,91,0.2)]">
             <Cpu className="w-4 h-4 text-[#C6A15B]" />
             <span className="text-[11px] uppercase tracking-widest text-[#C6A15B] font-semibold">
-              Arquitectura Tecnológica • Powered by Digital Color AI
+              Arquitectura Tecnológica • Smart Color Master con IA
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-4">
@@ -70,15 +70,15 @@ export const IATechnology: React.FC = () => {
                 En la peluquería convencional, mezclar tonos dependía enteramente de la intuición y el 'ojo' del momento. Factores como el fondo de aclaración (tonos cobrizos o amarillos residuales) y la porosidad capilar provocaban que un tinte quedara desigual o cambiara de tono a las dos semanas.
               </p>
               <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
-                En <strong>AURA IA COLOR</strong> operamos con la tecnología y derechos de formulación inteligente desarrollada en alianza con el ecosistema de <strong>Digital Color AI</strong>. El corazón del servicio sigue siendo el estilista humano especializado en colorimetría, quien evalúa tu fibra capilar, selecciona la altura de tono requerida y envía la instrucción a la máquina dosificadora con IA. El sistema computa los coeficientes cromáticos exactos y dispensa la fórmula pura lista para su aplicación.
+                En <strong>AURA IA COLOR</strong> operamos con tecnología y algoritmos de formulación inteligente asistida por computadora. El corazón del servicio sigue siendo el estilista humano especializado en colorimetría, quien evalúa tu fibra capilar, selecciona la altura de tono requerida y envía la instrucción a la máquina dosificadora con IA. El sistema computa los coeficientes cromáticos exactos y dispensa la fórmula pura lista para su aplicación.
               </p>
             </div>
             
             <div className="lg:col-span-5">
-              <div className="rounded-sm overflow-hidden border border-[#C6A15B]/30 shadow-2xl relative group">
+              <div className="rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-2xl relative group bg-[#161616]">
                 <img
-                  src="/digital-color-machine-splash.jpg"
-                  alt="Máquina Digital Color y Explosión de Pigmentos"
+                  src="/white-machine-clean.jpg"
+                  alt="Máquina Blanca Dispensadora de Color con IA"
                   className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="p-3 bg-[#141414] border-t border-[#222222] text-center">
@@ -92,16 +92,11 @@ export const IATechnology: React.FC = () => {
 
           <div className="p-4 rounded-sm bg-[#121212] border border-[#2b2b2b] flex items-center justify-between flex-wrap gap-4">
             <div className="text-xs text-[#888888]">
-              <strong className="text-[#FFFFFF]">Acreditación Tecnológica:</strong> Diseñado e integrado bajo los estándares de automatización y formulación de Digital Color AI.
+              <strong className="text-[#FFFFFF]">Precisión Robótica:</strong> Dispensación automatizada de 12 concentrados puros y microdosificación sin error humano.
             </div>
-            <a
-              href="https://digitalcolor.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] text-[#C6A15B] hover:text-[#DFBF7E] underline font-medium"
-            >
-              Conoce más sobre la tecnología aliada (digitalcolor.ai) →
-            </a>
+            <span className="text-[11px] text-[#C6A15B] font-medium font-mono">
+              Estándar de Calidad AURA IA COLOR
+            </span>
           </div>
         </div>
 
@@ -212,7 +207,7 @@ export const IATechnology: React.FC = () => {
                 La Fusión Perfecta: Talento Humano y Precisión Robótica
               </h4>
               <p className="text-xs text-[#888888] leading-relaxed">
-                La asesoría y el diagnóstico son 100% personalizados y realizados por estilistas profesionales para mujeres, hombres y cualquier género. Nuestra máquina dosificadora con tecnología Digital Color AI es el copiloto de precisión que elimina el error de pesaje y garantiza formulaciones perfectas en todo momento.
+                La asesoría y el diagnóstico son 100% personalizados y realizados por estilistas profesionales para mujeres, hombres y cualquier género. Nuestra máquina dosificadora con tecnología de Inteligencia Artificial es el copiloto de precisión que elimina el error de pesaje y garantiza formulaciones perfectas en todo momento.
               </p>
             </div>
           </div>

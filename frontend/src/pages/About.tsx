@@ -55,11 +55,14 @@ export const About: React.FC = () => {
             <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
               En AURA IA COLOR eliminamos las suposiciones integrando herramientas de cálculo algorítmico y dispensación robótica directa que determinan los gramos exactos de pigmentos primarios y secundarios necesarios para alcanzar la altura de tono deseada sin comprometer la estructura capilar.
             </p>
-            <div className="pt-4 border-t border-[#262626]">
-              <p className="font-serif text-lg text-[#C6A15B] italic">
-                "Nuestra misión es que cada persona experimente el tono exacto que soñó, manteniendo su cabello radiante, sano y con máxima fortaleza."
+            <div className="pt-4 border-t border-[#262626] space-y-3">
+              <p className="font-serif text-lg text-[#DFBF7E] italic leading-snug">
+                "Nuestra misión es que cada persona experimente el tono exacto que soñó, manteniendo su cabello radiante, sano y con máxima fortaleza, con la confianza en la precisión de la ciencia."
               </p>
-              <p className="text-xs text-[#888888] mt-2 font-medium uppercase tracking-wider">
+              <p className="font-serif text-base text-[#C6A15B] font-semibold tracking-wide">
+                "No solo es arte... es ciencia y salud."
+              </p>
+              <p className="text-xs text-[#888888] font-medium uppercase tracking-wider">
                 — Equipo Master Colorista AURA IA COLOR
               </p>
             </div>

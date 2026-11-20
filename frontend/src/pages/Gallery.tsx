@@ -65,13 +65,13 @@ export const Gallery: React.FC = () => {
         {/* Módulo Especial: Comparador Interactivo de Transformación en Cabina */}
         <div className="mb-20 max-w-3xl mx-auto bg-[#171717] border border-[#2D2D2D] p-6 sm:p-8 rounded-sm shadow-[0_15px_45px_rgba(0,0,0,0.7)]">
           <BeforeAfterSlider
-            beforeImage="/transform-aura-blonde-before.jpg"
-            afterImage="/transform-aura-blonde-after.jpg"
-            beforeLabel="Antes"
-            afterLabel="Después"
+            beforeImage="/aura-hair-before.jpg"
+            afterImage="/aura-hair-after.jpg"
+            beforeLabel="Antes (Oxidado)"
+            afterLabel="Después (Fórmula IA)"
             title="Corrección y Formulación Inteligente"
             subtitle="Transformación Destacada"
-            aspectRatio="aspect-[4/5] sm:aspect-[4/5]"
+            aspectRatio="aspect-[3/4] sm:aspect-[4/5]"
           />
         </div>
 

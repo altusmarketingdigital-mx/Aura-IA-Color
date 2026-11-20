@@ -45,13 +45,13 @@ export const IATechnology: React.FC = () => {
           </div>
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
             <span className="text-3xl font-serif text-[#06b6d4] font-bold block mb-1">12</span>
-            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Latas Originales</p>
-            <p className="text-[10px] text-[#888888] mt-1">Con claves internacionales que evitan la piratería comercial</p>
+            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Latas Clave & Cuidado</p>
+            <p className="text-[10px] text-[#888888] mt-1">Concentrados puros de alta pureza con claves internacionales que protegen tu cabello</p>
           </div>
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
-            <span className="text-3xl font-serif text-[#bc13fe] font-bold block mb-1">CERO</span>
-            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Desperdicio</p>
-            <p className="text-[10px] text-[#888888] mt-1">Fórmula exacta al gramo sin sobrantes</p>
+            <span className="text-3xl font-serif text-[#bc13fe] font-bold block mb-1">0%</span>
+            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Sostenibilidad</p>
+            <p className="text-[10px] text-[#888888] mt-1">Fórmulas más eficientes, menos residuos, más responsabilidad</p>
           </div>
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
             <span className="text-3xl font-serif text-[#DFBF7E] font-bold block mb-1">100%</span>

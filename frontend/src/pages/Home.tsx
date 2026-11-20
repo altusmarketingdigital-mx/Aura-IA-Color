@@ -131,12 +131,12 @@ export const Home: React.FC = () => {
                 <div className="bg-[#191919] p-4 rounded-sm border border-[#262626]">
                   <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">1,200+</span>
                   <p className="text-xs text-[#FFFFFF] font-medium">Tonos de Alta Precisión</p>
-                  <p className="text-[11px] text-[#888888] mt-1 font-light">Formulados matemáticamente con 12 latas de pigmentos orgánicos concentrados.</p>
+                  <p className="text-[11px] text-[#888888] mt-1 font-light">12 latas clave de pigmentos de alta pureza con claves internacionales que protegen y cuidan tu cabello.</p>
                 </div>
                 <div className="bg-[#191919] p-4 rounded-sm border border-[#262626]">
-                  <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">CERO</span>
-                  <p className="text-xs text-[#FFFFFF] font-medium">Desperdicio Químico</p>
-                  <p className="text-[11px] text-[#888888] mt-1 font-light">Dosificación exacta al miligramo. Menor residuo químico y máxima ecología capilar.</p>
+                  <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">0%</span>
+                  <p className="text-xs text-[#FFFFFF] font-medium">Sostenibilidad & Precisión</p>
+                  <p className="text-[11px] text-[#888888] mt-1 font-light">Fórmulas más eficientes, menos residuos, más responsabilidad con dosificación exacta al miligramo.</p>
                 </div>
               </div>
 

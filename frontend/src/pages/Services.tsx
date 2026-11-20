@@ -32,13 +32,18 @@ export const Services: React.FC = () => {
     <div className="bg-[#111111] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Encabezado */}
+        {/* Encabezado con efecto dinámico en títulos */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
             Catálogo Administrable de Servicios
           </span>
-          <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-6">
-            Nuestros Servicios Profesionales
+          <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-6 tracking-tight">
+            <span className="relative inline-block">
+              <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
+                Nuestros Servicios Profesionales
+              </span>
+              <span className="absolute -bottom-2 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#C6A15B] to-transparent shadow-[0_0_8px_#C6A15B]" />
+            </span>
           </h1>
           <p className="text-sm text-[#888888] font-light leading-relaxed">
             Cada servicio incluye valoración técnica capilar, productos de formulación premium y la asesoría de expertas en colorimetría.

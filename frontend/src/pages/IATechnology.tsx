@@ -12,7 +12,7 @@ export const IATechnology: React.FC = () => {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Encabezado */}
+        {/* Encabezado con efecto dinámico en títulos */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C6A15B]/40 bg-[#1A1A1A]/90 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(198,161,91,0.2)]">
             <Cpu className="w-4 h-4 text-[#C6A15B]" />
@@ -20,8 +20,13 @@ export const IATechnology: React.FC = () => {
               Arquitectura Tecnológica • Smart Color Master con IA
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-4">
-            Colorimetría Capilar con Inteligencia Artificial
+          <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-4 tracking-tight">
+            <span className="relative inline-block">
+              <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
+                Colorimetría Capilar con Inteligencia Artificial
+              </span>
+              <span className="absolute -bottom-2 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#C6A15B] to-transparent shadow-[0_0_8px_#C6A15B]" />
+            </span>
           </h1>
           <p className="text-lg font-serif slogan-multicolor-flow font-bold max-w-xl mx-auto mb-4">
             TU COLOR. TU DISEÑO. TU ESTILO.
@@ -31,7 +36,7 @@ export const IATechnology: React.FC = () => {
           </p>
         </div>
 
-        {/* Métricas de Alto Impacto basadas en Digital Color */}
+        {/* Métricas de Alto Impacto */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
             <span className="text-3xl font-serif text-[#C6A15B] font-bold block mb-1">1,200+</span>
@@ -40,17 +45,17 @@ export const IATechnology: React.FC = () => {
           </div>
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
             <span className="text-3xl font-serif text-[#06b6d4] font-bold block mb-1">12</span>
-            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Latas Clave</p>
-            <p className="text-[10px] text-[#888888] mt-1">Concentrados puros de alta pureza</p>
+            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Latas Originales</p>
+            <p className="text-[10px] text-[#888888] mt-1">Con claves internacionales que evitan la piratería comercial</p>
           </div>
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
-            <span className="text-3xl font-serif text-[#bc13fe] font-bold block mb-1">0%</span>
+            <span className="text-3xl font-serif text-[#bc13fe] font-bold block mb-1">CERO</span>
             <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Desperdicio</p>
-            <p className="text-[10px] text-[#888888] mt-1">Dosificación lista al gramo exacto</p>
+            <p className="text-[10px] text-[#888888] mt-1">Fórmula exacta al gramo sin sobrantes</p>
           </div>
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
             <span className="text-3xl font-serif text-[#DFBF7E] font-bold block mb-1">100%</span>
-            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Todo Género</p>
+            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Todo Género y Edades</p>
             <p className="text-[10px] text-[#888888] mt-1">Formulado para todo tipo de cabello</p>
           </div>
         </div>

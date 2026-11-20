@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Instagram, Clock, Sparkles } from 'lucide-react';
+import { MapPin, Phone, Instagram, Clock, Sparkles, Facebook } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -55,8 +55,12 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/promociones" className="text-[#888888] hover:text-[#C6A15B] transition-colors">
-                  Promoción: 50% en tu 5ta visita
+                <Link 
+                  to="/promociones" 
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#C6A15B]/15 text-[#DFBF7E] font-semibold rounded border border-[#C6A15B]/40 hover:bg-[#C6A15B]/25 hover:border-[#DFBF7E] transition-all"
+                >
+                  <Sparkles className="w-3 h-3 text-[#DFBF7E]" />
+                  <span>Promoción: 50% en tu 5ta visita</span>
                 </Link>
               </li>
               <li>
@@ -80,7 +84,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex justify-between border-b border-[#222222] pb-1">
                 <span>Domingos:</span>
-                <span className="text-[#C6A15B]">10:00 - 16:00 hrs</span>
+                <span className="text-[#DFBF7E] font-medium">10:00 - 16:00 hrs (Bajo confirmación)</span>
               </div>
               <div className="flex justify-between border-b border-[#222222] pb-1">
                 <span>Lunes:</span>
@@ -124,6 +128,17 @@ export const Footer: React.FC = () => {
                   className="hover:text-[#C6A15B] transition-colors"
                 >
                   @aura.iacolor
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Facebook className="w-4 h-4 text-[#C6A15B] shrink-0" />
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#C6A15B] transition-colors"
+                >
+                  Facebook: AURA IA COLOR
                 </a>
               </li>
             </ul>

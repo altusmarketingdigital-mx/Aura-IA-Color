@@ -212,7 +212,7 @@ export const IATechnology: React.FC = () => {
                 La Fusión Perfecta: Talento Humano y Precisión Robótica
               </h4>
               <p className="text-xs text-[#888888] leading-relaxed">
-                La asesoría y el diagnóstico son 100% personalizados y realizados por estilistas profesionales para mujeres, hombres y cualquier género. Nuestra máquina dosificadora con tecnología de Inteligencia Artificial es el copiloto de precisión que elimina el error de pesaje y garantiza formulaciones perfectas en todo momento.
+                La asesoría y el diagnóstico son 100% personalizados y realizados por estilistas profesionales para mujeres, hombres, cualquier género y edades, siempre cuidando tu salud. Nuestra máquina dosificadora con tecnología de Inteligencia Artificial es el copiloto de precisión que elimina el error de pesaje y garantiza formulaciones perfectas en todo momento.
               </p>
             </div>
           </div>

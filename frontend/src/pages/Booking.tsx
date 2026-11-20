@@ -330,7 +330,7 @@ export const Booking: React.FC = () => {
                   required
                 />
                 <p className="text-[11px] text-[#888888] mt-2">
-                  * Horario regular: Lunes a Sábado de 10:00 a 20:00 hrs. Domingos atención únicamente bajo cita especial (solicitar directamente por WhatsApp).
+                  * Horario regular: Martes a Sábado de 10:00 a 20:00 hrs. Domingos de 10:00 a 16:00 hrs. Lunes cerrado.
                 </p>
                 {dayInfo && (
                   <p className="text-xs text-[#C6A15B] mt-2 font-medium">{dayInfo}</p>

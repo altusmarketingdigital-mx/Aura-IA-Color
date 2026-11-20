@@ -206,7 +206,7 @@ export const Navbar: React.FC = () => {
             </p>
             <p className="flex items-center gap-2">
               <Clock className="w-3.5 h-3.5 text-[#C6A15B] shrink-0" />
-              <span>Lun a Sáb: 10:00 - 20:00 hrs (Dom: Cita Especial)</span>
+              <span>Mar a Sáb: 10:00 - 20:00 hrs | Dom: 10:00 - 16:00 hrs</span>
             </p>
           </div>
 

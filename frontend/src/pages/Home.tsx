@@ -354,8 +354,9 @@ export const Home: React.FC = () => {
               </p>
               <div className="p-4 bg-[#1B1B1B] rounded border border-[#2D2D2D] mb-6">
                 <p className="text-xs text-[#C6A15B] font-semibold mb-1">Horario Comercial:</p>
-                <p className="text-xs text-[#FFFFFF]">Lunes a Sábado: 10:00 a 20:00 hrs.</p>
-                <p className="text-xs text-[#C6A15B]">Domingos: Previa Cita Especial.</p>
+                <p className="text-xs text-[#FFFFFF]">Martes a Sábado: 10:00 a 20:00 hrs.</p>
+                <p className="text-xs text-[#C6A15B]">Domingos: 10:00 a 16:00 hrs.</p>
+                <p className="text-xs text-[#777777]">Lunes: Cerrado (Descanso de equipo técnico).</p>
               </div>
               <Link
                 to="/reservar"

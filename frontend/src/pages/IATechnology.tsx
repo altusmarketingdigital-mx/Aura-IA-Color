@@ -111,14 +111,16 @@ export const IATechnology: React.FC = () => {
             <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
               Flujo de Precisión
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF]">
-              Los 4 Pasos Hacia el Color Perfecto
+            <h2 className="text-2xl sm:text-3xl font-serif">
+              <span className="slogan-multicolor-flow font-extrabold tracking-wide">
+                Los 4 Pasos Hacia el Color Perfecto
+              </span>
             </h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <div className="bg-[#151515] border border-[#262626] hover:border-[#C6A15B]/50 p-6 rounded-sm transition-colors">
+            <div className="bg-[#151515] border border-[#262626] hover:border-[#C6A15B]/50 p-6 rounded-sm transition-all hover:-translate-y-0.5">
               <div className="flex items-center justify-between mb-3">
                 <span className="font-serif text-2xl text-[#C6A15B] font-bold">01</span>
                 <span className="text-[10px] uppercase tracking-widest text-[#888888] px-2 py-0.5 border border-[#333333] rounded">Analizamos</span>
@@ -129,18 +131,18 @@ export const IATechnology: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-[#151515] border border-[#262626] hover:border-[#06b6d4]/50 p-6 rounded-sm transition-colors">
+            <div className="bg-[#151515] border border-[#262626] hover:border-[#06b6d4]/50 p-6 rounded-sm transition-all hover:-translate-y-0.5">
               <div className="flex items-center justify-between mb-3">
                 <span className="font-serif text-2xl text-[#06b6d4] font-bold">02</span>
                 <span className="text-[10px] uppercase tracking-widest text-[#888888] px-2 py-0.5 border border-[#333333] rounded">Calculamos</span>
               </div>
               <h3 className="font-serif text-lg text-[#FFFFFF] mb-2">La IA Calcula la Fórmula Exacta</h3>
               <p className="text-xs text-[#888888] font-light leading-relaxed">
-                Nuestros algoritmos calculan la combinación matemática idónea de pigmentos y activadores para llegar al matiz perfecto.
+                Nuestros algoritmos calculan la combinación matemática idónea de pigmentos y activadores para llegar al matiz perfecto y cuidando tu cabello en cada miligramo.
               </p>
             </div>
 
-            <div className="bg-[#151515] border border-[#262626] hover:border-[#bc13fe]/50 p-6 rounded-sm transition-colors">
+            <div className="bg-[#151515] border border-[#262626] hover:border-[#bc13fe]/50 p-6 rounded-sm transition-all hover:-translate-y-0.5">
               <div className="flex items-center justify-between mb-3">
                 <span className="font-serif text-2xl text-[#bc13fe] font-bold">03</span>
                 <span className="text-[10px] uppercase tracking-widest text-[#888888] px-2 py-0.5 border border-[#333333] rounded">Preparamos</span>
@@ -151,7 +153,7 @@ export const IATechnology: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-[#151515] border border-[#262626] hover:border-[#DFBF7E]/50 p-6 rounded-sm transition-colors">
+            <div className="bg-[#151515] border border-[#262626] hover:border-[#DFBF7E]/50 p-6 rounded-sm transition-all hover:-translate-y-0.5">
               <div className="flex items-center justify-between mb-3">
                 <span className="font-serif text-2xl text-[#DFBF7E] font-bold">04</span>
                 <span className="text-[10px] uppercase tracking-widest text-[#888888] px-2 py-0.5 border border-[#333333] rounded">Aplicamos</span>
@@ -165,40 +167,55 @@ export const IATechnology: React.FC = () => {
           </div>
         </div>
 
-        {/* Salud Capilar & Ingredientes Botánicos */}
-        <div className="bg-[#161616] border border-[#262626] p-8 rounded-sm mb-16">
-          <div className="text-center max-w-xl mx-auto mb-8">
-            <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-1">
-              Cuidado Activo de la Fibra
-            </span>
-            <h3 className="text-xl sm:text-2xl font-serif text-[#FFFFFF]">
-              Salud Capilar con Alto Contenido Orgánico
+        {/* Salud Capilar & Ingredientes Botánicos con diseño premium destacado */}
+        <div className="relative bg-gradient-to-b from-[#1C1812] via-[#161616] to-[#121212] border-2 border-[#C6A15B]/50 p-8 sm:p-10 rounded-xl mb-16 shadow-[0_10px_40px_rgba(198,161,91,0.15)] overflow-hidden">
+          {/* Acento decorativo luminoso de fondo */}
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#C6A15B]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#bc13fe]/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 text-center max-w-xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C6A15B]/20 border border-[#C6A15B]/50 text-[#DFBF7E] text-[10px] uppercase tracking-widest font-semibold mb-3">
+              <Sparkles className="w-3 h-3 text-[#DFBF7E]" />
+              <span>Fórmula Protectora Exclusiva</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-serif">
+              <span className="slogan-multicolor-flow font-extrabold tracking-wide">
+                Salud Capilar con Alto Contenido Orgánico
+              </span>
             </h3>
-            <p className="text-xs text-[#888888] mt-2">
-              Color que cuida el cabello y restaura la cutícula en cada sesión.
+            <p className="text-xs sm:text-sm text-[#CCCCCC] mt-3 font-light leading-relaxed">
+              Color que cuida el cabello y restaura la cutícula en cada sesión, fusionando activos botánicos de alta pureza con tecnología robótica de infusión.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div className="p-4 bg-[#1C1C1C] rounded border border-[#292929]">
-              <Droplet className="w-5 h-5 text-[#C6A15B] mx-auto mb-2" />
-              <p className="text-xs font-semibold text-[#FFFFFF]">Aceite de Argán</p>
-              <p className="text-[10px] text-[#888888] mt-1">Efecto espejo y brillo de larga duración.</p>
+          <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="p-5 bg-[#1E1E1E]/90 hover:bg-[#252525] rounded-lg border border-[#C6A15B]/30 hover:border-[#C6A15B] transition-all transform hover:-translate-y-1 shadow-lg group">
+              <div className="w-10 h-10 rounded-full bg-[#C6A15B]/15 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                <Droplet className="w-5 h-5 text-[#C6A15B]" />
+              </div>
+              <p className="text-xs font-bold text-[#FFFFFF] uppercase tracking-wider">Aceite de Argán</p>
+              <p className="text-[11px] text-[#A0A0A0] mt-2 font-light leading-snug">Efecto espejo y brillo sublime de larga duración.</p>
             </div>
-            <div className="p-4 bg-[#1C1C1C] rounded border border-[#292929]">
-              <Sparkle className="w-5 h-5 text-[#06b6d4] mx-auto mb-2" />
-              <p className="text-xs font-semibold text-[#FFFFFF]">Aloe Vera</p>
-              <p className="text-[10px] text-[#888888] mt-1">Nutrición e hidratación profunda del cuero cabelludo.</p>
+            <div className="p-5 bg-[#1E1E1E]/90 hover:bg-[#252525] rounded-lg border border-[#06b6d4]/30 hover:border-[#06b6d4] transition-all transform hover:-translate-y-1 shadow-lg group">
+              <div className="w-10 h-10 rounded-full bg-[#06b6d4]/15 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                <Sparkle className="w-5 h-5 text-[#06b6d4]" />
+              </div>
+              <p className="text-xs font-bold text-[#FFFFFF] uppercase tracking-wider">Aloe Vera</p>
+              <p className="text-[11px] text-[#A0A0A0] mt-2 font-light leading-snug">Nutrición calmante e hidratación celular profunda.</p>
             </div>
-            <div className="p-4 bg-[#1C1C1C] rounded border border-[#292929]">
-              <HeartPulse className="w-5 h-5 text-[#bc13fe] mx-auto mb-2" />
-              <p className="text-xs font-semibold text-[#FFFFFF]">Pantenol</p>
-              <p className="text-[10px] text-[#888888] mt-1">Restaura la elasticidad y evita quiebres.</p>
+            <div className="p-5 bg-[#1E1E1E]/90 hover:bg-[#252525] rounded-lg border border-[#bc13fe]/30 hover:border-[#bc13fe] transition-all transform hover:-translate-y-1 shadow-lg group">
+              <div className="w-10 h-10 rounded-full bg-[#bc13fe]/15 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                <HeartPulse className="w-5 h-5 text-[#bc13fe]" />
+              </div>
+              <p className="text-xs font-bold text-[#FFFFFF] uppercase tracking-wider">Pantenol</p>
+              <p className="text-[11px] text-[#A0A0A0] mt-2 font-light leading-snug">Restaura la elasticidad biológica y previene quiebres.</p>
             </div>
-            <div className="p-4 bg-[#1C1C1C] rounded border border-[#292929]">
-              <Layers className="w-5 h-5 text-[#DFBF7E] mx-auto mb-2" />
-              <p className="text-xs font-semibold text-[#FFFFFF]">Vitamina E</p>
-              <p className="text-[10px] text-[#888888] mt-1">Escudo térmico y antioxidante natural.</p>
+            <div className="p-5 bg-[#1E1E1E]/90 hover:bg-[#252525] rounded-lg border border-[#DFBF7E]/30 hover:border-[#DFBF7E] transition-all transform hover:-translate-y-1 shadow-lg group">
+              <div className="w-10 h-10 rounded-full bg-[#DFBF7E]/15 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                <Layers className="w-5 h-5 text-[#DFBF7E]" />
+              </div>
+              <p className="text-xs font-bold text-[#FFFFFF] uppercase tracking-wider">Vitamina E</p>
+              <p className="text-[11px] text-[#A0A0A0] mt-2 font-light leading-snug">Escudo térmico y potente antioxidante natural.</p>
             </div>
           </div>
         </div>

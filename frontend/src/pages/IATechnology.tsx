@@ -67,10 +67,10 @@ export const IATechnology: React.FC = () => {
                 ¿Cómo funciona nuestra tecnología de formulación?
               </h2>
               <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light mb-4">
-                En la peluquería convencional, mezclar tonos dependía enteramente de la intuición y el 'ojo' del momento. Factores como el fondo de aclaración (tonos cobrizos o amarillos residuales) y la porosidad capilar provocaban que un tinte quedara desigual o cambiara de tono a las dos semanas.
+                En la peluquería convencional, mezclar tonos dependía enteramente de la intuición y el 'ojo' del momento, donde le ponían a la fórmula gramaje sin medición científica. Factores críticos como el fondo de aclaración (tonos cobrizos o amarillos residuales) y la porosidad capilar provocaban que un tinte quedara desigual o cambiara de tono a las dos semanas.
               </p>
               <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
-                En <strong>AURA IA COLOR</strong> operamos con tecnología y algoritmos de formulación inteligente asistida por computadora. El corazón del servicio sigue siendo el estilista humano especializado en colorimetría, quien evalúa tu fibra capilar, selecciona la altura de tono requerida y envía la instrucción a la máquina dosificadora con IA. El sistema computa los coeficientes cromáticos exactos y dispensa la fórmula pura lista para su aplicación.
+                En <strong>AURA IA COLOR</strong> operamos con tecnología y algoritmos de formulación inteligente asistida por computadora. El corazón del servicio sigue siendo el estilista humano especializado en colorimetría, quien evalúa tu fibra capilar, selecciona la altura de tono requerida y envía la instrucción a nuestra máquina dosificadora blanca con IA. El sistema computa los coeficientes cromáticos exactos y dispensa la fórmula pura lista para su aplicación.
               </p>
             </div>
             
@@ -78,7 +78,7 @@ export const IATechnology: React.FC = () => {
               <div className="rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-2xl relative group bg-[#161616]">
                 <img
                   src="/white-machine-clean.jpg"
-                  alt="Máquina Blanca Dispensadora de Color con IA"
+                  alt="Máquina Blanca Oficial Dispensadora de Color AURA IA COLOR"
                   className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="p-3 bg-[#141414] border-t border-[#222222] text-center">

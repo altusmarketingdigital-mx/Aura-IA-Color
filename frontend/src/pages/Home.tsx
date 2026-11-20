@@ -171,11 +171,11 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Fotografía de la Máquina Blanca Oficial (con marca difuminada) */}
+            {/* Fotografía de la Máquina Blanca Oficial con Identidad AURA IA COLOR */}
             <div className="relative">
               <div className="aspect-[3/4] sm:aspect-[4/5] rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-[0_15px_50px_rgba(0,0,0,0.85)] relative group bg-[#161616]">
                 <img
-                  src="/white-machine-clean.jpg"
+                  src="/aura-white-machine-branded.jpg"
                   alt="Máquina Inteligente Blanca Dispensadora de Color AURA IA COLOR"
                   className="w-full h-full object-cover object-center filter brightness-95 group-hover:scale-105 transition-transform duration-700"
                 />

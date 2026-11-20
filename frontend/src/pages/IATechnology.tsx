@@ -82,7 +82,7 @@ export const IATechnology: React.FC = () => {
             <div className="lg:col-span-5">
               <div className="rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-2xl relative group bg-[#161616]">
                 <img
-                  src="/tecnologia-cabina-white-machine.jpg"
+                  src="/aura-white-machine-branded.jpg"
                   alt="Estación Oficial de Formulación y Dispensación con IA - AURA IA COLOR"
                   className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                 />

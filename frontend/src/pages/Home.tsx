@@ -277,11 +277,11 @@ export const Home: React.FC = () => {
 
           <div className="bg-[#181818] border border-[#2D2D2D] p-6 sm:p-10 rounded-sm shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
             <BeforeAfterSlider
-              beforeImage="/aura-hair-before.jpg"
-              afterImage="/aura-hair-after.jpg"
-              beforeLabel="Antes (Oxidado)"
-              afterLabel="Después (Fórmula IA)"
-              aspectRatio="aspect-[3/4] sm:aspect-[4/5]"
+              beforeImage="/real-hair-before-full.jpg"
+              afterImage="/real-hair-after-full.jpg"
+              beforeLabel="Antes (Textura Natural)"
+              afterLabel="Después (Efecto Espejo)"
+              aspectRatio="aspect-[9/16] sm:aspect-[3/4] max-h-[580px]"
             />
           </div>
 

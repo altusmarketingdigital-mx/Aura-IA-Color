@@ -244,13 +244,18 @@ export const Booking: React.FC = () => {
     <div className="bg-[#111111] py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Encabezado */}
+        {/* Encabezado con efecto dinámico en títulos */}
         <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
             Reservaciones en Línea
           </span>
-          <h1 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-4">
-            Agenda tu Experiencia de Color
+          <h1 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-4 tracking-tight">
+            <span className="relative inline-block">
+              <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
+                Agenda tu Experiencia de Color
+              </span>
+              <span className="absolute -bottom-2 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#C6A15B] to-transparent shadow-[0_0_8px_#C6A15B]" />
+            </span>
           </h1>
           <p className="text-xs sm:text-sm text-[#888888] font-light max-w-xl mx-auto">
             Selecciona tu servicio, consulta los horarios disponibles en tiempo real y solicita tu cita sin necesidad de crear una cuenta.

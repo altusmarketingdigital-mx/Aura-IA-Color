@@ -15,56 +15,62 @@ export const About: React.FC = () => {
           <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-6 tracking-tight">
             <span className="relative inline-block">
               <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
-                El Arte del Color Asistido por la Ciencia
+                Arte y Ciencia del Color Asistido por IA y un Especialista
               </span>
               <span className="absolute -bottom-2 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#C6A15B] to-transparent shadow-[0_0_8px_#C6A15B]" />
             </span>
           </h1>
           <p className="text-sm sm:text-base text-[#888888] font-light max-w-2xl mx-auto leading-relaxed">
-            AURA IA COLOR nace de la pasión por la excelencia cromática y la necesidad de resolver la mayor frustración en los salones: la falta de predictibilidad y precisión en los resultados de coloración capilar.
+            AURA IA COLOR nace de la pasión por la excelencia cromática y calidad, y la necesidad de resolver la mayor frustración en los salones: la falta de predictibilidad y precisión en los resultados de coloración capilar.
           </p>
         </div>
 
-        {/* Sección de Concepto con Render Oficial de Estudio */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
-          <div className="relative group">
-            <div className="aspect-[16/10] sm:aspect-[4/3] rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-2xl relative">
+        {/* Sección de Concepto con Render Oficial de Estudio (Vista Completa Panorámica sin recortes de libreros) */}
+        <div className="space-y-12 mb-20">
+          <div className="relative group max-w-5xl mx-auto">
+            <div className="w-full rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-2xl relative bg-[#141414]">
               <img
                 src="/salon-render.jpg"
                 alt="Render Arquitectónico Oficial de AURA IA COLOR"
-                className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-auto object-contain filter brightness-95 group-hover:scale-[1.02] transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/60 via-transparent to-transparent opacity-40 pointer-events-none" />
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-[#1A1A1A]/95 border border-[#C6A15B]/50 px-4 py-2 rounded-sm shadow-xl backdrop-blur-md">
+            <div className="absolute bottom-4 right-4 bg-[#1A1A1A]/95 border border-[#C6A15B]/50 px-4 py-2 rounded-sm shadow-xl backdrop-blur-md">
               <span className="text-[10px] text-[#C6A15B] uppercase tracking-widest font-mono font-semibold">
                 Concepto Arquitectónico • Próxima Inauguración
               </span>
             </div>
           </div>
-          <div className="space-y-6">
-            <span className="text-[11px] uppercase tracking-widest text-[#C6A15B] font-semibold block">
-              Instalaciones de Vanguardia
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF]">
-              Una Visión Transformadora del Espacio y el Color
-            </h2>
-            <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
-              Nuestro espacio físico ha sido concebido para combinar el lujo contemporáneo, la calidez botánica y la más alta ingeniería en colorimetría capilar. Con estaciones de atención privada, iluminación diseñada para evaluar reflejos cromáticos reales y nuestra estación central de formulación con Inteligencia Artificial.
-            </p>
-            <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
-              En AURA IA COLOR eliminamos las suposiciones integrando herramientas de cálculo algorítmico y dispensación robótica directa que determinan los gramos exactos de pigmentos primarios y secundarios necesarios para alcanzar la altura de tono deseada sin comprometer la estructura capilar.
-            </p>
-            <div className="pt-4 border-t border-[#262626] space-y-3">
-              <p className="font-serif text-lg text-[#DFBF7E] italic leading-snug">
-                "Nuestra misión es que cada persona experimente el tono exacto que soñó, manteniendo su cabello radiante, sano y con máxima fortaleza, con la confianza en la precisión de la ciencia."
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start max-w-5xl mx-auto">
+            <div className="space-y-4">
+              <span className="text-[11px] uppercase tracking-widest text-[#C6A15B] font-semibold block">
+                Instalaciones de Vanguardia
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF]">
+                Una Visión del Espacio Arquitectónico
+              </h2>
+              <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
+                La tecnología con un diseño saludable y contemporáneo. Nuestro espacio arquitectónico combina la calidez botánica, el confort privado y la más alta ingeniería en colorimetría capilar. Con estaciones de atención personalizadas, iluminación calibrada para evaluar reflejos cromáticos reales y nuestra estación central de formulación con Inteligencia Artificial.
               </p>
-              <p className="font-serif text-base text-[#C6A15B] font-semibold tracking-wide">
-                "No solo es arte... es ciencia y salud."
+              <p className="text-xs sm:text-sm text-[#F5F1E9]/80 leading-relaxed font-light">
+                En AURA IA COLOR eliminamos las suposiciones integrando herramientas de cálculo algorítmico y dispensación robótica directa que determinan los gramos exactos de pigmentos primarios y secundarios necesarios para alcanzar la altura de tono deseada sin comprometer la estructura capilar.
               </p>
-              <p className="text-xs text-[#888888] font-medium uppercase tracking-wider">
-                — Equipo Master Colorista AURA IA COLOR
-              </p>
+            </div>
+
+            <div className="bg-[#171717] border border-[#292929] p-8 rounded-sm space-y-4">
+              <div className="space-y-3">
+                <p className="font-serif text-lg text-[#DFBF7E] italic leading-snug">
+                  "Nuestra misión es que cada persona experimente el tono exacto que soñó, manteniendo su cabello radiante, sano y con máxima fortaleza, con la confianza en la precisión de la ciencia."
+                </p>
+                <p className="font-serif text-base text-[#C6A15B] font-semibold tracking-wide">
+                  "No solo es arte... es ciencia y salud."
+                </p>
+                <p className="text-xs text-[#888888] font-medium uppercase tracking-wider">
+                  — Equipo Master Colorista AURA IA COLOR
+                </p>
+              </div>
             </div>
           </div>
         </div>

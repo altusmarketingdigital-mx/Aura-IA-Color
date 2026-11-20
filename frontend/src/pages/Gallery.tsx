@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
+import { BeforeAfterSlider } from '../components/common/BeforeAfterSlider';
+import { Sparkles } from 'lucide-react';
 
 export const Gallery: React.FC = () => {
   const [items, setItems] = useState<any[]>([]);
@@ -35,20 +37,42 @@ export const Gallery: React.FC = () => {
     : items.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="bg-[#111111] py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#111111] py-16 relative overflow-hidden">
+      {/* Splashes sutiles de fondo */}
+      <div className="absolute top-24 -left-20 w-80 h-80 ink-splash-cyan rounded-full pointer-events-none opacity-20" />
+      <div className="absolute bottom-32 -right-20 w-80 h-80 ink-splash-rose rounded-full pointer-events-none opacity-20" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Encabezado */}
+        {/* Encabezado con efecto de texto animado */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
             Galería Oficial de Trabajos
           </span>
-          <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-6">
-            Resultados & Transformaciones
+          <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-6 tracking-tight">
+            <span className="relative inline-block">
+              <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
+                Resultados & Transformaciones
+              </span>
+              <span className="absolute -bottom-2 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#C6A15B] to-transparent shadow-[0_0_8px_#C6A15B]" />
+            </span>
           </h1>
           <p className="text-sm text-[#888888] font-light leading-relaxed">
             Fotografías reales de resultados obtenidos en AURA IA COLOR con consentimiento de nuestras clientas.
           </p>
+        </div>
+
+        {/* Módulo Especial: Comparador Interactivo de Transformación en Cabina */}
+        <div className="mb-20 max-w-3xl mx-auto bg-[#171717] border border-[#2D2D2D] p-6 sm:p-8 rounded-sm shadow-[0_15px_45px_rgba(0,0,0,0.7)]">
+          <BeforeAfterSlider
+            beforeImage="/transform-aura-blonde-before.jpg"
+            afterImage="/transform-aura-blonde-after.jpg"
+            beforeLabel="Antes"
+            afterLabel="Después"
+            title="Corrección y Formulación Inteligente"
+            subtitle="Transformación Destacada"
+            aspectRatio="aspect-[4/5] sm:aspect-[4/5]"
+          />
         </div>
 
         {/* Filtros */}

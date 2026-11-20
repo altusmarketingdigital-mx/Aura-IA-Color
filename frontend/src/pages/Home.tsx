@@ -118,7 +118,7 @@ export const Home: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
-                Innovación Responsable • Precisión Robótica
+                Innovación Responsable • En Colorimetría y Formulación Científica
               </span>
               <h2 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-6 leading-snug">
                 Estilistas Especialistas con Apoyo de Dispensación Inteligente con IA
@@ -134,8 +134,8 @@ export const Home: React.FC = () => {
                   <p className="text-[11px] text-[#888888] mt-1 font-light">Formulados matemáticamente con 12 latas de pigmentos orgánicos concentrados.</p>
                 </div>
                 <div className="bg-[#191919] p-4 rounded-sm border border-[#262626]">
-                  <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">0%</span>
-                  <p className="text-xs text-[#FFFFFF] font-medium">Improvisación & Desperdicio</p>
+                  <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">CERO</span>
+                  <p className="text-xs text-[#FFFFFF] font-medium">Desperdicio Químico</p>
                   <p className="text-[11px] text-[#888888] mt-1 font-light">Dosificación exacta al miligramo. Menor residuo químico y máxima ecología capilar.</p>
                 </div>
               </div>
@@ -151,8 +151,8 @@ export const Home: React.FC = () => {
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="text-sm font-semibold text-[#FFFFFF]">Historial de Colorimetría Inmutable</h3>
-                    <p className="text-xs text-[#888888]">Tu fórmula exacta queda registrada digitalmente en cada cita para que tu tono siempre conserve la misma perfección.</p>
+                    <h3 className="text-sm font-semibold text-[#FFFFFF]">Historial de Colorimetría Inmutable y Privado</h3>
+                    <p className="text-xs text-[#888888]">Tu fórmula exacta y confidencial queda registrada en tu expediente digital en cada cita para que tu tono siempre conserve la misma perfección y exclusividad.</p>
                   </div>
                 </div>
               </div>

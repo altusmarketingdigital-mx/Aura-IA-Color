@@ -37,7 +37,7 @@ export const IATechnology: React.FC = () => {
         </div>
 
         {/* Métricas de Alto Impacto */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
             <span className="text-3xl font-serif text-[#C6A15B] font-bold block mb-1">1,200+</span>
             <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Tonos Exactos</p>
@@ -47,11 +47,6 @@ export const IATechnology: React.FC = () => {
             <span className="text-3xl font-serif text-[#06b6d4] font-bold block mb-1">12</span>
             <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Latas Clave & Cuidado</p>
             <p className="text-[10px] text-[#888888] mt-1">Concentrados puros de alta pureza con claves internacionales que protegen tu cabello</p>
-          </div>
-          <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
-            <span className="text-3xl font-serif text-[#bc13fe] font-bold block mb-1">0%</span>
-            <p className="text-xs text-[#FFFFFF] uppercase tracking-wider font-semibold">Sostenibilidad</p>
-            <p className="text-[10px] text-[#888888] mt-1">Fórmulas más eficientes, menos residuos, más responsabilidad</p>
           </div>
           <div className="bg-[#171717] border border-[#262626] p-5 rounded-sm text-center">
             <span className="text-3xl font-serif text-[#DFBF7E] font-bold block mb-1">100%</span>

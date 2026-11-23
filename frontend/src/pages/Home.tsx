@@ -127,16 +127,11 @@ export const Home: React.FC = () => {
                 En <strong>AURA IA COLOR</strong> la asesoría la realiza un estilista profesional especializado en colorimetría capilar. Evaluamos tu tono base, tipo de cabello y expectativas de forma 100% personalizada para todo género, y nos apoyamos en una avanzada máquina inteligente que formula y dispensa el tinte listo para aplicar con más de <strong>1,200 tonos posibles</strong> y cero margen de error.
               </p>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-1 gap-4 mb-8">
                 <div className="bg-[#191919] p-4 rounded-sm border border-[#262626]">
                   <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">1,200+</span>
                   <p className="text-xs text-[#FFFFFF] font-medium">Tonos de Alta Precisión</p>
                   <p className="text-[11px] text-[#888888] mt-1 font-light">12 latas clave de pigmentos de alta pureza con claves internacionales que protegen y cuidan tu cabello.</p>
-                </div>
-                <div className="bg-[#191919] p-4 rounded-sm border border-[#262626]">
-                  <span className="text-2xl font-serif text-[#C6A15B] font-bold block mb-1">0%</span>
-                  <p className="text-xs text-[#FFFFFF] font-medium">Sostenibilidad & Precisión</p>
-                  <p className="text-[11px] text-[#888888] mt-1 font-light">Fórmulas más eficientes, menos residuos, más responsabilidad con dosificación exacta al miligramo.</p>
                 </div>
               </div>
 

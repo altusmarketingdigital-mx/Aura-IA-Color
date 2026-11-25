@@ -3,19 +3,30 @@ import { Link } from 'react-router-dom';
 import { Sparkles, Calendar, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Star } from 'lucide-react';
 import api from '../services/api';
 import { BeforeAfterSlider } from '../components/common/BeforeAfterSlider';
+import { OFFICIAL_SERVICE_CATEGORIES } from '../data/officialServices';
 
 export const Home: React.FC = () => {
   const [services, setServices] = useState<any[]>([]);
   const [promotions, setPromotions] = useState<any[]>([]);
 
   useEffect(() => {
+    const getFallbackFeatured = () => {
+      const list: any[] = [];
+      OFFICIAL_SERVICE_CATEGORIES.forEach((cat) => {
+        cat.services.forEach((s) => {
+          if (s.isFeatured) list.push({ ...s, categoryName: cat.name });
+        });
+      });
+      return list.slice(0, 4);
+    };
+
     const loadHomeData = async () => {
       try {
         const [servicesRes, promoRes] = await Promise.all([
           api.get('/services'),
           api.get('/promotions'),
         ]);
-        if (servicesRes.data.success) {
+        if (servicesRes.data.success && Array.isArray(servicesRes.data.categories) && servicesRes.data.categories.length > 0) {
           // Extraer servicios destacados
           const allServices: any[] = [];
           servicesRes.data.categories.forEach((cat: any) => {
@@ -23,13 +34,16 @@ export const Home: React.FC = () => {
               if (s.isFeatured) allServices.push({ ...s, categoryName: cat.name });
             });
           });
-          setServices(allServices.slice(0, 4));
+          setServices(allServices.length > 0 ? allServices.slice(0, 4) : getFallbackFeatured());
+        } else {
+          setServices(getFallbackFeatured());
         }
         if (promoRes.data.success) {
           setPromotions(promoRes.data.promotions);
         }
       } catch (e) {
         console.error('Error cargando datos de inicio:', e);
+        setServices(getFallbackFeatured());
       }
     };
     loadHomeData();
@@ -223,13 +237,15 @@ export const Home: React.FC = () => {
               </div>
               <div className="pt-4 border-t border-[#262626] flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-[#888888] block">Inversión</span>
+                  <span className="text-[10px] text-[#888888] block">
+                    {service.pricePrefix ? `Inversión ${service.pricePrefix.toLowerCase()}` : 'Inversión'}
+                  </span>
                   <span className="font-serif text-lg text-[#FFFFFF] font-bold">
                     ${service.price.toLocaleString('es-MX')} MXN
                   </span>
                 </div>
                 <Link
-                  to={`/reservar?serviceId=${service.id}`}
+                  to={service.isFallback ? '/reservar' : `/reservar?serviceId=${service.id}`}
                   className="p-3 bg-[#222222] group-hover:bg-[#C6A15B] text-[#C6A15B] group-hover:text-[#111111] rounded-sm transition-all transform group-hover:rotate-6"
                   title="Reservar este servicio"
                 >

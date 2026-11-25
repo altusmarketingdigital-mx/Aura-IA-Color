@@ -142,30 +142,30 @@ async function main() {
     // B. Técnicas de Iluminación
     {
       categoryId: catIluminacion.id,
-      name: 'Balayage Premium',
-      description: 'Técnica a mano alzada para un degradado natural, elegante y sin demarcaciones bruscas.',
+      name: 'Balayage',
+      description: 'Técnica de aclaración degradada y natural que aporta luz, dimensión y movimiento al cabello. (Largo: Mediano, Largo y Extra Largo — Precio desde $1,600)',
       durationMinutes: 240,
-      price: 3200.0,
+      price: 1600.0,
       bufferMinutes: 30,
       isFeatured: true,
     },
     {
       categoryId: catIluminacion.id,
       name: 'Babylights',
-      description: 'Microreflejos ultrafinos que imitan los destellos naturales del sol en la infancia.',
+      description: 'Técnica de coloración que crea mechas ultra finas y delicadas, imitando los reflejos naturales del sol. Aporta luz, dimensión y un efecto suave y sofisticado en tu cabello. (Largo: Mediano, Largo y Extra Largo — Precio desde $1,700)',
       durationMinutes: 210,
-      price: 2800.0,
+      price: 1700.0,
       bufferMinutes: 20,
       isFeatured: true,
     },
     {
       categoryId: catIluminacion.id,
       name: 'Money Piece',
-      description: 'Enmarcado frontal de luz para acentuar facciones y aportar luminosidad inmediata al rostro.',
+      description: 'Aclaración estratégica en el contorno del rostro que enmarca, ilumina y realza tus facciones. (Largo: Mediano, Largo y Extra Largo — Precio desde $900)',
       durationMinutes: 120,
-      price: 1400.0,
+      price: 900.0,
       bufferMinutes: 15,
-      isFeatured: false,
+      isFeatured: true,
     },
     {
       categoryId: catIluminacion.id,
@@ -180,12 +180,12 @@ async function main() {
     // C. Decoloración
     {
       categoryId: catDecoloracion.id,
-      name: 'Decoloración Global Controlada',
-      description: 'Aclarado uniforme total de la cabellera con monitoreo constante y plex reconstructor.',
-      durationMinutes: 270,
-      price: 3800.0,
+      name: 'Decoloración Global',
+      description: 'Aclaración uniforme en todo el cabello, ideal para lograr rubios muy claros, colores fantasía o como base para otros servicios. (Largo: Corto, Mediano, Largo y Extra Largo — Precio desde $990)',
+      durationMinutes: 240,
+      price: 990.0,
       bufferMinutes: 30,
-      isFeatured: false,
+      isFeatured: true,
     },
 
     // D. Coloración Creativa

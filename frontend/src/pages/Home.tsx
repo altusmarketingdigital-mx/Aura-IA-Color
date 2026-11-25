@@ -306,7 +306,7 @@ export const Home: React.FC = () => {
             Confianza y Excelencia
           </span>
           <h2 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-4">
-            La Experiencia de Quienes Nos Visitan
+            La experiencia de quienes nos visitan
           </h2>
         </div>
 

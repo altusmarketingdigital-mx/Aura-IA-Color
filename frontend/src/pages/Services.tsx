@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, Sparkles, ZoomIn, X, MessageSquare } from 'lucide-react';
+import { Calendar, Clock, Sparkles } from 'lucide-react';
 import api from '../services/api';
 import { OFFICIAL_SERVICE_CATEGORIES } from '../data/officialServices';
 
@@ -8,7 +8,6 @@ export const Services: React.FC = () => {
   const [categories, setCategories] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [loading, setLoading] = useState<boolean>(true);
-  const [isPosterZoomed, setIsPosterZoomed] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -29,27 +28,18 @@ export const Services: React.FC = () => {
     fetchServices();
   }, []);
 
-  useEffect(() => {
-    if (!isPosterZoomed) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsPosterZoomed(false);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isPosterZoomed]);
-
   const filteredCategories = selectedCategory === 'ALL'
     ? categories
     : categories.filter((c) => c.id === selectedCategory);
 
   return (
     <div className="bg-[#111111] py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Encabezado con efecto dinámico en títulos */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
-            Catálogo Oficial de Servicios
+            Lista Oficial de Servicios
           </span>
           <h1 className="text-4xl sm:text-5xl font-serif text-[#FFFFFF] mb-6 tracking-tight">
             <span className="relative inline-block">
@@ -62,60 +52,6 @@ export const Services: React.FC = () => {
           <p className="text-sm text-[#888888] font-light leading-relaxed">
             Cada servicio incluye valoración técnica capilar, productos de formulación premium y la asesoría de expertas en colorimetría.
           </p>
-        </div>
-
-        {/* Lista Oficial Gráfica de Servicios */}
-        <div className="max-w-3xl mx-auto mb-20">
-          <div className="bg-[#171717] border border-[#C6A15B]/40 rounded-sm p-4 sm:p-6 shadow-[0_20px_60px_rgba(0,0,0,0.85)]">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 mb-4 border-b border-[#262626]">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#C6A15B]" />
-                <span className="text-xs uppercase tracking-[0.2em] text-[#C6A15B] font-semibold">
-                  Lista Oficial de Precios y Largos del Cabello
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsPosterZoomed(true)}
-                className="inline-flex items-center gap-1.5 text-[11px] text-[#DFBF7E] hover:text-[#FFFFFF] transition-colors self-start sm:self-auto"
-              >
-                <ZoomIn className="w-3.5 h-3.5" />
-                <span>Ampliar lista</span>
-              </button>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setIsPosterZoomed(true)}
-              className="block w-full overflow-hidden rounded-sm border border-[#2A2A2A] hover:border-[#C6A15B]/60 transition-colors group cursor-zoom-in"
-              aria-label="Ampliar imagen de la lista oficial de servicios AURA"
-            >
-              <img
-                src="/lista-servicios.jpg"
-                alt="Lista oficial de servicios AURA Hair Color With AI: Balayage, Babylights, Money Piece y Decoloración Global"
-                className="w-full h-auto object-contain mx-auto group-hover:scale-[1.01] transition-transform duration-300"
-              />
-            </button>
-
-            <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                to="/reservar"
-                className="w-full sm:w-auto px-7 py-3 bg-[#C6A15B] hover:bg-[#DFBF7E] text-[#111111] font-semibold text-xs uppercase tracking-widest rounded-sm transition-all flex items-center justify-center gap-2"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>Agenda tu Cita</span>
-              </Link>
-              <a
-                href="https://wa.me/525537293887?text=Hola%2C%20vi%20su%20lista%20de%20servicios%20en%20la%20p%C3%A1gina%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20valoraci%C3%B3n."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-7 py-3 border border-[#C6A15B]/70 text-[#C6A15B] hover:bg-[#C6A15B]/15 font-semibold text-xs uppercase tracking-widest rounded-sm transition-all flex items-center justify-center gap-2"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>Cotizar por WhatsApp</span>
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Filtro por Categorías */}
@@ -145,14 +81,14 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Listado de Servicios Agrupados */}
+        {/* Listado de Servicios en Forma de Lista */}
         {loading ? (
           <div className="text-center py-20 text-[#888888]">Cargando catálogo oficial...</div>
         ) : (
-          <div className="space-y-16">
+          <div className="space-y-14">
             {filteredCategories.map((cat) => (
               <div key={cat.id}>
-                <div className="border-b border-[#262626] pb-4 mb-8">
+                <div className="border-b border-[#262626] pb-4 mb-6">
                   <h2 className="text-2xl font-serif text-[#FFFFFF] flex items-center gap-3">
                     <Sparkles className="w-5 h-5 text-[#C6A15B]" />
                     <span>{cat.name}</span>
@@ -162,32 +98,48 @@ export const Services: React.FC = () => {
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="divide-y divide-[#262626] bg-[#171717] border border-[#262626] rounded-sm">
                   {cat.services.map((service: any) => (
                     <div
                       key={service.id}
-                      className="bg-[#171717] border border-[#262626] hover:border-[#C6A15B]/50 rounded-sm p-6 flex flex-col justify-between transition-all"
+                      className="p-6 sm:p-7 hover:bg-[#1B1B1B] transition-colors flex flex-col md:flex-row md:items-center md:justify-between gap-6"
                     >
-                      <div>
-                        {service.isFeatured && (
-                          <span className="inline-block px-2 py-0.5 bg-[#C6A15B]/10 border border-[#C6A15B]/30 text-[#C6A15B] text-[9px] uppercase tracking-widest font-semibold rounded mb-3">
-                            Servicio Destacado
-                          </span>
-                        )}
-                        <h3 className="font-serif text-xl text-[#FFFFFF] mb-2">{service.name}</h3>
-                        <p className="text-xs text-[#888888] font-light leading-relaxed mb-4">
+                      {/* Información principal y largos */}
+                      <div className="flex-1 space-y-2.5">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <h3 className="font-serif text-xl sm:text-2xl text-[#FFFFFF] tracking-wide">
+                            {service.name}
+                          </h3>
+                          {service.isFeatured && (
+                            <span className="px-2 py-0.5 bg-[#C6A15B]/10 border border-[#C6A15B]/30 text-[#C6A15B] text-[9px] uppercase tracking-widest font-semibold rounded">
+                              Destacado
+                            </span>
+                          )}
+                        </div>
+
+                        <p className="text-xs sm:text-sm text-[#A3A3A3] font-light leading-relaxed max-w-2xl">
                           {service.description}
                         </p>
+
+                        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 text-xs text-[#888888]">
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-[#C6A15B]" />
+                            <span>Duración aprox.: {service.durationMinutes} min</span>
+                          </span>
+                        </div>
+
                         {Array.isArray(service.lengths) && service.lengths.length > 0 && (
-                          <div className="mb-5 pt-3 border-t border-[#222222]">
-                            <span className="text-[10px] uppercase tracking-widest text-[#C6A15B] font-semibold block mb-2">
-                              Largo del Cabello
+                          <div className="pt-2">
+                            <span className="text-[10px] uppercase tracking-widest text-[#C6A15B] font-semibold block mb-1.5">
+                              Largo del cabello
                             </span>
-                            <ul className="space-y-1 text-[11px] text-[#C5C5C5] font-light">
+                            <ul className="flex flex-wrap gap-2">
                               {service.lengths.map((len: string) => (
-                                <li key={len} className="flex items-start gap-1.5">
-                                  <span className="text-[#C6A15B] mt-0.5">•</span>
-                                  <span>{len}</span>
+                                <li
+                                  key={len}
+                                  className="px-2.5 py-1 bg-[#111111] border border-[#2D2D2D] rounded-sm text-[11px] text-[#E5E5E5] font-light"
+                                >
+                                  {len}
                                 </li>
                               ))}
                             </ul>
@@ -195,20 +147,20 @@ export const Services: React.FC = () => {
                         )}
                       </div>
 
-                      <div className="pt-4 border-t border-[#262626] space-y-3">
-                        <div className="flex items-center justify-between text-xs text-[#888888]">
-                          <span className="flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-[#C6A15B]" />
-                            <span>Duración: {service.durationMinutes} min</span>
+                      {/* Columna derecha: Precio y Acción */}
+                      <div className="flex flex-row md:flex-col items-center md:items-end justify-between gap-4 pt-4 md:pt-0 border-t md:border-t-0 border-[#262626] shrink-0 md:min-w-[190px]">
+                        <div className="md:text-right">
+                          <span className="text-[10px] uppercase tracking-[0.2em] text-[#C6A15B] font-semibold block">
+                            {service.pricePrefix ? `Precio ${service.pricePrefix}` : 'Precio'}
                           </span>
-                          <span className="text-base font-serif text-[#FFFFFF] font-bold">
-                            {service.pricePrefix ? `${service.pricePrefix} ` : ''}
-                            ${service.price.toLocaleString('es-MX')} MXN
+                          <span className="text-2xl font-serif text-[#FFFFFF] font-bold">
+                            ${service.price.toLocaleString('es-MX')} <span className="text-xs font-sans font-normal text-[#888888]">MXN</span>
                           </span>
                         </div>
+
                         <Link
                           to={service.isFallback ? '/reservar' : `/reservar?serviceId=${service.id}`}
-                          className="w-full py-2.5 bg-[#C6A15B] hover:bg-[#DFBF7E] text-[#111111] font-semibold text-xs uppercase tracking-wider rounded-sm transition-all flex items-center justify-center gap-2"
+                          className="px-5 py-2.5 bg-[#C6A15B] hover:bg-[#DFBF7E] text-[#111111] font-semibold text-xs uppercase tracking-wider rounded-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap"
                         >
                           <Calendar className="w-3.5 h-3.5" />
                           <span>Solicitar Cita</span>
@@ -223,33 +175,6 @@ export const Services: React.FC = () => {
         )}
 
       </div>
-
-      {/* Modal Lightbox para ampliar la Lista de Servicios */}
-      {isPosterZoomed && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setIsPosterZoomed(false)}
-        >
-          <button
-            type="button"
-            onClick={() => setIsPosterZoomed(false)}
-            className="fixed top-5 right-5 z-50 w-10 h-10 rounded-full bg-[#1A1A1A] border border-[#C6A15B]/60 text-[#FFFFFF] hover:text-[#C6A15B] flex items-center justify-center transition-colors"
-            aria-label="Cerrar vista ampliada"
-          >
-            <X className="w-5 h-5" />
-          </button>
-          <div
-            className="max-w-3xl max-h-[90vh] overflow-auto rounded-sm border border-[#C6A15B]/40 bg-[#111111]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src="/lista-servicios.jpg"
-              alt="Lista oficial de servicios AURA Hair Color With AI"
-              className="w-full h-auto object-contain"
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

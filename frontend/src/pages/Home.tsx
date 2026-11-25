@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Calendar, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Star } from 'lucide-react';
 import api from '../services/api';
-import { BeforeAfterSlider } from '../components/common/BeforeAfterSlider';
 import { OFFICIAL_SERVICE_CATEGORIES } from '../data/officialServices';
 
 export const Home: React.FC = () => {
@@ -267,47 +266,6 @@ export const Home: React.FC = () => {
             <span>Ver todas las categorías y técnicas</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </div>
-      </section>
-
-      {/* 3.5 SECCIÓN INTERACTIVA: TRANSFORMACIÓN ANTES Y DESPUÉS (SLIDER INTERACTIVO AURA) */}
-      <section className="py-24 bg-[#141414] border-b border-[#222222] relative overflow-hidden">
-        {/* Splashes decorativos en sección de transformación */}
-        <div className="absolute top-1/4 -left-20 w-80 h-80 ink-splash-amber rounded-full pointer-events-none opacity-20" />
-        <div className="absolute bottom-1/4 -right-20 w-80 h-80 ink-splash-magenta rounded-full pointer-events-none opacity-20" />
-
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
-              Hair Color with AI • Resultados Reales
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-serif text-[#FFFFFF] mb-4">
-              Una Transformación AURA
-            </h2>
-            <p className="text-xs sm:text-sm text-[#888888] font-light">
-              Desliza el control interactivo para apreciar la corrección, brillo, hidratación y matiz exacto obtenido con formulación inteligente.
-            </p>
-          </div>
-
-          <div className="bg-[#181818] border border-[#2D2D2D] p-6 sm:p-10 rounded-sm shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-            <BeforeAfterSlider
-              beforeImage="/real-hair-before-full.jpg"
-              afterImage="/real-hair-after-full.jpg"
-              beforeLabel="Antes (Textura Natural)"
-              afterLabel="Después (Efecto Espejo)"
-              aspectRatio="aspect-[9/16] sm:aspect-[3/4] max-h-[580px]"
-            />
-          </div>
-
-          <div className="mt-10 text-center">
-            <Link
-              to="/galeria"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#C6A15B] hover:text-[#DFBF7E] font-semibold border-b border-[#C6A15B] pb-1 transition-colors"
-            >
-              <span>Explora más transformaciones en nuestra Galería Oficial</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
 

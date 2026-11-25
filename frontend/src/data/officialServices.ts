@@ -97,4 +97,29 @@ export const OFFICIAL_SERVICE_CATEGORIES: OfficialServiceCategory[] = [
       },
     ],
   },
+  {
+    id: 'cat-corte',
+    name: 'Corte de Cabello',
+    description: 'Diseño de corte personalizado para mujer y hombre adaptado a tus facciones y estilo.',
+    services: [
+      {
+        id: 'corte-mujer',
+        name: 'Corte Mujer',
+        description: 'Corte personalizado diseñado según tu tipo de rostro, textura capilar y estilo.',
+        durationMinutes: 60,
+        price: 450,
+        isFeatured: false,
+        isFallback: true,
+      },
+      {
+        id: 'corte-hombre',
+        name: 'Corte Hombre',
+        description: 'Corte masculino de precisión adaptado a la forma de tu rostro y estilo personal.',
+        durationMinutes: 45,
+        price: 300,
+        isFeatured: false,
+        isFallback: true,
+      },
+    ],
+  },
 ];

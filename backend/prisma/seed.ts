@@ -108,6 +108,15 @@ async function main() {
     },
   });
 
+  const catCorte = await prisma.serviceCategory.create({
+    data: {
+      name: 'Corte de Cabello',
+      slug: 'corte-de-cabello',
+      description: 'Diseño de corte personalizado para mujer y hombre adaptado a tus facciones y estilo.',
+      displayOrder: 6,
+    },
+  });
+
   // Servicios por Categoría
   const servicesData = [
     // A. Mantenimiento y Coloración
@@ -217,6 +226,26 @@ async function main() {
       price: 3400.0,
       bufferMinutes: 30,
       isFeatured: true,
+    },
+
+    // F. Corte de Cabello
+    {
+      categoryId: catCorte.id,
+      name: 'Corte Mujer',
+      description: 'Corte personalizado diseñado según tu tipo de rostro, textura capilar y estilo.',
+      durationMinutes: 60,
+      price: 450.0,
+      bufferMinutes: 15,
+      isFeatured: false,
+    },
+    {
+      categoryId: catCorte.id,
+      name: 'Corte Hombre',
+      description: 'Corte masculino de precisión adaptado a la forma de tu rostro y estilo personal.',
+      durationMinutes: 45,
+      price: 300.0,
+      bufferMinutes: 15,
+      isFeatured: false,
     },
   ];
 

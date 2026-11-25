@@ -137,8 +137,9 @@ export const createAppointment = async (req: Request, res: Response): Promise<vo
       return newApp;
     });
 
-    // 3. Formatear mensaje oficial de WhatsApp wa.me
+    // 3. Formatear mensaje oficial de WhatsApp wa.me con cálculo de anticipo del 10%
     const businessPhone = process.env.BUSINESS_PHONE || '525537293887';
+    const depositAmount = Math.round(service.price * 0.1);
     const formattedDate = appDate.toLocaleDateString('es-MX', {
       weekday: 'long',
       year: 'numeric',
@@ -149,14 +150,15 @@ export const createAppointment = async (req: Request, res: Response): Promise<vo
 
     const rawMessage = `Hola, soy ${customerName}.
 
-Me gustaría solicitar una cita en AURA IA COLOR.
+Me gustaría confirmar mi cita y realizar el pago del 10% de anticipo en AURA IA COLOR.
 
 Servicio: ${service.name}
 Fecha: ${formattedDate}
 Horario: ${reqSlot} hrs.
 Folio: ${folio}
+Anticipo del 10%: $${depositAmount.toLocaleString('es-MX')} MXN
 
-Quedo pendiente de confirmación.`;
+Quedo al pendiente para completar mi pago y confirmar mi lugar.`;
 
     const encodedMessage = encodeURIComponent(rawMessage);
     const whatsappUrl = `https://wa.me/${businessPhone}?text=${encodedMessage}`;
@@ -164,6 +166,8 @@ Quedo pendiente de confirmación.`;
     res.status(201).json({
       success: true,
       folio,
+      depositAmount,
+      depositPercentage: 10,
       appointment,
       whatsappUrl,
       message: 'Solicitud de cita registrada exitosamente con estado PENDIENTE',

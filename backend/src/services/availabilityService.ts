@@ -72,7 +72,7 @@ export async function calculateAvailability(dateStr: string, serviceId: string):
     return {
       isOpen: false,
       slots: [],
-      dayInfo: dayOfWeek === 1 ? 'Los días lunes el salón permanece cerrado por mantenimiento y descanso del equipo técnico.' : 'Cerrado en este día',
+      dayInfo: dayOfWeek === 1 ? 'Los días lunes el salón permanece cerrado.' : 'Cerrado en este día',
     };
   }
 
@@ -111,12 +111,13 @@ export async function calculateAvailability(dateStr: string, serviceId: string):
     where: { date: dateStr },
   });
 
-  // 5. Generar slots en intervalos de 30 minutos dentro del horario comercial
+  // 5. Generar slots cada 2 horas (120 min), dejando como última cita 2 hrs antes del cierre
+  // Martes a Sábado (10:00 - 20:00 -> última cita 18:00), Domingo (10:00 - 16:00 -> última cita 14:00)
   const openMins = timeToMinutes(businessHour.openTime);
   const closeMins = timeToMinutes(businessHour.closeTime);
   const slots: TimeSlot[] = [];
 
-  for (let slotTime = openMins; slotTime + service.durationMinutes <= closeMins; slotTime += 30) {
+  for (let slotTime = openMins; slotTime <= closeMins - 120; slotTime += 120) {
     const slotEndTime = slotTime + serviceTotalMinutes;
     let isAvailable = true;
     let reason = '';

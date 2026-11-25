@@ -4,17 +4,79 @@ import {
   Calendar,
   Clock,
   User,
-  Phone,
-  Mail,
   Upload,
   CheckCircle,
   AlertCircle,
   MessageSquare,
   Sparkles,
   ArrowRight,
+  CreditCard,
   ShieldCheck,
+  Landmark,
+  RefreshCw,
 } from 'lucide-react';
 import api from '../services/api';
+import { OFFICIAL_SERVICE_CATEGORIES } from '../data/officialServices';
+
+interface SlotItem {
+  time: string;
+  available: boolean;
+  reason?: string;
+}
+
+const formatSlotLabel = (time24: string): string => {
+  const [hStr, mStr] = time24.split(':');
+  const h = Number(hStr);
+  const suffix = h >= 12 ? 'p.m.' : 'a.m.';
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return `${h12}:${mStr} ${suffix}`;
+};
+
+const getLocalAvailability = (dateStr: string): { isOpen: boolean; slots: SlotItem[]; dayInfo: string } => {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const targetDate = new Date(Date.UTC(year, month - 1, day));
+  const dayOfWeek = targetDate.getUTCDay(); // 0=Dom, 1=Lun, ..., 6=Sáb
+
+  if (dayOfWeek === 1) {
+    return {
+      isOpen: false,
+      slots: [],
+      dayInfo: 'Los días lunes el salón permanece cerrado. Por favor elige un día de martes a domingo.',
+    };
+  }
+
+  if (dayOfWeek === 0) {
+    return {
+      isOpen: true,
+      slots: [
+        { time: '10:00', available: true },
+        { time: '12:00', available: true },
+        { time: '14:00', available: true },
+      ],
+      dayInfo: 'Horario de domingo: 10:00 a.m. a 4:00 p.m. (citas cada 2 horas, última cita 2:00 p.m.).',
+    };
+  }
+
+  return {
+    isOpen: true,
+    slots: [
+      { time: '10:00', available: true },
+      { time: '12:00', available: true },
+      { time: '14:00', available: true },
+      { time: '16:00', available: true },
+      { time: '18:00', available: true },
+    ],
+    dayInfo: 'Horario de martes a sábado: 10:00 a.m. a 8:00 p.m. (citas cada 2 horas, última cita 6:00 p.m.).',
+  };
+};
+
+const getLocalTodayString = (): string => {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+};
 
 export const Booking: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -27,7 +89,7 @@ export const Booking: React.FC = () => {
 
   // Estados de fecha y slots
   const [selectedDate, setSelectedDate] = useState<string>('');
-  const [availableSlots, setAvailableSlots] = useState<any[]>([]);
+  const [availableSlots, setAvailableSlots] = useState<SlotItem[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<string>('');
   const [loadingSlots, setLoadingSlots] = useState<boolean>(false);
   const [dayInfo, setDayInfo] = useState<string>('');
@@ -43,30 +105,38 @@ export const Booking: React.FC = () => {
   const [currentPhoto, setCurrentPhoto] = useState<File | null>(null);
   const [referencePhoto, setReferencePhoto] = useState<File | null>(null);
 
-  // Estados del proceso
+  // Estados del proceso y pago de anticipo
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [bookingSuccess, setBookingSuccess] = useState<any>(null);
+  const [paymentMethod, setPaymentMethod] = useState<'TRANSFERENCIA' | 'TARJETA'>('TRANSFERENCIA');
 
-  // 1. Cargar servicios
+  // 1. Cargar servicios (con respaldo oficial si el backend no está conectado)
   useEffect(() => {
+    const applyCategories = (cats: any[]) => {
+      setCategories(cats);
+      if (preselectedServiceId) {
+        for (const cat of cats) {
+          const found = cat.services?.find((s: any) => s.id === preselectedServiceId);
+          if (found) {
+            setSelectedService(found);
+            break;
+          }
+        }
+      }
+    };
+
     const loadServices = async () => {
       try {
         const res = await api.get('/services');
-        if (res.data.success) {
-          setCategories(res.data.categories);
-          if (preselectedServiceId) {
-            for (const cat of res.data.categories) {
-              const found = cat.services.find((s: any) => s.id === preselectedServiceId);
-              if (found) {
-                setSelectedService(found);
-                break;
-              }
-            }
-          }
+        if (res.data.success && Array.isArray(res.data.categories) && res.data.categories.length > 0) {
+          applyCategories(res.data.categories);
+        } else {
+          applyCategories(OFFICIAL_SERVICE_CATEGORIES);
         }
       } catch (e) {
         console.error('Error al cargar servicios:', e);
+        applyCategories(OFFICIAL_SERVICE_CATEGORIES);
       }
     };
     loadServices();
@@ -80,46 +150,89 @@ export const Booking: React.FC = () => {
       const found = cat.services.find((s: any) => s.id === serviceId);
       if (found) {
         setSelectedService(found);
-        break;
+        return;
       }
     }
+    setSelectedService(null);
   };
 
-  // 2. Consultar disponibilidad en tiempo real cuando cambie la fecha o el servicio
+  // 2. Consultar disponibilidad cada 2 horas (con cálculo local si el backend no está disponible)
   useEffect(() => {
     const checkAvailability = async () => {
       if (!selectedDate || !selectedServiceId) {
         setAvailableSlots([]);
+        setDayInfo('');
         return;
       }
       setLoadingSlots(true);
       setErrorMessage('');
+      setSelectedSlot('');
+
+      const applyLocal = () => {
+        const local = getLocalAvailability(selectedDate);
+        setAvailableSlots(local.slots);
+        setDayInfo(local.dayInfo);
+      };
+
+      if (selectedService?.isFallback) {
+        applyLocal();
+        setLoadingSlots(false);
+        return;
+      }
+
       try {
         const res = await api.get(`/appointments/availability?date=${selectedDate}&serviceId=${selectedServiceId}`);
         if (res.data.success) {
           setAvailableSlots(res.data.slots || []);
           setDayInfo(res.data.dayInfo || '');
+        } else {
+          applyLocal();
         }
-      } catch (err: any) {
-        setAvailableSlots([]);
-        setDayInfo(err.response?.data?.error || 'No disponible en este día');
+      } catch {
+        applyLocal();
       } finally {
         setLoadingSlots(false);
       }
     };
 
     checkAvailability();
-  }, [selectedDate, selectedServiceId]);
+  }, [selectedDate, selectedServiceId, selectedService]);
 
-  // Generar fecha mínima (hoy en formato YYYY-MM-DD)
-  const today = new Date().toISOString().split('T')[0];
+  const today = getLocalTodayString();
 
-  // Enviar reservación
+  const buildLocalWhatsAppUrl = (folio: string, depositAmount: number, methodLabel: string) => {
+    const [year, month, day] = selectedDate.split('-').map(Number);
+    const appDate = new Date(Date.UTC(year, month - 1, day));
+    const formattedDate = appDate.toLocaleDateString('es-MX', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC',
+    });
+
+    const rawMessage = `Hola, soy ${customerName.trim()}.
+
+Me gustaría confirmar mi cita y realizar el pago del 10% de anticipo en AURA IA COLOR.
+
+Servicio: ${selectedService?.name}
+Fecha: ${formattedDate}
+Horario: ${formatSlotLabel(selectedSlot)} (${selectedSlot} hrs.)
+Folio: ${folio}
+Anticipo del 10%: $${depositAmount.toLocaleString('es-MX')} MXN
+Método de pago elegido: ${methodLabel}
+
+Quedo al pendiente para completar mi pago y confirmar mi lugar.`;
+
+    return `https://wa.me/525537293887?text=${encodeURIComponent(rawMessage)}`;
+  };
+
+  // Enviar reservación y mostrar pantalla de pago del 10%
   const handleSubmitBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
 
-    if (!selectedServiceId) {
+    if (!selectedServiceId || !selectedService) {
       setErrorMessage('Por favor selecciona un servicio');
       return;
     }
@@ -141,98 +254,254 @@ export const Booking: React.FC = () => {
     }
 
     setSubmitting(true);
+    const depositAmount = Math.round(Number(selectedService.price) * 0.1);
 
     try {
-      // Construir ISO DateTime a partir de la fecha seleccionada y el slot "HH:mm"
-      const [year, month, day] = selectedDate.split('-').map(Number);
-      const [hours, mins] = selectedSlot.split(':').map(Number);
-      const appointmentDate = new Date(Date.UTC(year, month - 1, day, hours, mins, 0)).toISOString();
+      if (!selectedService.isFallback) {
+        const [year, month, day] = selectedDate.split('-').map(Number);
+        const [hours, mins] = selectedSlot.split(':').map(Number);
+        const appointmentDate = new Date(Date.UTC(year, month - 1, day, hours, mins, 0)).toISOString();
 
-      const formData = new FormData();
-      formData.append('customerName', customerName);
-      formData.append('customerPhone', customerPhone);
-      if (customerEmail) formData.append('customerEmail', customerEmail);
-      formData.append('serviceId', selectedServiceId);
-      formData.append('appointmentDate', appointmentDate);
-      if (clientNotes) formData.append('clientNotes', clientNotes);
-      formData.append('acceptedPrivacy', 'true');
+        const formData = new FormData();
+        formData.append('customerName', customerName);
+        formData.append('customerPhone', customerPhone);
+        if (customerEmail) formData.append('customerEmail', customerEmail);
+        formData.append('serviceId', selectedServiceId);
+        formData.append('appointmentDate', appointmentDate);
+        if (clientNotes) formData.append('clientNotes', clientNotes);
+        formData.append('acceptedPrivacy', 'true');
 
-      if (currentPhoto) formData.append('currentPhoto', currentPhoto);
-      if (referencePhoto) formData.append('referencePhoto', referencePhoto);
+        if (currentPhoto) formData.append('currentPhoto', currentPhoto);
+        if (referencePhoto) formData.append('referencePhoto', referencePhoto);
 
-      const res = await api.post('/appointments', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+        const res = await api.post('/appointments', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
 
-      if (res.data.success) {
-        setBookingSuccess(res.data);
+        if (res.data.success) {
+          setBookingSuccess({
+            ...res.data,
+            depositAmount: res.data.depositAmount ?? depositAmount,
+          });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
       }
+
+      // Respaldo cuando el servicio es local o no hay backend conectado
+      const randomSeq = Math.floor(10000 + Math.random() * 89999);
+      const localFolio = `AURA-${new Date().getFullYear()}-${randomSeq}`;
+      setBookingSuccess({
+        success: true,
+        folio: localFolio,
+        depositAmount,
+        whatsappUrl: buildLocalWhatsAppUrl(localFolio, depositAmount, 'Transferencia bancaria / SPEI'),
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err: any) {
-      console.error('Error al registrar cita:', err);
-      setErrorMessage(
-        err.response?.data?.error || 'Ocurrió un error al procesar tu solicitud. Intenta nuevamente.'
-      );
+      // Si es un error de validación o choque real del servidor (4xx), mostrarlo
+      if (err.response && err.response.status >= 400 && err.response.status < 500) {
+        setErrorMessage(
+          err.response?.data?.error || 'Ocurrió un error al procesar tu solicitud. Intenta nuevamente.'
+        );
+      } else {
+        // Si el backend no responde, confirmar con respaldo local para no bloquear la cita
+        const randomSeq = Math.floor(10000 + Math.random() * 89999);
+        const localFolio = `AURA-${new Date().getFullYear()}-${randomSeq}`;
+        setBookingSuccess({
+          success: true,
+          folio: localFolio,
+          depositAmount,
+          whatsappUrl: buildLocalWhatsAppUrl(localFolio, depositAmount, 'Transferencia bancaria / SPEI'),
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } finally {
       setSubmitting(false);
     }
   };
 
-  // Pantalla de Éxito con Folio y Botón Oficial wa.me
+  // Pantalla de Confirmación + Pago del 10% de Anticipo + Políticas de 24 horas
   if (bookingSuccess) {
+    const servicePrice = Number(selectedService?.price || 0);
+    const depositAmount = Number(bookingSuccess.depositAmount ?? Math.round(servicePrice * 0.1));
+    const remainingAmount = Math.max(0, servicePrice - depositAmount);
+    const methodLabel =
+      paymentMethod === 'TRANSFERENCIA'
+        ? 'Transferencia bancaria / SPEI'
+        : 'Enlace de pago con tarjeta';
+    const paymentWhatsappUrl = buildLocalWhatsAppUrl(bookingSuccess.folio, depositAmount, methodLabel);
+
     return (
-      <div className="bg-[#111111] py-20 min-h-[80vh] flex items-center justify-center">
+      <div className="bg-[#111111] py-16 min-h-[80vh] flex items-center justify-center">
         <div className="max-w-2xl mx-auto px-4 w-full">
-          <div className="bg-[#171717] border border-[#C6A15B]/50 p-8 sm:p-12 rounded-sm text-center shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-[#C6A15B]/20 border border-[#C6A15B] flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-8 h-8 text-[#C6A15B]" />
+          <div className="bg-[#171717] border border-[#C6A15B]/50 p-6 sm:p-10 rounded-sm shadow-2xl space-y-7">
+            {/* Cabecera de confirmación */}
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-[#C6A15B]/20 border border-[#C6A15B] flex items-center justify-center mx-auto mb-5">
+                <CheckCircle className="w-8 h-8 text-[#C6A15B]" />
+              </div>
+
+              <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-semibold block mb-2">
+                Solicitud Registrada • Paso Final: Anticipo del 10%
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF] mb-3">
+                ¡Gracias, {customerName}!
+              </h1>
+              <p className="text-xs sm:text-sm text-[#A3A3A3] font-light max-w-lg mx-auto leading-relaxed">
+                Para asegurar tu horario, realiza el pago del{' '}
+                <strong className="text-[#C6A15B]">10% de anticipo</strong>. Este monto será tomado en cuenta y descontado de tu pago final el día de tu cita.
+              </p>
             </div>
 
-            <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-semibold block mb-2">
-              Solicitud Registrada con Éxito
-            </span>
-            <h1 className="text-3xl font-serif text-[#FFFFFF] mb-4">
-              ¡Gracias, {customerName}!
-            </h1>
-            <p className="text-sm text-[#888888] font-light max-w-md mx-auto mb-6 leading-relaxed">
-              Tu solicitud de reservación ha sido registrada en el sistema con estado{' '}
-              <span className="text-[#C6A15B] font-semibold">PENDIENTE</span>.
-            </p>
-
-            {/* Tarjeta de Resumen con Folio */}
-            <div className="bg-[#1F1F1F] border border-[#333333] p-6 rounded-sm text-left max-w-md mx-auto mb-8 space-y-2.5">
-              <div className="flex justify-between items-center border-b border-[#2D2D2D] pb-2">
-                <span className="text-xs text-[#888888]">Folio Oficial:</span>
+            {/* Tarjeta de Resumen de Cita y Desglose del 10% */}
+            <div className="bg-[#1F1F1F] border border-[#333333] p-5 sm:p-6 rounded-sm space-y-3 text-xs">
+              <div className="flex justify-between items-center border-b border-[#2D2D2D] pb-2.5">
+                <span className="text-[#888888]">Folio Oficial:</span>
                 <span className="font-mono text-sm text-[#C6A15B] font-bold">
                   {bookingSuccess.folio}
                 </span>
               </div>
-              <div className="flex justify-between items-center text-xs">
+              <div className="flex justify-between items-center">
                 <span className="text-[#888888]">Servicio:</span>
                 <span className="text-[#FFFFFF] font-medium">{selectedService?.name}</span>
               </div>
-              <div className="flex justify-between items-center text-xs">
+              <div className="flex justify-between items-center">
                 <span className="text-[#888888]">Fecha:</span>
                 <span className="text-[#FFFFFF]">{selectedDate}</span>
               </div>
-              <div className="flex justify-between items-center text-xs">
+              <div className="flex justify-between items-center">
                 <span className="text-[#888888]">Horario:</span>
-                <span className="text-[#FFFFFF]">{selectedSlot} hrs.</span>
+                <span className="text-[#FFFFFF]">
+                  {formatSlotLabel(selectedSlot)} ({selectedSlot} hrs.)
+                </span>
+              </div>
+              <div className="flex justify-between items-center pt-2 border-t border-[#2D2D2D]">
+                <span className="text-[#888888]">
+                  Costo total {selectedService?.pricePrefix ? `(${selectedService.pricePrefix.toLowerCase()})` : 'del servicio'}:
+                </span>
+                <span className="text-[#FFFFFF]">
+                  ${servicePrice.toLocaleString('es-MX')} MXN
+                </span>
+              </div>
+              <div className="flex justify-between items-center bg-[#141414] border border-[#C6A15B]/40 px-3.5 py-3 rounded-sm">
+                <span className="text-[#DFBF7E] font-semibold uppercase tracking-wider text-[11px]">
+                  Anticipo a pagar hoy (10%):
+                </span>
+                <span className="font-serif text-xl text-[#C6A15B] font-bold">
+                  ${depositAmount.toLocaleString('es-MX')} MXN
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-[11px] text-[#888888]">
+                <span>Saldo restante en tu visita (se descuenta tu 10%):</span>
+                <span className="text-[#E5E5E5] font-medium">
+                  ${remainingAmount.toLocaleString('es-MX')} MXN
+                </span>
               </div>
             </div>
 
-            <div className="space-y-4">
+            {/* Selección de Método de Pago del 10% */}
+            <div className="space-y-3">
+              <p className="text-xs uppercase tracking-wider text-[#C6A15B] font-semibold">
+                Selecciona cómo deseas pagar tu anticipo del 10%
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('TRANSFERENCIA')}
+                  className={`p-4 rounded-sm border text-left transition-all flex items-start gap-3 ${
+                    paymentMethod === 'TRANSFERENCIA'
+                      ? 'bg-[#222222] border-[#C6A15B] text-[#FFFFFF]'
+                      : 'bg-[#141414] border-[#2D2D2D] text-[#888888] hover:border-[#444444]'
+                  }`}
+                >
+                  <Landmark className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-semibold text-[#FFFFFF]">Transferencia / SPEI</p>
+                    <p className="text-[11px] text-[#888888] mt-0.5">
+                      Recibe los datos bancarios oficiales por WhatsApp y envía tu comprobante.
+                    </p>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('TARJETA')}
+                  className={`p-4 rounded-sm border text-left transition-all flex items-start gap-3 ${
+                    paymentMethod === 'TARJETA'
+                      ? 'bg-[#222222] border-[#C6A15B] text-[#FFFFFF]'
+                      : 'bg-[#141414] border-[#2D2D2D] text-[#888888] hover:border-[#444444]'
+                  }`}
+                >
+                  <CreditCard className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-semibold text-[#FFFFFF]">Pago con Tarjeta</p>
+                    <p className="text-[11px] text-[#888888] mt-0.5">
+                      Solicita tu enlace de pago seguro por ${depositAmount.toLocaleString('es-MX')} MXN vía WhatsApp.
+                    </p>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Políticas de Cancelación, Modificación y Devolución (24 horas) */}
+            <div className="bg-[#141414] border border-[#C6A15B]/35 rounded-sm p-5 space-y-2.5">
+              <div className="flex items-center gap-2 text-[#C6A15B]">
+                <ShieldCheck className="w-4 h-4 shrink-0" />
+                <span className="text-xs uppercase tracking-wider font-semibold">
+                  Políticas de Anticipo, Cambios y Devolución
+                </span>
+              </div>
+              <ul className="space-y-1.5 text-xs text-[#C5C5C5] font-light leading-relaxed">
+                <li className="flex items-start gap-2">
+                  <span className="text-[#C6A15B] mt-0.5">•</span>
+                  <span>
+                    El pago del <strong className="text-[#FFFFFF]">10% de anticipo</strong> (${depositAmount.toLocaleString('es-MX')} MXN) será tomado en cuenta y descontado de tu pago final en el estudio.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#C6A15B] mt-0.5">•</span>
+                  <span>
+                    Cuentas con <strong className="text-[#FFFFFF]">24 horas de anticipación</strong> para cancelar o modificar la fecha/horario de tu cita.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#C6A15B] mt-0.5">•</span>
+                  <span>
+                    En caso de cancelación, se cuenta con un plazo máximo de <strong className="text-[#FFFFFF]">24 horas</strong> para realizar la devolución de tu dinero.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Botones de Acción */}
+            <div className="text-center space-y-3 pt-1">
               <a
-                href={bookingSuccess.whatsappUrl}
+                href={paymentWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] hover:bg-[#20ba59] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest rounded-sm transition-all shadow-lg"
+                className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] hover:bg-[#20ba59] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest rounded-sm transition-all shadow-lg"
               >
                 <MessageSquare className="w-5 h-5" />
-                <span>Continuar Confirmación por WhatsApp</span>
+                <span>
+                  Realizar Pago del 10% (${depositAmount.toLocaleString('es-MX')} MXN) por WhatsApp
+                </span>
               </a>
-              <p className="text-[11px] text-[#666666] max-w-sm mx-auto">
-                * Para agilizar y asegurar tu lugar, envía el mensaje precargado oficial a nuestro WhatsApp empresarial.
+              <p className="text-[11px] text-[#777777]">
+                Al presionar el botón se abrirá nuestro WhatsApp oficial con tu folio y el monto de anticipo precargados para completar el pago.
               </p>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setBookingSuccess(null);
+                  setSelectedSlot('');
+                }}
+                className="inline-flex items-center gap-1.5 text-xs text-[#C6A15B] hover:text-[#DFBF7E] pt-2 transition-colors"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>Agendar otra cita</span>
+              </button>
             </div>
           </div>
         </div>
@@ -243,7 +512,7 @@ export const Booking: React.FC = () => {
   return (
     <div className="bg-[#111111] py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Encabezado con efecto dinámico en títulos */}
         <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-medium block mb-2">
@@ -258,7 +527,7 @@ export const Booking: React.FC = () => {
             </span>
           </h1>
           <p className="text-xs sm:text-sm text-[#888888] font-light max-w-xl mx-auto">
-            Selecciona tu servicio, consulta los horarios disponibles en tiempo real y solicita tu cita sin necesidad de crear una cuenta.
+            Selecciona tu servicio, consulta los horarios disponibles cada 2 horas y aparta tu cita con el 10% de anticipo.
           </p>
         </div>
 
@@ -270,7 +539,7 @@ export const Booking: React.FC = () => {
         )}
 
         <form onSubmit={handleSubmitBooking} className="space-y-10">
-          
+
           {/* PASO 1: Selección de Servicio */}
           <div className="bg-[#171717] border border-[#262626] p-6 sm:p-8 rounded-sm">
             <h3 className="font-serif text-lg text-[#FFFFFF] mb-4 flex items-center gap-2">
@@ -290,7 +559,7 @@ export const Booking: React.FC = () => {
                   <optgroup key={cat.id} label={cat.name}>
                     {cat.services.map((s: any) => (
                       <option key={s.id} value={s.id}>
-                        {s.name} — ${s.price.toLocaleString('es-MX')} MXN ({s.durationMinutes} min)
+                        {s.name} — {s.pricePrefix ? `${s.pricePrefix} ` : ''}${s.price.toLocaleString('es-MX')} MXN ({s.durationMinutes} min)
                       </option>
                     ))}
                   </optgroup>
@@ -298,16 +567,19 @@ export const Booking: React.FC = () => {
               </select>
 
               {selectedService && (
-                <div className="p-4 bg-[#1F1F1F] border border-[#2D2D2D] rounded-sm text-xs text-[#888888] flex justify-between items-center">
+                <div className="p-4 bg-[#1F1F1F] border border-[#2D2D2D] rounded-sm text-xs text-[#888888] flex flex-col sm:flex-row justify-between sm:items-center gap-3">
                   <div>
                     <p className="text-[#FFFFFF] font-medium">{selectedService.name}</p>
                     <p className="font-light mt-0.5">{selectedService.description}</p>
                   </div>
-                  <div className="text-right shrink-0 ml-4">
+                  <div className="sm:text-right shrink-0 sm:ml-4">
                     <span className="font-serif text-base text-[#C6A15B] font-bold block">
+                      {selectedService.pricePrefix ? `${selectedService.pricePrefix} ` : ''}
                       ${selectedService.price.toLocaleString('es-MX')} MXN
                     </span>
-                    <span className="text-[10px]">Aprox. {selectedService.durationMinutes} min</span>
+                    <span className="text-[10px] block">
+                      Anticipo (10%): ${Math.round(selectedService.price * 0.1).toLocaleString('es-MX')} MXN
+                    </span>
                   </div>
                 </div>
               )}
@@ -334,8 +606,8 @@ export const Booking: React.FC = () => {
                   className="w-full bg-[#111111] border border-[#333333] text-[#FFFFFF] px-4 py-3 rounded-sm text-xs focus:outline-none focus:border-[#C6A15B]"
                   required
                 />
-                <p className="text-[11px] text-[#888888] mt-2">
-                  * Horario regular: Martes a Sábado de 10:00 a 20:00 hrs. Domingos de 10:00 a 16:00 hrs. Lunes cerrado.
+                <p className="text-[11px] text-[#888888] mt-2 leading-relaxed">
+                  * Citas cada 2 horas: Martes a Sábado de 10:00 a.m. a 8:00 p.m. (última cita 6:00 p.m.). Domingos de 10:00 a.m. a 4:00 p.m. (última cita 2:00 p.m.). Lunes cerrado.
                 </p>
                 {dayInfo && (
                   <p className="text-xs text-[#C6A15B] mt-2 font-medium">{dayInfo}</p>
@@ -344,27 +616,31 @@ export const Booking: React.FC = () => {
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-[#888888] mb-2">
-                  Horarios Disponibles
+                  Horarios Disponibles (Citas cada 2 hrs)
                 </label>
                 {loadingSlots ? (
                   <div className="text-xs text-[#888888] py-8 text-center">Consultando disponibilidad en tiempo real...</div>
+                ) : !selectedServiceId ? (
+                  <div className="text-xs text-[#666666] py-8 text-center border border-dashed border-[#2A2A2A] rounded">
+                    Selecciona un servicio primero
+                  </div>
                 ) : !selectedDate ? (
                   <div className="text-xs text-[#666666] py-8 text-center border border-dashed border-[#2A2A2A] rounded">
                     Selecciona una fecha primero
                   </div>
                 ) : availableSlots.length === 0 ? (
-                  <div className="text-xs text-[#C6A15B] py-8 text-center border border-[#2A2A2A] rounded">
+                  <div className="text-xs text-[#C6A15B] py-8 px-4 text-center border border-[#2A2A2A] rounded">
                     No hay horarios disponibles para esta fecha o el salón se encuentra cerrado.
                   </div>
                 ) : (
-                  <div className="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto pr-1">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                     {availableSlots.map((slot) => (
                       <button
                         type="button"
                         key={slot.time}
                         disabled={!slot.available}
                         onClick={() => setSelectedSlot(slot.time)}
-                        className={`py-2 px-2 text-xs rounded text-center transition-all ${
+                        className={`py-2.5 px-3 text-xs rounded text-center transition-all flex items-center justify-center gap-1.5 ${
                           !slot.available
                             ? 'bg-[#181818] text-[#444444] cursor-not-allowed line-through'
                             : selectedSlot === slot.time
@@ -372,7 +648,8 @@ export const Booking: React.FC = () => {
                             : 'bg-[#222222] text-[#F5F1E9] hover:border-[#C6A15B] border border-[#333333]'
                         }`}
                       >
-                        {slot.time} hrs
+                        <Clock className="w-3 h-3 shrink-0" />
+                        <span>{formatSlotLabel(slot.time)}</span>
                       </button>
                     ))}
                   </div>
@@ -480,7 +757,7 @@ export const Booking: React.FC = () => {
             </div>
           </div>
 
-          {/* PASO 5: Aviso de Privacidad y Botón de Envío */}
+          {/* PASO 5: Aviso de Privacidad, Política de Anticipo y Botón de Envío */}
           <div className="space-y-4">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
@@ -491,7 +768,7 @@ export const Booking: React.FC = () => {
                 required
               />
               <span className="text-xs text-[#888888] leading-relaxed">
-                Acepto el <strong className="text-[#FFFFFF]">Aviso de Privacidad</strong> y consiento el tratamiento confidencial de mis datos personales y fotografías capilares para la gestión exclusiva de mi reservación en AURA IA COLOR conforme a la Ley.
+                Acepto el <strong className="text-[#FFFFFF]">Aviso de Privacidad</strong> y consiento el tratamiento confidencial de mis datos personales y fotografías capilares para la gestión exclusiva de mi reservación en AURA IA COLOR conforme a la Ley. Entiendo que al confirmar se requiere un anticipo del 10% (tomado en cuenta en mi pago final) y que cuento con 24 horas para cancelar o modificar mi cita.
               </span>
             </label>
 
@@ -504,7 +781,7 @@ export const Booking: React.FC = () => {
                 <span>Procesando Reservación...</span>
               ) : (
                 <>
-                  <span>Confirmar Solicitud de Cita</span>
+                  <span>Confirmar Cita y Pasar a Pago (10%)</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

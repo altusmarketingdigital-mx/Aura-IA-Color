@@ -370,7 +370,7 @@ export const Home: React.FC = () => {
                 <p className="text-xs text-[#C6A15B] font-semibold mb-1">Horario Comercial:</p>
                 <p className="text-xs text-[#FFFFFF]">Martes a Sábado: 10:00 a 20:00 hrs.</p>
                 <p className="text-xs text-[#C6A15B]">Domingos: 10:00 a 16:00 hrs.</p>
-                <p className="text-xs text-[#777777]">Lunes: Cerrado (Descanso de equipo técnico).</p>
+                <p className="text-xs text-[#777777]">Lunes: Cerrado</p>
               </div>
               <Link
                 to="/reservar"

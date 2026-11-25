@@ -183,15 +183,15 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Fotografía de la Máquina Blanca Oficial con Identidad AURA IA COLOR */}
+            {/* Fotografía de la Máquina Blanca Oficial con las 12 Latas de Pigmentos */}
             <div className="relative">
-              <div className="aspect-[3/4] sm:aspect-[4/5] rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-[0_15px_50px_rgba(0,0,0,0.85)] relative group bg-[#161616]">
+              <div className="aspect-[3/2] rounded-sm overflow-hidden border border-[#C6A15B]/40 shadow-[0_15px_50px_rgba(0,0,0,0.85)] relative group bg-[#000000]">
                 <img
-                  src="/aura-white-machine-branded.jpg"
-                  alt="Máquina Inteligente Blanca Dispensadora de Color AURA IA COLOR"
-                  className="w-full h-full object-cover object-center filter brightness-95 group-hover:scale-105 transition-transform duration-700"
+                  src="/aura-innovacion-machine.jpg"
+                  alt="Máquina Inteligente Blanca Dispensadora de Color y Latas de Pigmentos AURA IA COLOR"
+                  className="w-full h-full object-contain object-center filter brightness-95 group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/70 via-transparent to-transparent opacity-60 pointer-events-none" />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-[#1A1A1A]/95 border border-[#C6A15B]/50 p-6 rounded-sm shadow-2xl max-w-xs hidden sm:block backdrop-blur-md">
                 <p className="font-serif text-2xl text-[#C6A15B] font-bold">1,200+ Tonos</p>

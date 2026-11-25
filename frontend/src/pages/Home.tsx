@@ -85,7 +85,10 @@ export const Home: React.FC = () => {
 
           {/* Slogan con texto en movimiento dinámico de colores sobre base dorada */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-[#FFFFFF] tracking-tight mb-6 leading-tight">
-            TU COLOR. TU DISEÑO. <br />
+            <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
+              TU COLOR. TU DISEÑO.
+            </span>{' '}
+            <br />
             <span className="slogan-multicolor-flow font-serif font-extrabold tracking-wide">
               TU ESTILO.
             </span>

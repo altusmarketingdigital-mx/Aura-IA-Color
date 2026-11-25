@@ -32,6 +32,11 @@ import {
   deleteBlockedSlot,
   getDashboardStats,
 } from '../controllers/adminController';
+import {
+  getStripeConfig,
+  createCheckoutSession,
+  getCheckoutSessionStatus,
+} from '../controllers/paymentController';
 import { authenticateToken, requireRole } from '../middleware/auth';
 import { uploadPrivate, uploadPublic } from '../middleware/upload';
 
@@ -62,6 +67,11 @@ router.post(
 // Galería y Promociones
 router.get('/gallery', getGallery);
 router.get('/promotions', getPromotions);
+
+// Pagos con Stripe (Anticipo 10%)
+router.get('/payments/config', getStripeConfig);
+router.post('/payments/create-checkout-session', createCheckoutSession);
+router.get('/payments/session/:sessionId', getCheckoutSessionStatus);
 
 // =======================
 // RUTAS ADMINISTRATIVAS PROTEGIDAS

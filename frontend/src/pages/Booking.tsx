@@ -79,8 +79,11 @@ const getLocalTodayString = (): string => {
 };
 
 export const Booking: React.FC = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const preselectedServiceId = searchParams.get('serviceId') || '';
+  const paymentStatusParam = searchParams.get('payment');
+  const sessionIdParam = searchParams.get('session_id');
+  const folioParam = searchParams.get('folio') || '';
 
   // Estados de datos del catálogo
   const [categories, setCategories] = useState<any[]>([]);
@@ -105,11 +108,57 @@ export const Booking: React.FC = () => {
   const [currentPhoto, setCurrentPhoto] = useState<File | null>(null);
   const [referencePhoto, setReferencePhoto] = useState<File | null>(null);
 
-  // Estados del proceso y pago de anticipo
+  // Estados del proceso y pago de anticipo con Stripe
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [bookingSuccess, setBookingSuccess] = useState<any>(null);
-  const [paymentMethod, setPaymentMethod] = useState<'TRANSFERENCIA' | 'TARJETA'>('TRANSFERENCIA');
+  const [paymentMethod, setPaymentMethod] = useState<'TARJETA' | 'TRANSFERENCIA'>('TARJETA');
+  const [stripeLoading, setStripeLoading] = useState<boolean>(false);
+  const [stripeError, setStripeError] = useState<string>('');
+  const [stripeReturnInfo, setStripeReturnInfo] = useState<{
+    status: 'success' | 'cancelled';
+    folio?: string;
+    amountTotal?: number | null;
+    serviceName?: string;
+    appointmentDate?: string;
+    slot?: string;
+  } | null>(null);
+
+  // Verificar regreso desde Stripe Checkout (?payment=success|cancelled)
+  useEffect(() => {
+    if (paymentStatusParam !== 'success' && paymentStatusParam !== 'cancelled') return;
+
+    if (paymentStatusParam === 'cancelled') {
+      setStripeReturnInfo({ status: 'cancelled', folio: folioParam });
+      return;
+    }
+
+    const verifySession = async () => {
+      if (!sessionIdParam) {
+        setStripeReturnInfo({ status: 'success', folio: folioParam });
+        return;
+      }
+      try {
+        const res = await api.get(`/payments/session/${encodeURIComponent(sessionIdParam)}`);
+        if (res.data.success) {
+          setStripeReturnInfo({
+            status: 'success',
+            folio: res.data.metadata?.folio || folioParam,
+            amountTotal: res.data.amountTotal,
+            serviceName: res.data.metadata?.serviceName,
+            appointmentDate: res.data.metadata?.appointmentDate,
+            slot: res.data.metadata?.slot,
+          });
+          return;
+        }
+      } catch (e) {
+        console.error('Error al verificar sesión de Stripe:', e);
+      }
+      setStripeReturnInfo({ status: 'success', folio: folioParam });
+    };
+
+    verifySession();
+  }, [paymentStatusParam, sessionIdParam, folioParam]);
 
   // 1. Cargar servicios (con respaldo oficial si el backend no está conectado)
   useEffect(() => {
@@ -321,16 +370,139 @@ Quedo al pendiente para completar mi pago y confirmar mi lugar.`;
     }
   };
 
+  const handleStripeCheckout = async () => {
+    if (!bookingSuccess || !selectedService) return;
+    setStripeLoading(true);
+    setStripeError('');
+    try {
+      const res = await api.post('/payments/create-checkout-session', {
+        serviceId: selectedService.id,
+        serviceName: selectedService.name,
+        servicePrice: Number(selectedService.price),
+        folio: bookingSuccess.folio,
+        customerName: customerName.trim(),
+        customerEmail: customerEmail.trim(),
+        appointmentDate: selectedDate,
+        slot: selectedSlot,
+      });
+
+      if (res.data.success && res.data.url) {
+        window.location.href = res.data.url;
+        return;
+      }
+      setStripeError('No se pudo obtener el enlace de pago de Stripe.');
+    } catch (err: any) {
+      setStripeError(
+        err.response?.data?.error ||
+          'No fue posible conectar con la pasarela de Stripe en este momento. Puedes continuar enviando tu comprobante por WhatsApp.'
+      );
+    } finally {
+      setStripeLoading(false);
+    }
+  };
+
+  // Pantalla de Regreso desde Stripe Checkout
+  if (stripeReturnInfo) {
+    const isPaid = stripeReturnInfo.status === 'success';
+    const whatsappMessage = isPaid
+      ? `Hola, acabo de realizar el pago de mi anticipo del 10% en Stripe para mi cita en AURA IA COLOR.\n\nFolio: ${stripeReturnInfo.folio || 'Confirmado'}${
+          stripeReturnInfo.serviceName ? `\nServicio: ${stripeReturnInfo.serviceName}` : ''
+        }${stripeReturnInfo.appointmentDate ? `\nFecha: ${stripeReturnInfo.appointmentDate}` : ''}${
+          stripeReturnInfo.slot ? `\nHorario: ${stripeReturnInfo.slot} hrs.` : ''
+        }`
+      : `Hola, intenté realizar el pago con tarjeta en Stripe para mi cita (Folio: ${
+          stripeReturnInfo.folio || 'Pendiente'
+        }) y me gustaría completar el anticipo del 10%.`;
+
+    return (
+      <div className="bg-[#111111] py-16 min-h-[80vh] flex items-center justify-center">
+        <div className="max-w-xl mx-auto px-4 w-full">
+          <div className="bg-[#171717] border border-[#C6A15B]/50 p-8 sm:p-10 rounded-sm text-center shadow-2xl space-y-6">
+            <div className="w-16 h-16 rounded-full bg-[#C6A15B]/20 border border-[#C6A15B] flex items-center justify-center mx-auto">
+              {isPaid ? (
+                <CheckCircle className="w-8 h-8 text-[#C6A15B]" />
+              ) : (
+                <AlertCircle className="w-8 h-8 text-[#C6A15B]" />
+              )}
+            </div>
+
+            <div>
+              <span className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-semibold block mb-2">
+                {isPaid ? 'Anticipo del 10% Confirmado con Stripe' : 'Pago con Tarjeta Cancelado'}
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-serif text-[#FFFFFF] mb-3">
+                {isPaid ? '¡Pago Recibido con Éxito!' : 'Tu pago no se completó'}
+              </h1>
+              <p className="text-xs sm:text-sm text-[#A3A3A3] font-light leading-relaxed">
+                {isPaid
+                  ? 'Tu anticipo del 10% quedó registrado y será tomado en cuenta en tu pago final en sucursal. Recuerda que cuentas con 24 horas para cancelar o modificar tu cita (con devolución en un plazo de 24 horas en caso de cancelación).'
+                  : 'El cargo no fue realizado. Puedes volver a intentarlo o finalizar tu anticipo del 10% directamente por WhatsApp.'}
+              </p>
+            </div>
+
+            {stripeReturnInfo.folio && (
+              <div className="bg-[#1F1F1F] border border-[#333333] p-4 rounded-sm text-xs space-y-2 text-left">
+                <div className="flex justify-between">
+                  <span className="text-[#888888]">Folio Oficial:</span>
+                  <span className="font-mono text-[#C6A15B] font-bold">{stripeReturnInfo.folio}</span>
+                </div>
+                {stripeReturnInfo.serviceName && (
+                  <div className="flex justify-between">
+                    <span className="text-[#888888]">Servicio:</span>
+                    <span className="text-[#FFFFFF]">{stripeReturnInfo.serviceName}</span>
+                  </div>
+                )}
+                {typeof stripeReturnInfo.amountTotal === 'number' && (
+                  <div className="flex justify-between">
+                    <span className="text-[#888888]">Anticipo pagado (10%):</span>
+                    <span className="text-[#C6A15B] font-bold">
+                      ${stripeReturnInfo.amountTotal.toLocaleString('es-MX')} MXN
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="space-y-3">
+              <a
+                href={`https://wa.me/525537293887?text=${encodeURIComponent(whatsappMessage)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest rounded-sm transition-all"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Enviar Confirmación por WhatsApp</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setStripeReturnInfo(null);
+                  setSearchParams({});
+                }}
+                className="inline-flex items-center gap-1.5 text-xs text-[#C6A15B] hover:text-[#DFBF7E] pt-2 transition-colors"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>Volver al formulario de citas</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Pantalla de Confirmación + Pago del 10% de Anticipo + Políticas de 24 horas
   if (bookingSuccess) {
     const servicePrice = Number(selectedService?.price || 0);
     const depositAmount = Number(bookingSuccess.depositAmount ?? Math.round(servicePrice * 0.1));
     const remainingAmount = Math.max(0, servicePrice - depositAmount);
     const methodLabel =
-      paymentMethod === 'TRANSFERENCIA'
-        ? 'Transferencia bancaria / SPEI'
-        : 'Enlace de pago con tarjeta';
+      paymentMethod === 'TARJETA'
+        ? 'Tarjeta (Stripe)'
+        : 'Transferencia bancaria / SPEI';
     const paymentWhatsappUrl = buildLocalWhatsAppUrl(bookingSuccess.folio, depositAmount, methodLabel);
+    const hasStripePublishableKey = Boolean(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
     return (
       <div className="bg-[#111111] py-16 min-h-[80vh] flex items-center justify-center">
@@ -408,7 +580,33 @@ Quedo al pendiente para completar mi pago y confirmar mi lugar.`;
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   type="button"
-                  onClick={() => setPaymentMethod('TRANSFERENCIA')}
+                  onClick={() => {
+                    setPaymentMethod('TARJETA');
+                    setStripeError('');
+                  }}
+                  className={`p-4 rounded-sm border text-left transition-all flex items-start gap-3 ${
+                    paymentMethod === 'TARJETA'
+                      ? 'bg-[#222222] border-[#C6A15B] text-[#FFFFFF]'
+                      : 'bg-[#141414] border-[#2D2D2D] text-[#888888] hover:border-[#444444]'
+                  }`}
+                >
+                  <CreditCard className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs font-semibold text-[#FFFFFF]">
+                      Pago con Tarjeta (Stripe)
+                    </p>
+                    <p className="text-[11px] text-[#888888] mt-0.5">
+                      Paga ${depositAmount.toLocaleString('es-MX')} MXN en línea de forma segura con tarjeta de débito o crédito.
+                    </p>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPaymentMethod('TRANSFERENCIA');
+                    setStripeError('');
+                  }}
                   className={`p-4 rounded-sm border text-left transition-all flex items-start gap-3 ${
                     paymentMethod === 'TRANSFERENCIA'
                       ? 'bg-[#222222] border-[#C6A15B] text-[#FFFFFF]'
@@ -423,26 +621,15 @@ Quedo al pendiente para completar mi pago y confirmar mi lugar.`;
                     </p>
                   </div>
                 </button>
-
-                <button
-                  type="button"
-                  onClick={() => setPaymentMethod('TARJETA')}
-                  className={`p-4 rounded-sm border text-left transition-all flex items-start gap-3 ${
-                    paymentMethod === 'TARJETA'
-                      ? 'bg-[#222222] border-[#C6A15B] text-[#FFFFFF]'
-                      : 'bg-[#141414] border-[#2D2D2D] text-[#888888] hover:border-[#444444]'
-                  }`}
-                >
-                  <CreditCard className="w-5 h-5 text-[#C6A15B] shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-xs font-semibold text-[#FFFFFF]">Pago con Tarjeta</p>
-                    <p className="text-[11px] text-[#888888] mt-0.5">
-                      Solicita tu enlace de pago seguro por ${depositAmount.toLocaleString('es-MX')} MXN vía WhatsApp.
-                    </p>
-                  </div>
-                </button>
               </div>
             </div>
+
+            {stripeError && (
+              <div className="p-3.5 bg-red-950/40 border border-red-500/40 rounded-sm text-red-200 text-xs flex items-start gap-2.5">
+                <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                <span>{stripeError}</span>
+              </div>
+            )}
 
             {/* Políticas de Cancelación, Modificación y Devolución (24 horas) */}
             <div className="bg-[#141414] border border-[#C6A15B]/35 rounded-sm p-5 space-y-2.5">
@@ -476,6 +663,22 @@ Quedo al pendiente para completar mi pago y confirmar mi lugar.`;
 
             {/* Botones de Acción */}
             <div className="text-center space-y-3 pt-1">
+              {paymentMethod === 'TARJETA' && (
+                <button
+                  type="button"
+                  onClick={handleStripeCheckout}
+                  disabled={stripeLoading}
+                  className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#C6A15B] hover:bg-[#DFBF7E] text-[#111111] font-bold text-xs uppercase tracking-widest rounded-sm transition-all shadow-lg disabled:opacity-50"
+                >
+                  <CreditCard className="w-5 h-5" />
+                  <span>
+                    {stripeLoading
+                      ? 'Conectando con Stripe...'
+                      : `Pagar 10% (${`$${depositAmount.toLocaleString('es-MX')} MXN`}) con Stripe`}
+                  </span>
+                </button>
+              )}
+
               <a
                 href={paymentWhatsappUrl}
                 target="_blank"
@@ -484,12 +687,17 @@ Quedo al pendiente para completar mi pago y confirmar mi lugar.`;
               >
                 <MessageSquare className="w-5 h-5" />
                 <span>
-                  Realizar Pago del 10% (${depositAmount.toLocaleString('es-MX')} MXN) por WhatsApp
+                  {paymentMethod === 'TARJETA'
+                    ? 'Confirmar / Solicitar Enlace por WhatsApp'
+                    : `Realizar Pago del 10% ($${depositAmount.toLocaleString('es-MX')} MXN) por WhatsApp`}
                 </span>
               </a>
-              <p className="text-[11px] text-[#777777]">
-                Al presionar el botón se abrirá nuestro WhatsApp oficial con tu folio y el monto de anticipo precargados para completar el pago.
-              </p>
+
+              {hasStripePublishableKey && paymentMethod === 'TARJETA' && (
+                <p className="text-[10px] text-[#777777] font-mono">
+                  Pasarela segura procesada por Stripe (Modo Prueba)
+                </p>
+              )}
 
               <button
                 type="button"

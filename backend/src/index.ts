@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 import path from 'path';
 import apiRoutes from './routes/api';
+import { handleStripeWebhook } from './controllers/paymentController';
 
 dotenv.config();
 
@@ -27,6 +28,9 @@ const limiter = rateLimit({
   message: { success: false, error: 'Demasiadas solicitudes desde esta IP, por favor intente más tarde.' },
 });
 app.use('/api', limiter);
+
+// Webhook de Stripe requiere raw body antes de express.json()
+app.post('/api/payments/webhook', express.raw({ type: 'application/json' }), handleStripeWebhook);
 
 // Parsing de JSON y URL encoded
 app.use(express.json());

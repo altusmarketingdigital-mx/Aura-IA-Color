@@ -68,6 +68,11 @@ export const Footer: React.FC = () => {
                   Reservaciones en Línea
                 </Link>
               </li>
+              <li>
+                <Link to="/lealtad" className="inline-flex items-center gap-1.5 text-[#888888] hover:text-[#C6A15B] transition-colors">
+                  🏅 Mi Tarjeta de Lealtad QR
+                </Link>
+              </li>
             </ul>
           </div>
 

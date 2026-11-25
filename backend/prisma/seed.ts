@@ -7,6 +7,11 @@ async function main() {
   console.log('--- Iniciando Semilla de Base de Datos para AURA IA COLOR ---');
 
   // 1. Limpieza inicial controlada (idempotente)
+  await prisma.loyaltyLedger.deleteMany();
+  await prisma.posTransaction.deleteMany();
+  await prisma.rewardsCatalog.deleteMany();
+  await prisma.servicesCatalog.deleteMany();
+  await prisma.client.deleteMany();
   await prisma.activityLog.deleteMany();
   await prisma.appointmentPhoto.deleteMany();
   await prisma.appointment.deleteMany();
@@ -323,6 +328,76 @@ async function main() {
     },
   });
 
+  // 8. Semilla de Módulo POS y Lealtad Digital (/system)
+  const posServices = [
+    { name: 'Balayage', category: 'Servicio', price: 1600, pointsAwarded: 160, active: true },
+    { name: 'Babylights', category: 'Servicio', price: 1700, pointsAwarded: 170, active: true },
+    { name: 'Money Piece', category: 'Servicio', price: 900, pointsAwarded: 90, active: true },
+    { name: 'Decoloración Global', category: 'Servicio', price: 990, pointsAwarded: 100, active: true },
+    { name: 'Corte Mujer', category: 'Servicio', price: 450, pointsAwarded: 45, active: true },
+    { name: 'Corte Hombre', category: 'Servicio', price: 300, pointsAwarded: 30, active: true },
+    { name: 'Baño de Color / Gloss', category: 'Servicio', price: 950, pointsAwarded: 95, active: true },
+    { name: 'Shampoo Matizador AURA', category: 'Producto', price: 480, pointsAwarded: 50, active: true },
+    { name: 'Sérum Capilar Argán & Vitamina E', category: 'Producto', price: 620, pointsAwarded: 65, active: true },
+  ];
+
+  for (const item of posServices) {
+    await prisma.servicesCatalog.create({ data: item });
+  }
+
+  const posRewards = [
+    {
+      title: 'Descuento $200 MXN',
+      description: 'Descuento directo de $200 MXN aplicable en cualquier servicio o producto de cuidado.',
+      requiredPoints: 200,
+      discountType: 'fixed',
+      discountValue: 200,
+      active: true,
+    },
+    {
+      title: 'Premio a tu Lealtad (50% OFF)',
+      description: '50% de descuento en tu servicio de coloración preferido al alcanzar 500 puntos AURA.',
+      requiredPoints: 500,
+      discountType: 'percentage',
+      discountValue: 50,
+      active: true,
+    },
+    {
+      title: 'Baño de Color / Gloss Cortesía',
+      description: 'Servicio de Baño de Color / Gloss de cortesía para revitalizar el brillo espejo.',
+      requiredPoints: 800,
+      discountType: 'free_service',
+      discountValue: 950,
+      active: true,
+    },
+  ];
+
+  for (const reward of posRewards) {
+    await prisma.rewardsCatalog.create({ data: reward });
+  }
+
+  const demoClient = await prisma.client.create({
+    data: {
+      name: 'Mariana Rodríguez',
+      phone: '5512345678',
+      email: 'mariana.rodriguez@ejemplo.com',
+      qrToken: 'AURA-QR-DEMO2026',
+      currentPoints: 320,
+      totalVisits: 2,
+    },
+  });
+
+  await prisma.loyaltyLedger.create({
+    data: {
+      clientId: demoClient.id,
+      type: 'EARN',
+      pointsDelta: 320,
+      visitsDelta: 2,
+      description: 'Saldo inicial de demostración (2 visitas previas)',
+    },
+  });
+
+  console.log('[Seed] Catálogo POS, Recompensas y Cliente Demo QR registrados');
   console.log('--- Semilla completada con éxito para AURA IA COLOR ---');
 }
 

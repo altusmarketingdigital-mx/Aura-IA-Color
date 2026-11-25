@@ -14,6 +14,11 @@ import { Promotions } from './pages/Promotions';
 import { Contact } from './pages/Contact';
 import { Booking } from './pages/Booking';
 
+// Módulo POS y Lealtad
+import { SystemPos } from './pages/system/SystemPos';
+import { SystemClientDetail } from './pages/system/SystemClientDetail';
+import { LoyaltyCard } from './pages/LoyaltyCard';
+
 // Páginas Administrativas
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -116,6 +121,28 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <AdminGallery />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Tarjeta de Lealtad Pública */}
+          <Route path="/lealtad" element={<LoyaltyCard />} />
+          <Route path="/lealtad/:qrToken" element={<LoyaltyCard />} />
+
+          {/* Módulo POS y Lealtad — Protegido */}
+          <Route
+            path="/system"
+            element={
+              <ProtectedRoute>
+                <SystemPos />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/system/clientes/:id"
+            element={
+              <ProtectedRoute>
+                <SystemClientDetail />
               </ProtectedRoute>
             }
           />

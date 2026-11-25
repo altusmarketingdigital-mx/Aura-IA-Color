@@ -201,3 +201,95 @@ model ActivityLog {
   @@index([createdAt])
   @@map("activity_logs")
 }
+
+// ============================================================================
+// MÓDULO POS Y PROGRAMA DE LEALTAD DIGITAL (QR) - /system
+// ============================================================================
+
+// 13. Clientes de Lealtad (Tarjeta Digital QR)
+model Client {
+  id              String           @id @default(uuid())
+  name            String
+  phone           String           @unique
+  email           String?
+  qrToken         String           @unique @map("qr_token")
+  currentPoints   Int              @default(0) @map("current_points")
+  totalVisits     Int              @default(0) @map("total_visits")
+  createdAt       DateTime         @default(now()) @map("created_at")
+  posTransactions PosTransaction[]
+  loyaltyLedger   LoyaltyLedger[]
+
+  @@index([phone])
+  @@index([name])
+  @@map("clients")
+}
+
+// 14. Catálogo POS de Servicios y Productos
+model ServicesCatalog {
+  id            String   @id @default(uuid())
+  name          String
+  category      String   // "Servicio" | "Producto"
+  price         Float
+  pointsAwarded Int      @default(0) @map("points_awarded")
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@index([active, category])
+  @@map("services_catalog")
+}
+
+// 15. Catálogo de Recompensas Alcanzables
+model RewardsCatalog {
+  id              String           @id @default(uuid())
+  title           String
+  description     String
+  requiredPoints  Int              @map("required_points")
+  discountType    String           @map("discount_type") // "percentage" | "fixed" | "free_service"
+  discountValue   Float            @default(0) @map("discount_value")
+  active          Boolean          @default(true)
+  createdAt       DateTime         @default(now()) @map("created_at")
+  posTransactions PosTransaction[]
+
+  @@index([active, requiredPoints])
+  @@map("rewards_catalog")
+}
+
+// 16. Transacciones de Caja / POS (con Idempotencia)
+model PosTransaction {
+  id              String          @id @default(uuid())
+  idempotencyKey  String          @unique @map("idempotency_key")
+  clientId        String          @map("client_id")
+  client          Client          @relation(fields: [clientId], references: [id])
+  items           String          // JSON serializado de ítems [{ id, name, category, unitPrice, quantity, pointsAwarded, lineTotal }]
+  subtotal        Float
+  discountApplied Float           @default(0) @map("discount_applied")
+  totalPaid       Float           @map("total_paid")
+  pointsEarned    Int             @default(0) @map("points_earned")
+  pointsRedeemed  Int             @default(0) @map("points_redeemed")
+  rewardId        String?         @map("reward_id")
+  reward          RewardsCatalog? @relation(fields: [rewardId], references: [id])
+  notes           String?
+  createdAt       DateTime        @default(now()) @map("created_at")
+  ledgerEntries   LoyaltyLedger[]
+
+  @@index([clientId, createdAt])
+  @@map("pos_transactions")
+}
+
+// 17. Libro Mayor de Movimientos de Lealtad
+model LoyaltyLedger {
+  id            String          @id @default(uuid())
+  clientId      String          @map("client_id")
+  client        Client          @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  transactionId String?         @map("transaction_id")
+  transaction   PosTransaction? @relation(fields: [transactionId], references: [id], onDelete: SetNull)
+  type          String          // "EARN" | "REDEEM" | "ADJUSTMENT"
+  pointsDelta   Int             @map("points_delta")
+  visitsDelta   Int             @default(0) @map("visits_delta")
+  description   String
+  createdAt     DateTime        @default(now()) @map("created_at")
+
+  @@index([clientId, createdAt])
+  @@index([transactionId])
+  @@map("loyalty_ledger")
+}

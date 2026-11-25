@@ -46,6 +46,7 @@ export const Navbar: React.FC = () => {
     { name: 'Tecnología IA', path: '/tecnologia-ia', subtitle: 'Formulación algorítmica de precisión' },
     { name: 'Galería', path: '/galeria', subtitle: 'Resultados y transformaciones reales' },
     { name: 'Promociones', path: '/promociones', subtitle: '50% de descuento en tu 5ta visita' },
+    { name: 'Mi Tarjeta', path: '/lealtad', subtitle: 'Programa de Lealtad QR · Consulta tus puntos' },
     { name: 'Contacto', path: '/contacto', subtitle: 'Entre Roma Sur y Del Valle Norte, CDMX' },
   ];
 

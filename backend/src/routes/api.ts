@@ -37,6 +37,24 @@ import {
   createCheckoutSession,
   getCheckoutSessionStatus,
 } from '../controllers/paymentController';
+import {
+  getPosClients,
+  createPosClient,
+  updatePosClient,
+  getPosClientById,
+  getPosClientByQr,
+  adjustClientPoints,
+  getCatalogItems,
+  createCatalogItem,
+  updateCatalogItem,
+  getRewardsCatalog,
+  createReward,
+  updateReward,
+  createPosTransaction,
+  getPosTransactions,
+  getPublicLoyaltyCard,
+  lookupPublicLoyaltyCard,
+} from '../controllers/posController';
 import { authenticateToken, requireRole } from '../middleware/auth';
 import { uploadPrivate, uploadPublic } from '../middleware/upload';
 
@@ -72,6 +90,10 @@ router.get('/promotions', getPromotions);
 router.get('/payments/config', getStripeConfig);
 router.post('/payments/create-checkout-session', createCheckoutSession);
 router.get('/payments/session/:sessionId', getCheckoutSessionStatus);
+
+// Tarjeta de Lealtad Digital QR (Pública en tiempo real)
+router.get('/loyalty/lookup', lookupPublicLoyaltyCard);
+router.get('/loyalty/card/:qrToken', getPublicLoyaltyCard);
 
 // =======================
 // RUTAS ADMINISTRATIVAS PROTEGIDAS
@@ -116,5 +138,26 @@ router.delete('/admin/blocked-slots/:id', deleteBlockedSlot);
 // Galería y Promociones Admin
 router.post('/admin/gallery', uploadPublic.single('image'), createGalleryItem);
 router.put('/admin/promotions/:id', updatePromotion);
+
+// =======================
+// MÓDULO POS Y LEALTAD (/system)
+// =======================
+router.get('/system/clients', getPosClients);
+router.post('/system/clients', createPosClient);
+router.get('/system/clients/qr/:qrToken', getPosClientByQr);
+router.get('/system/clients/:id', getPosClientById);
+router.put('/system/clients/:id', updatePosClient);
+router.post('/system/clients/:id/adjust', adjustClientPoints);
+
+router.get('/system/catalog', getCatalogItems);
+router.post('/system/catalog', createCatalogItem);
+router.put('/system/catalog/:id', updateCatalogItem);
+
+router.get('/system/rewards', getRewardsCatalog);
+router.post('/system/rewards', createReward);
+router.put('/system/rewards/:id', updateReward);
+
+router.get('/system/pos/transactions', getPosTransactions);
+router.post('/system/pos/transactions', createPosTransaction);
 
 export default router;

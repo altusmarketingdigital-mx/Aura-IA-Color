@@ -11,6 +11,8 @@ import {
   LogOut,
   Sparkles,
   ExternalLink,
+  ShoppingBag,
+  QrCode,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -26,6 +28,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children 
     { name: 'Catálogo de Servicios', path: '/admin/servicios', icon: Palette },
     { name: 'Galería de Trabajos', path: '/admin/galeria', icon: ImageIcon },
     { name: 'Promociones', path: '/admin/promociones', icon: Tag },
+    { name: 'POS y Lealtad QR', path: '/system', icon: ShoppingBag },
   ];
 
   const isActive = (path: string) => {
